@@ -99,7 +99,6 @@ def load_and_parse_json(file_source):
       command = decode.get("command", "N/A")
       payload = decode.get("payload", "N/A")
 
-      # Generate Signal Code here for instant performance later
       if str(address) != "N/A" and str(command) != "N/A":
         sig_code = f"{protocol} | Addr: {address} | Cmd: {command}"
       elif str(payload) != "N/A":
@@ -126,7 +125,7 @@ def load_and_parse_json(file_source):
   return pd.DataFrame(remote_summary), pd.DataFrame(key_signals)
 
 # -----------------------------------------------------------------------------
-# 3. Cached Heavy Aggregation Helpers (Prevents UI Freezing)
+# 3. Cached Heavy Aggregation Helpers
 # -----------------------------------------------------------------------------
 @st.cache_data
 def compute_cross_brand(df_valid):
@@ -202,8 +201,8 @@ if selected_device:
 # -----------------------------------------------------------------------------
 # 5. Main Navigation Tabs
 # -----------------------------------------------------------------------------
-tab_analytics, tab_matcher, tab_finder = st.tabs(
-    ["📊 Database Analytics", "🔍 Direct Signal Matcher", "📂 Smart Folder Finder"]
+tab_analytics, tab_matcher, tab_finder, tab_explorer = st.tabs(
+    ["📊 Database Analytics", "🔍 Direct Signal Matcher", "📂 Smart Folder Finder", "📱 Device & Brand Explorer"]
 )
 
 # =============================================================================
@@ -302,7 +301,6 @@ with tab_analytics:
     if search_key:
       display_keys = display_keys[display_keys["Key Name"].str.contains(search_key, case=False, na=False)]
     st.dataframe(display_keys, use_container_width=True, hide_index=True)
-
 
 # =============================================================================
 # TAB 2: DIRECT SIGNAL MATCHER
@@ -435,4 +433,75 @@ with tab_finder:
             st.success(f"🎉 Found {len(results)} folders matching your criteria!")
 
             display_cols = ["Folder ID", "Brand", "Device", "Model", "Region", "Matched Keys Count", "Matched Keys", "Missing Keys"]
+            st.dataframe(results[display_cols], use_container_width=True, hide_index=True)
+
+# =============================================================================
+# TAB 4: DEVICE & BRAND EXPLORER
+# =============================================================================
+with tab_explorer:
+  st.header("📱 Device & Brand Explorer")
+  st.write(
+      "Search for remote folders by Device, Brand, and Model. Returns all "
+      "matching folders along with a complete list of all supported keys."
+  )
+
+  # Layout for inputs
+  col1, col2, col3 = st.columns(3)
+  with col1:
+    all_devices_t4 = sorted(df_remotes["Device"].unique())
+    search_devices = st.multiselect("Target Device(s) [Mandatory]", options=all_devices_t4, key="t4_dev")
+  with col2:
+    all_brands_t4 = sorted(df_remotes["Brand"].unique())
+    search_brands = st.multiselect("Target Brand(s) [Mandatory]", options=all_brands_t4, key="t4_brand")
+  with col3:
+    search_model = st.text_input("Model Name (Min 3 chars) [Optional]", value="", key="t4_model", placeholder="e.g. AKB")
+
+  if st.button("Search Database", type="primary", use_container_width=True, key="t4_btn"):
+    if not search_devices:
+      st.error("⚠️ Please select at least one Target Device.")
+    elif not search_brands:
+      st.error("⚠️ Please select at least one Target Brand.")
+    else:
+      with st.spinner("Searching for matching folders..."):
+        # 1. Base Filter: Device and Brand
+        cand = df_remotes[
+            (df_remotes["Device"].isin(search_devices)) &
+            (df_remotes["Brand"].isin(search_brands))
+        ].copy()
+
+        # 2. Conditional Filter: Model (must be >= 3 characters to apply)
+        model_query = search_model.strip()
+        if len(model_query) > 0:
+            if len(model_query) < 3:
+                st.warning("⚠️ Model input ignored. Please enter at least 3 characters to apply the model filter.")
+            else:
+                # Perform case-insensitive partial match
+                cand = cand[cand["Model"].astype(str).str.contains(model_query, case=False, na=False)]
+
+        if cand.empty:
+            st.warning("No folders found matching the specified Device, Brand, and Model criteria.")
+        else:
+            valid_fids = cand["Folder ID"].unique()
+            
+            # Extract all keys associated with these specific folders
+            matched_keys = df_keys[df_keys["Folder ID"].isin(valid_fids)]
+            
+            # Aggregate keys into a single comma-separated string per folder
+            keys_per_folder = (
+                matched_keys.groupby("Folder ID")["Key Name"]
+                .apply(lambda x: ", ".join(sorted(set(x))))
+                .reset_index()
+            )
+            keys_per_folder.rename(columns={"Key Name": "Supported Keys"}, inplace=True)
+            
+            # Merge the aggregated keys back onto the folder metadata
+            results = pd.merge(cand, keys_per_folder, on="Folder ID", how="left")
+            
+            # Sort for clean presentation
+            results = results.sort_values(by=["Brand", "Device", "Model"])
+            
+            st.success(f"🎉 Found {len(results)} folders matching your criteria!")
+            
+            # Display final table
+            display_cols = ["Folder ID", "Brand", "Device", "Model", "Region", "Total Keys", "Supported Keys"]
             st.dataframe(results[display_cols], use_container_width=True, hide_index=True)
