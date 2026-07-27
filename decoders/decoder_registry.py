@@ -1,0 +1,91 @@
+# decoders/decoder_registry.py
+from . import rc6
+from . import rc5
+from . import nrc17
+from . import nec
+from . import onkyo
+from . import apple
+from . import lg
+from . import samsung
+from . import rca
+from . import sony
+from . import jvc
+from . import panasonic
+from . import sharp
+from . import denon
+
+def try_all_decoders(mark_space_array):
+    """Passes the array to every loaded decoder until one returns Success."""
+    
+    # 1. Try RC6
+    rc6_result = rc6.decode(mark_space_array)
+    if rc6_result.get("status") == "Success":
+        return rc6_result
+
+    # 2. Try RC5
+    rc5_result = rc5.decode(mark_space_array)
+    if rc5_result.get("status") == "Success":
+        return rc5_result
+
+    # 3. Try NRC17
+    nrc17_result = nrc17.decode(mark_space_array)
+    if nrc17_result.get("status") == "Success":
+        return nrc17_result
+
+    # 4. Try NEC
+    nec_result = nec.decode(mark_space_array)
+    if nec_result.get("status") in ["Success", "Repeat"]:
+        return nec_result
+        
+    # 5. Try Onkyo (Fallback for NEC-style 32-bit signals)
+    onkyo_result = onkyo.decode(mark_space_array)
+    if onkyo_result.get("status") in ["Success", "Repeat"]:
+        return onkyo_result
+        
+    # 6. Try Apple (Fallback for NEC-style 32-bit signals with Apple Vendor IDs)
+    apple_result = apple.decode(mark_space_array)
+    if apple_result.get("status") in ["Success", "Repeat"]:
+        return apple_result
+        
+    # 7. Try LG
+    lg_result = lg.decode(mark_space_array)
+    if lg_result.get("status") in ["Success", "Repeat"]:
+        return lg_result
+        
+    # 8. Try Samsung
+    samsung_result = samsung.decode(mark_space_array)
+    if samsung_result.get("status") == "Success":
+        return samsung_result
+        
+    # 9. Try Panasonic
+    panasonic_result = panasonic.decode(mark_space_array)
+    if panasonic_result.get("status") == "Success":
+        return panasonic_result
+        
+    # 10. Try RCA
+    rca_result = rca.decode(mark_space_array)
+    if rca_result.get("status") == "Success":
+        return rca_result
+        
+    # 11. Try Sony
+    sony_result = sony.decode(mark_space_array)
+    if sony_result.get("status") == "Success":
+        return sony_result
+
+    # 12. Try JVC
+    jvc_result = jvc.decode(mark_space_array)
+    if jvc_result.get("status") == "Success":
+        return jvc_result
+        
+    # 13. Try Sharp (Checked last as it has no header)
+    sharp_result = sharp.decode(mark_space_array)
+    if sharp_result.get("status") == "Success":
+        return sharp_result
+
+    # 14. Try Denon (Checked last as it has no header)
+    denon_result = denon.decode(mark_space_array)
+    if denon_result.get("status") == "Success":
+        return denon_result
+
+    # If all fail, return an unknown state
+    return {"status": "Error", "message": "Unknown Protocol"}
