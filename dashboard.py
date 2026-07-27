@@ -9,8 +9,6 @@ import streamlit as st
 # -----------------------------------------------------------------------------
 # Dependency Linking for Signal Parsing
 # -----------------------------------------------------------------------------
-# We create a wrapper function that uses RdPlsPython to read the raw bytes 
-# and try_all_decoders to identify the protocol.
 try:
     from signal_parser import RdPlsPython
     from decoders.decoder_registry import try_all_decoders
@@ -45,11 +43,10 @@ st.caption(
 )
 
 # -----------------------------------------------------------------------------
-# 2. Data Loading & Parsing Function
+# 2. Data Loading & Parsing Function (Optimized)
 # -----------------------------------------------------------------------------
 @st.cache_data
 def load_and_parse_json(file_source):
-  # Parse JSON from file path string or uploaded file
   if isinstance(file_source, str):
     if file_source.endswith(".gz"):
       with gzip.open(file_source, "rt", encoding="utf-8") as f:
@@ -58,7 +55,6 @@ def load_and_parse_json(file_source):
       with open(file_source, "r", encoding="utf-8") as f:
         data = json.load(f)
   else:
-    # Handles uploaded file objects in Streamlit
     if hasattr(file_source, "name") and file_source.name.endswith(".gz"):
       with gzip.open(file_source, "rt") as f:
         data = json.load(f)
@@ -66,7 +62,6 @@ def load_and_parse_json(file_source):
       data = json.load(file_source)
 
   remotes = data.get("remotes", {})
-
   remote_summary = []
   key_signals = []
 
@@ -96,9 +91,21 @@ def load_and_parse_json(file_source):
 
     for key_name, key_info in keys.items():
       decode = key_info.get("decode_data", {})
-
       if isinstance(decode, list):
         decode = decode[0] if len(decode) > 0 else {}
+
+      protocol = decode.get("protocol", "Unknown")
+      address = decode.get("address", "N/A")
+      command = decode.get("command", "N/A")
+      payload = decode.get("payload", "N/A")
+
+      # Generate Signal Code here for instant performance later
+      if str(address) != "N/A" and str(command) != "N/A":
+        sig_code = f"{protocol} | Addr: {address} | Cmd: {command}"
+      elif str(payload) != "N/A":
+        sig_code = f"{protocol} | Payload: {payload}"
+      else:
+        sig_code = f"{protocol} | Addr: {address} | Cmd: {command}"
 
       key_signals.append({
           "Folder ID": folder_id,
@@ -108,30 +115,59 @@ def load_and_parse_json(file_source):
           "Region": region,
           "Country": country,
           "Key Name": key_name,
-          "Protocol": decode.get("protocol", "Unknown"),
-          "Address": decode.get("address", "N/A"),
-          "Command": decode.get("command", "N/A"),
-          "Payload": decode.get("payload", "N/A"),
+          "Protocol": protocol,
+          "Address": address,
+          "Command": command,
+          "Payload": payload,
+          "Signal Code": sig_code,
           "Source File": key_info.get("source_file", ""),
       })
 
-  df_remotes = pd.DataFrame(remote_summary)
-  df_keys = pd.DataFrame(key_signals)
-
-  return df_remotes, df_keys
-
+  return pd.DataFrame(remote_summary), pd.DataFrame(key_signals)
 
 # -----------------------------------------------------------------------------
-# 3. Sidebar Data Selection & Filtering
+# 3. Cached Heavy Aggregation Helpers (Prevents UI Freezing)
+# -----------------------------------------------------------------------------
+@st.cache_data
+def compute_cross_brand(df_valid):
+    cross = df_valid.groupby("Signal Code").agg(
+        Unique_Brands=("Brand", "nunique"),
+        Brand_Names=("Brand", lambda x: ", ".join(sorted(set(x)))),
+        Remotes_Count=("Folder ID", "nunique"),
+        Folders=("Folder ID", lambda x: ", ".join(sorted(set(x)))),
+        Keys_Mapped=("Key Name", lambda x: ", ".join(sorted(set(x)))),
+        Total_Signals=("Key Name", "count"),
+    ).reset_index()
+    return cross[cross["Unique_Brands"] > 1].sort_values(by="Unique_Brands", ascending=False)
+
+@st.cache_data
+def compute_intra_remote(df_valid):
+    intra = df_valid.groupby(["Folder ID", "Brand", "Signal Code"]).agg(
+        Duplicate_Key_Count=("Key Name", "count"),
+        Buttons_Sharing_Code=("Key Name", lambda x: ", ".join(x)),
+    ).reset_index()
+    return intra[intra["Duplicate_Key_Count"] > 1].sort_values(by="Duplicate_Key_Count", ascending=False)
+
+@st.cache_data
+def compute_dictionary(df_valid):
+    dict_df = df_valid.groupby(["Protocol", "Address", "Command", "Payload"]).agg(
+        Total_Occurrences=("Key Name", "count"),
+        Brands=("Brand", lambda x: ", ".join(sorted(set(x)))),
+        Devices=("Device", lambda x: ", ".join(sorted(set(x)))),
+        Models=("Model", lambda x: ", ".join(sorted(set([str(m) for m in x if str(m) != "N/A"])))),
+        Folders=("Folder ID", lambda x: ", ".join(sorted(set(x)))),
+        Mapped_Keys=("Key Name", lambda x: ", ".join(sorted(set(x)))),
+    ).reset_index()
+    return dict_df.sort_values(by="Total_Occurrences", ascending=False)
+
+# -----------------------------------------------------------------------------
+# 4. Sidebar Data Selection & Filtering
 # -----------------------------------------------------------------------------
 st.sidebar.header("⚙️ Data Options & Filters")
 
 json_gz_path = "batch_passed.json.gz"
 json_path = "batch_passed.json"
-
-uploaded_file = st.sidebar.file_uploader(
-    "Upload custom JSON or GZ", type=["json", "gz"]
-)
+uploaded_file = st.sidebar.file_uploader("Upload custom JSON or GZ", type=["json", "gz"])
 
 if uploaded_file is not None:
   df_remotes, df_keys = load_and_parse_json(uploaded_file)
@@ -140,46 +176,31 @@ elif os.path.exists(json_gz_path):
 elif os.path.exists(json_path):
   df_remotes, df_keys = load_and_parse_json(json_path)
 else:
-  st.error(
-      "No dataset found! Please ensure batch_passed.json or batch_passed.json.gz"
-      " is in the project folder."
-  )
+  st.error("No dataset found! Ensure batch_passed.json or batch_passed.json.gz is present.")
   st.stop()
 
 st.sidebar.subheader("Filter Analytics Dashboard")
-selected_region = st.sidebar.multiselect(
-    "Region", options=sorted(df_remotes["Region"].unique())
-)
-selected_brand = st.sidebar.multiselect(
-    "Brand", options=sorted(df_remotes["Brand"].unique())
-)
-selected_device = st.sidebar.multiselect(
-    "Device", options=sorted(df_remotes["Device"].unique())
-)
+selected_region = st.sidebar.multiselect("Region", options=sorted(df_remotes["Region"].unique()))
+selected_brand = st.sidebar.multiselect("Brand", options=sorted(df_remotes["Brand"].unique()))
+selected_device = st.sidebar.multiselect("Device", options=sorted(df_remotes["Device"].unique()))
 
 filtered_remotes = df_remotes.copy()
 filtered_keys = df_keys.copy()
 
 if selected_region:
-  filtered_remotes = filtered_remotes[
-      filtered_remotes["Region"].isin(selected_region)
-  ]
+  filtered_remotes = filtered_remotes[filtered_remotes["Region"].isin(selected_region)]
   filtered_keys = filtered_keys[filtered_keys["Region"].isin(selected_region)]
 
 if selected_brand:
-  filtered_remotes = filtered_remotes[
-      filtered_remotes["Brand"].isin(selected_brand)
-  ]
+  filtered_remotes = filtered_remotes[filtered_remotes["Brand"].isin(selected_brand)]
   filtered_keys = filtered_keys[filtered_keys["Brand"].isin(selected_brand)]
 
 if selected_device:
-  filtered_remotes = filtered_remotes[
-      filtered_remotes["Device"].isin(selected_device)
-  ]
+  filtered_remotes = filtered_remotes[filtered_remotes["Device"].isin(selected_device)]
   filtered_keys = filtered_keys[filtered_keys["Device"].isin(selected_device)]
 
 # -----------------------------------------------------------------------------
-# 4. Main Navigation Tabs
+# 5. Main Navigation Tabs
 # -----------------------------------------------------------------------------
 tab_analytics, tab_matcher, tab_finder = st.tabs(
     ["📊 Database Analytics", "🔍 Direct Signal Matcher", "📂 Smart Folder Finder"]
@@ -194,13 +215,7 @@ with tab_analytics:
   m2.metric("Total Keys / Signals", len(filtered_keys))
   m3.metric("Unique Brands", filtered_remotes["Brand"].nunique())
   m4.metric("Unique Device Types", filtered_remotes["Device"].nunique())
-  m5.metric(
-      "Avg Keys / Remote",
-      f"{filtered_remotes['Total Keys'].mean():.1f}"
-      if len(filtered_remotes) > 0
-      else "0",
-  )
-
+  m5.metric("Avg Keys / Remote", f"{filtered_remotes['Total Keys'].mean():.1f}" if len(filtered_remotes) > 0 else "0")
   st.divider()
 
   col1, col2 = st.columns(2)
@@ -208,28 +223,13 @@ with tab_analytics:
     st.subheader("🏷️ Brand Statistics")
     brand_counts = filtered_remotes["Brand"].value_counts().reset_index()
     brand_counts.columns = ["Brand", "Count"]
-    fig_brand = px.bar(
-        brand_counts,
-        x="Brand",
-        y="Count",
-        text="Count",
-        color="Brand",
-        title="Remotes per Brand",
-    )
-    st.plotly_chart(fig_brand, use_container_width=True)
+    st.plotly_chart(px.bar(brand_counts, x="Brand", y="Count", text="Count", color="Brand", title="Remotes per Brand"), use_container_width=True)
 
   with col2:
     st.subheader("📺 Device Statistics")
     device_counts = filtered_remotes["Device"].value_counts().reset_index()
     device_counts.columns = ["Device", "Count"]
-    fig_device = px.pie(
-        device_counts,
-        names="Device",
-        values="Count",
-        hole=0.4,
-        title="Device Type Distribution",
-    )
-    st.plotly_chart(fig_device, use_container_width=True)
+    st.plotly_chart(px.pie(device_counts, names="Device", values="Count", hole=0.4, title="Device Type Distribution"), use_container_width=True)
 
   st.divider()
 
@@ -238,147 +238,46 @@ with tab_analytics:
     st.subheader("📡 Protocol Statistics")
     proto_counts = filtered_keys["Protocol"].value_counts().reset_index()
     proto_counts.columns = ["Protocol", "Total Keys"]
-    fig_proto = px.bar(
-        proto_counts,
-        x="Total Keys",
-        y="Protocol",
-        orientation="h",
-        text="Total Keys",
-        color="Protocol",
-        title="Signals by IR Protocol",
-    )
-    st.plotly_chart(fig_proto, use_container_width=True)
+    st.plotly_chart(px.bar(proto_counts, x="Total Keys", y="Protocol", orientation="h", text="Total Keys", color="Protocol", title="Signals by IR Protocol"), use_container_width=True)
 
   with col4:
     st.subheader("🌍 Region & Country Coverage")
-    region_counts = (
-        filtered_remotes.groupby(["Region", "Country"])
-        .size()
-        .reset_index(name="Count")
-    )
-    fig_region = px.sunburst(
-        region_counts,
-        path=["Region", "Country"],
-        values="Count",
-        title="Geographic Breakdown (Region -> Country)",
-    )
-    st.plotly_chart(fig_region, use_container_width=True)
+    region_counts = filtered_remotes.groupby(["Region", "Country"]).size().reset_index(name="Count")
+    st.plotly_chart(px.sunburst(region_counts, path=["Region", "Country"], values="Count", title="Geographic Breakdown"), use_container_width=True)
 
   st.divider()
 
   st.subheader("🔌 Protocol-to-Brand Mapping Analytics")
   pb_col1, pb_col2 = st.columns(2)
-  proto_brand_df = (
-      filtered_keys.groupby(["Protocol", "Brand"])
-      .size()
-      .reset_index(name="Signal Count")
-  )
-
+  proto_brand_df = filtered_keys.groupby(["Protocol", "Brand"]).size().reset_index(name="Signal Count")
   with pb_col1:
-    fig_proto_brand_bar = px.bar(
-        proto_brand_df,
-        x="Protocol",
-        y="Signal Count",
-        color="Brand",
-        title="Protocol Distribution Stacked by Brand",
-        barmode="stack",
-        text="Signal Count",
-    )
-    st.plotly_chart(fig_proto_brand_bar, use_container_width=True)
-
+    st.plotly_chart(px.bar(proto_brand_df, x="Protocol", y="Signal Count", color="Brand", title="Protocol Stacked by Brand", barmode="stack", text="Signal Count"), use_container_width=True)
   with pb_col2:
-    fig_brand_proto_sunburst = px.sunburst(
-        proto_brand_df,
-        path=["Brand", "Protocol"],
-        values="Signal Count",
-        title="Brand -> Protocol Hierarchy Breakdown",
-    )
-    st.plotly_chart(fig_brand_proto_sunburst, use_container_width=True)
+    st.plotly_chart(px.sunburst(proto_brand_df, path=["Brand", "Protocol"], values="Signal Count", title="Brand -> Protocol Breakdown"), use_container_width=True)
 
   st.markdown("#### 📋 Protocol vs. Brand Matrix")
-  pb_crosstab = pd.crosstab(
-      filtered_keys["Protocol"],
-      filtered_keys["Brand"],
-      margins=True,
-      margins_name="Total Signals",
-  )
-  st.dataframe(pb_crosstab, use_container_width=True)
-
+  st.dataframe(pd.crosstab(filtered_keys["Protocol"], filtered_keys["Brand"], margins=True, margins_name="Total Signals"), use_container_width=True)
   st.divider()
 
   st.subheader("🔍 Signal Duplication & Brand Overlap Analysis")
-  valid_keys = filtered_keys[filtered_keys["Protocol"] != "Unknown"].copy()
+  valid_keys = filtered_keys[filtered_keys["Protocol"] != "Unknown"]
 
-  def build_hex_sig(row):
-    p = str(row["Protocol"])
-    a = str(row["Address"])
-    c = str(row["Command"])
-    pl = str(row["Payload"])
-
-    if a != "N/A" and c != "N/A":
-      return f"{p} | Addr: {a} | Cmd: {c}"
-    elif pl != "N/A":
-      return f"{p} | Payload: {pl}"
-    else:
-      return f"{p} | Addr: {a} | Cmd: {c}"
-
-  valid_keys["Signal Code"] = valid_keys.apply(build_hex_sig, axis=1)
-
-  dup_tab1, dup_tab2 = st.tabs(
-      ["⚡ Cross-Brand Code Sharing", "🔁 Same-Remote Duplicate Commands"]
-  )
-
+  dup_tab1, dup_tab2 = st.tabs(["⚡ Cross-Brand Code Sharing", "🔁 Same-Remote Duplicate Commands"])
   with dup_tab1:
     st.markdown("##### Signals Shared Across Multiple Brands")
-    cross_brand = (
-        valid_keys.groupby("Signal Code")
-        .agg(
-            Unique_Brands=("Brand", "nunique"),
-            Brand_Names=("Brand", lambda x: ", ".join(sorted(set(x)))),
-            Remotes_Count=("Folder ID", "nunique"),
-            Folders=("Folder ID", lambda x: ", ".join(sorted(set(x)))),
-            Keys_Mapped=("Key Name", lambda x: ", ".join(sorted(set(x)))),
-            Total_Signals=("Key Name", "count"),
-        )
-        .reset_index()
-    )
-
-    shared_signals = cross_brand[cross_brand["Unique_Brands"] > 1].sort_values(
-        by="Unique_Brands", ascending=False
-    )
-
+    shared_signals = compute_cross_brand(valid_keys)
     if len(shared_signals) > 0:
-      st.success(
-          f"Found {len(shared_signals)} unique Hex signal signatures shared"
-          " across different brands."
-      )
+      st.success(f"Found {len(shared_signals)} unique Hex signal signatures shared across different brands.")
       st.dataframe(shared_signals, use_container_width=True, hide_index=True)
     else:
       st.info("No cross-brand hex overlaps detected.")
 
   with dup_tab2:
     st.markdown("##### Duplicate Hex Commands Within the Same Remote Folder")
-    intra_remote = (
-        valid_keys.groupby(["Folder ID", "Brand", "Signal Code"])
-        .agg(
-            Duplicate_Key_Count=("Key Name", "count"),
-            Buttons_Sharing_Code=("Key Name", lambda x: ", ".join(x)),
-        )
-        .reset_index()
-    )
-
-    same_remote_dups = intra_remote[
-        intra_remote["Duplicate_Key_Count"] > 1
-    ].sort_values(by="Duplicate_Key_Count", ascending=False)
-
+    same_remote_dups = compute_intra_remote(valid_keys)
     if len(same_remote_dups) > 0:
-      st.warning(
-          f"Found {len(same_remote_dups)} instances where a single remote uses"
-          " identical Hex codes for multiple buttons."
-      )
-      st.dataframe(
-          same_remote_dups, use_container_width=True, hide_index=True
-      )
+      st.warning(f"Found {len(same_remote_dups)} instances where a single remote uses identical Hex codes for multiple buttons.")
+      st.dataframe(same_remote_dups, use_container_width=True, hide_index=True)
     else:
       st.info("No intra-remote key collisions detected.")
 
@@ -386,60 +285,22 @@ with tab_analytics:
 
   st.subheader("🗂️ Universal Hex Dictionary (Reverse Lookup)")
   st.markdown("Grouped strictly by Protocol, Address, and Command.")
-
-  dictionary_df = (
-      valid_keys.groupby(["Protocol", "Address", "Command", "Payload"])
-      .agg(
-          Total_Occurrences=("Key Name", "count"),
-          Brands=("Brand", lambda x: ", ".join(sorted(set(x)))),
-          Devices=("Device", lambda x: ", ".join(sorted(set(x)))),
-          Models=(
-              "Model",
-              lambda x: ", ".join(
-                  sorted(set([str(m) for m in x if str(m) != "N/A"]))
-              ),
-          ),
-          Folders=("Folder ID", lambda x: ", ".join(sorted(set(x)))),
-          Mapped_Keys=("Key Name", lambda x: ", ".join(sorted(set(x)))),
-      )
-      .reset_index()
-  )
-
-  dictionary_df = dictionary_df.sort_values(
-      by="Total_Occurrences", ascending=False
-  )
-  st.dataframe(dictionary_df, use_container_width=True, hide_index=True)
-
+  st.dataframe(compute_dictionary(valid_keys), use_container_width=True, hide_index=True)
   st.divider()
 
   st.subheader("🔄 Device-Brand Coverage Matrix")
-  crosstab = pd.crosstab(
-      filtered_remotes["Brand"],
-      filtered_remotes["Device"],
-      margins=True,
-      margins_name="Total",
-  )
-  st.dataframe(crosstab, use_container_width=True)
-
+  st.dataframe(pd.crosstab(filtered_remotes["Brand"], filtered_remotes["Device"], margins=True, margins_name="Total"), use_container_width=True)
   st.divider()
 
   st.subheader("📁 Processed Folders Explorer")
-  e_tab1, e_tab2 = st.tabs(
-      ["Remote Folders Summary", "Detailed Signals & Decodes"]
-  )
-
+  e_tab1, e_tab2 = st.tabs(["Remote Folders Summary", "Detailed Signals & Decodes"])
   with e_tab1:
     st.dataframe(filtered_remotes, use_container_width=True, hide_index=True)
-
   with e_tab2:
     search_key = st.text_input("Filter signals by Key Name:")
     display_keys = filtered_keys
     if search_key:
-      display_keys = display_keys[
-          display_keys["Key Name"].str.contains(
-              search_key, case=False, na=False
-          )
-      ]
+      display_keys = display_keys[display_keys["Key Name"].str.contains(search_key, case=False, na=False)]
     st.dataframe(display_keys, use_container_width=True, hide_index=True)
 
 
@@ -447,132 +308,60 @@ with tab_analytics:
 # TAB 2: DIRECT SIGNAL MATCHER
 # =============================================================================
 with tab_matcher:
-  
   st.header("🎯 Direct Raw Signal Matcher")
-  st.write(
-      "Upload a raw signal file (`.SIG`, `.U1`, or `.U2`) or manually enter"
-      " decodes to query the complete database across all folders."
-  )
+  st.write("Upload a raw signal file (`.SIG`, `.U1`, or `.U2`) or manually enter decodes to query the complete database across all folders.")
 
-  input_method = st.radio(
-      "Select Input Mode:",
-      ["Upload Signal File (.SIG / .U1 / .U2)", "Manual Hex Search"],
-      horizontal=True,
-  )
-
-  search_protocol = None
-  search_address = None
-  search_command = None
+  input_method = st.radio("Select Input Mode:", ["Upload Signal File (.SIG / .U1 / .U2)", "Manual Hex Search"], horizontal=True)
+  search_protocol, search_address, search_command = None, None, None
 
   if input_method == "Upload Signal File (.SIG / .U1 / .U2)":
-    uploaded_signal = st.file_uploader(
-        "Upload a raw `.SIG`, `.U1`, or `.U2` file",
-        type=["sig", "u1", "u2"],
-        key="matcher_file_uploader",
-    )
-
+    uploaded_signal = st.file_uploader("Upload a raw `.SIG`, `.U1`, or `.U2` file", type=["sig", "u1", "u2"], key="matcher_file_uploader")
     if uploaded_signal:
       ext = uploaded_signal.name.split(".")[-1].lower()
-
       with tempfile.NamedTemporaryFile(delete=False, suffix=f".{ext}") as tmp:
         tmp.write(uploaded_signal.getvalue())
         tmp_path = tmp.name
-
       try:
-        decoded = None
-        if parse_and_decode_signal:
-          decoded = parse_and_decode_signal(tmp_path)
-
+        decoded = parse_and_decode_signal(tmp_path) if parse_and_decode_signal else None
         if decoded and isinstance(decoded, dict) and decoded.get("status") in ["Success", "Repeat"]:
           search_protocol = decoded.get("protocol")
           search_address = decoded.get("address")
           search_command = decoded.get("command")
-          st.success(
-              f"**Successfully Decoded File:** Protocol: `{search_protocol}`, "
-              f"Address: `{search_address}`, Command: `{search_command}`"
-          )
+          st.success(f"**Successfully Decoded File:** Protocol: `{search_protocol}`, Address: `{search_address}`, Command: `{search_command}`")
         else:
-          st.warning(
-              "⚠️ Decoder failed to identify this signal format. Please enter "
-              "hex values manually:"
-          )
+          st.warning("⚠️ Decoder failed to identify this signal format. Please enter hex values manually:")
           c_p, c_a, c_c = st.columns(3)
-          search_protocol = c_p.text_input(
-              "Protocol", value="", placeholder="e.g. NEC", key="up_proto"
-          )
-          search_address = c_a.text_input(
-              "Address", value="", placeholder="e.g. 0x4", key="up_addr"
-          )
-          search_command = c_c.text_input(
-              "Command", value="", placeholder="e.g. 0xf0", key="up_cmd"
-          )
-
+          search_protocol = c_p.text_input("Protocol", value="", placeholder="e.g. NEC", key="up_proto")
+          search_address = c_a.text_input("Address", value="", placeholder="e.g. 0x4", key="up_addr")
+          search_command = c_c.text_input("Command", value="", placeholder="e.g. 0xf0", key="up_cmd")
       except Exception as e:
         st.error(f"Error decoding signal file: {e}")
       finally:
         if os.path.exists(tmp_path):
           os.remove(tmp_path)
-
   else:
     c_p, c_a, c_c = st.columns(3)
-    search_protocol = c_p.text_input(
-        "Protocol (e.g. NEC, RC5, SONY)", value="", placeholder="e.g. NEC", key="man_proto"
-    )
-    search_address = c_a.text_input(
-        "Address Hex (e.g. 0x4)", value="", placeholder="e.g. 0x4", key="man_addr"
-    )
-    search_command = c_c.text_input(
-        "Command Hex (e.g. 0xf0)", value="", placeholder="e.g. 0xf0", key="man_cmd"
-    )
+    search_protocol = c_p.text_input("Protocol (e.g. NEC, RC5, SONY)", value="", placeholder="e.g. NEC", key="man_proto")
+    search_address = c_a.text_input("Address Hex (e.g. 0x4)", value="", placeholder="e.g. 0x4", key="man_addr")
+    search_command = c_c.text_input("Command Hex (e.g. 0xf0)", value="", placeholder="e.g. 0xf0", key="man_cmd")
 
   if search_protocol or search_address or search_command:
     st.divider()
     st.subheader("🔎 Search Parameters")
-    st.write(
-        f"**Protocol:** `{search_protocol or 'Any'}` | **Address:**"
-        f" `{search_address or 'Any'}` | **Command:**"
-        f" `{search_command or 'Any'}`"
-    )
+    st.write(f"**Protocol:** `{search_protocol or 'Any'}` | **Address:** `{search_address or 'Any'}` | **Command:** `{search_command or 'Any'}`")
 
     matches = df_keys.copy()
-
     if search_protocol:
-      matches = matches[
-          matches["Protocol"].astype(str).str.upper()
-          == str(search_protocol).strip().upper()
-      ]
-
+      matches = matches[matches["Protocol"].astype(str).str.upper() == str(search_protocol).strip().upper()]
     if search_address:
-      target_addr = str(search_address).strip().lower()
-      matches = matches[
-          matches["Address"].astype(str).str.strip().str.lower() == target_addr
-      ]
-
+      matches = matches[matches["Address"].astype(str).str.strip().str.lower() == str(search_address).strip().lower()]
     if search_command:
-      target_cmd = str(search_command).strip().lower()
-      matches = matches[
-          matches["Command"].astype(str).str.strip().str.lower() == target_cmd
-      ]
+      matches = matches[matches["Command"].astype(str).str.strip().str.lower() == str(search_command).strip().lower()]
 
     st.subheader(f"📋 Exact Database Matches ({len(matches)} found)")
-
     if len(matches) > 0:
-      output_cols = [
-          "Folder ID",
-          "Brand",
-          "Device",
-          "Model",
-          "Key Name",
-          "Protocol",
-          "Address",
-          "Command",
-          "Country",
-          "Region",
-          "Source File",
-      ]
-      st.dataframe(
-          matches[output_cols].reset_index(drop=True), use_container_width=True
-      )
+      output_cols = ["Folder ID", "Brand", "Device", "Model", "Key Name", "Protocol", "Address", "Command", "Country", "Region", "Source File"]
+      st.dataframe(matches[output_cols].reset_index(drop=True), use_container_width=True)
     else:
       st.warning("No records matched the specified protocol and hex criteria.")
 
@@ -581,44 +370,31 @@ with tab_matcher:
 # =============================================================================
 with tab_finder:
   st.header("📂 Smart Folder Finder")
-  st.write(
-      "Find remote folders that contain a specific combination of keys for a target device. "
-      "Adjust the tolerance slider if you don't need a 100% perfect match."
-  )
+  st.write("Find remote folders that contain a specific combination of keys for a target device. Adjust the tolerance slider if you don't need a 100% perfect match.")
 
-  # Layout for inputs
   col1, col2, col3 = st.columns(3)
-
   with col1:
     all_devices = sorted(df_remotes["Device"].unique())
     req_devices = st.multiselect("Target Device(s) [Mandatory]", options=all_devices)
-
   with col2:
     all_regions = sorted(df_remotes["Region"].unique())
     req_regions = st.multiselect("Target Region(s) [Optional]", options=all_regions)
-
   with col3:
     all_keys = sorted(df_keys["Key Name"].dropna().unique())
     req_keys = st.multiselect("Required Keys [Mandatory]", options=all_keys)
 
-  # Dynamic Tolerance Slider
   if len(req_keys) > 0:
     max_tol = len(req_keys)
-    # Minimum tolerance is 2, unless the user only selected 1 key
     min_tol = 1 if max_tol == 1 else 2
-    
     tolerance = st.slider(
         "Minimum Keys Match Tolerance",
-        min_value=min_tol,
-        max_value=max_tol,
-        value=max_tol, # Defaults to 100% required
+        min_value=min_tol, max_value=max_tol, value=max_tol,
         help="Set the minimum number of requested keys a folder must have to be considered a match."
     )
   else:
     tolerance = 0
     st.info("Select keys above to set the match tolerance.")
 
-  # Execute Search
   if st.button("Search Folders", type="primary", use_container_width=True):
     if not req_devices:
       st.error("⚠️ Please select at least one Target Device.")
@@ -626,58 +402,37 @@ with tab_finder:
       st.error("⚠️ Please select at least one Required Key.")
     else:
       with st.spinner("Scanning database for matching folders..."):
-        # 1. Filter Remotes by Device and (Optional) Region
         cand_remotes = df_remotes[df_remotes["Device"].isin(req_devices)]
         if req_regions:
           cand_remotes = cand_remotes[cand_remotes["Region"].isin(req_regions)]
         
         valid_folders = cand_remotes["Folder ID"].unique()
-
-        # 2. Filter Keys by valid folders and the requested keys
-        cand_keys = df_keys[
-            (df_keys["Folder ID"].isin(valid_folders)) & 
-            (df_keys["Key Name"].isin(req_keys))
-        ]
+        cand_keys = df_keys[(df_keys["Folder ID"].isin(valid_folders)) & (df_keys["Key Name"].isin(req_keys))]
 
         if cand_keys.empty:
           st.warning("No folders found matching the specified device and key criteria.")
         else:
-          # 3. Count how many requested keys exist in each folder
           match_counts = cand_keys.groupby("Folder ID")["Key Name"].nunique().reset_index()
           match_counts.rename(columns={"Key Name": "Matched Keys Count"}, inplace=True)
-          
-          # 4. Apply the user's tolerance threshold
           passed_folders = match_counts[match_counts["Matched Keys Count"] >= tolerance]
 
           if passed_folders.empty:
             st.warning(f"No folders met the minimum tolerance of {tolerance} matching keys.")
           else:
-            # 5. Merge back with folder metadata for display
             results = pd.merge(passed_folders, cand_remotes, on="Folder ID", how="left")
 
-            # Helper function to list exactly which keys matched
             def get_matched_keys(fid):
-              fk = cand_keys[cand_keys["Folder ID"] == fid]
-              return ", ".join(sorted(fk["Key Name"].unique()))
-
+              return ", ".join(sorted(cand_keys[cand_keys["Folder ID"] == fid]["Key Name"].unique()))
             results["Matched Keys"] = results["Folder ID"].apply(get_matched_keys)
 
-            # Helper function to calculate which requested keys are missing
             def get_missing_keys(matched_str):
               matched_list = [k.strip() for k in matched_str.split(",")] if matched_str else []
               missing = set(req_keys) - set(matched_list)
               return ", ".join(sorted(missing)) if missing else "None (100% Match)"
-
             results["Missing Keys"] = results["Matched Keys"].apply(get_missing_keys)
 
-            # Sort best matches (highest key count) to the top
             results = results.sort_values(by=["Matched Keys Count", "Brand"], ascending=[False, True])
-
             st.success(f"🎉 Found {len(results)} folders matching your criteria!")
 
-            # Display clean DataFrame
-            display_cols = [
-                "Folder ID", "Brand", "Device", "Model", "Region", 
-                "Matched Keys Count", "Matched Keys", "Missing Keys"
-            ]
+            display_cols = ["Folder ID", "Brand", "Device", "Model", "Region", "Matched Keys Count", "Matched Keys", "Missing Keys"]
             st.dataframe(results[display_cols], use_container_width=True, hide_index=True)
