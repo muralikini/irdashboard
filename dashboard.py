@@ -6,11 +6,15 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-# Optional: Import your project's custom decoder module if available
+# Try importing your signal parsing function from signal_parser.py
 try:
-  from signal_parser import parse_and_decode_signal
+    from signal_parser import parse_and_decode_signal
 except ImportError:
-  parse_and_decode_signal = None
+    try:
+        # Fallback in case your function is named decode_signal or parse_file
+        from signal_parser import parse_signal_file as parse_and_decode_signal
+    except ImportError:
+        parse_and_decode_signal = None
 
 # -----------------------------------------------------------------------------
 # 1. Page Configuration
@@ -464,116 +468,81 @@ with tab_analytics:
 # TAB 2: DIRECT SIGNAL MATCHER
 # =============================================================================
 with tab_matcher:
-  st.header("🎯 Direct Raw Signal Matcher")
-  st.write(
-      "Upload a raw signal file (`.SIG`, `.U1`, or `.U2`) or manually enter"
-      " decodes to query the complete database across all folders."
-  )
+    st.header("🎯 Direct Raw Signal Matcher")
+    st.write("Upload a raw signal file (`.SIG`, `.U1`, or `.U2`) or manually enter decodes to query the complete database across all folders.")
 
-  input_method = st.radio(
-      "Select Input Mode:",
-      ["Upload Signal File (.SIG / .U1 / .U2)", "Manual Hex Search"],
-      horizontal=True,
-  )
-
-  search_protocol = None
-  search_address = None
-  search_command = None
-
-  if input_method == "Upload Signal File (.SIG / .U1 / .U2)":
-    uploaded_signal = st.file_uploader(
-        "Upload a raw `.SIG`, `.U1`, or `.U2` file",
-        type=["sig", "u1", "u2"],
-        key="matcher_file_uploader",
+    input_method = st.radio(
+        "Select Input Mode:",
+        ["Upload Signal File (.SIG / .U1 / .U2)", "Manual Hex Search"],
+        horizontal=True
     )
 
-    if uploaded_signal:
-      ext = uploaded_signal.name.split(".")[-1].lower()
+    search_protocol = None
+    search_address = None
+    search_command = None
 
-      with tempfile.NamedTemporaryFile(delete=False, suffix=f".{ext}") as tmp:
-        tmp.write(uploaded_signal.getvalue())
-        tmp_path = tmp.name
+    if input_method == "Upload Signal File (.SIG / .U1 / .U2)":
+        uploaded_signal = st.file_uploader("Upload a raw `.SIG`, `.U1`, or `.U2` file", type=["sig", "u1", "u2"], key="matcher_file_uploader")
+        
+        if uploaded_signal:
+            ext = uploaded_signal.name.split('.')[-1].lower()
+            
+            with tempfile.NamedTemporaryFile(delete=False, suffix=f".{ext}") as tmp:
+                tmp.write(uploaded_signal.getvalue())
+                tmp_path = tmp.name
 
-      try:
-        if parse_and_decode_signal:
-          decoded = parse_and_decode_signal(tmp_path)
-          search_protocol = decoded.get("protocol")
-          search_address = decoded.get("address")
-          search_command = decoded.get("command")
-        else:
-          st.info(
-              "Decoder module not linked directly. Please enter decoded"
-              " values below or connect `signal_parser.py`."
-          )
-          c_p, c_a, c_c = st.columns(3)
-          search_protocol = c_p.text_input(
-              "Protocol", value="NEC", key="up_proto"
-          )
-          search_address = c_a.text_input("Address", value="0x4", key="up_addr")
-          search_command = c_c.text_input("Command", value="0x8", key="up_cmd")
-      except Exception as e:
-        st.error(f"Error decoding signal file: {e}")
-      finally:
-        if os.path.exists(tmp_path):
-          os.remove(tmp_path)
+            try:
+                decoded = None
+                if parse_and_decode_signal:
+                    decoded = parse_and_decode_signal(tmp_path)
 
-  else:
-    c_p, c_a, c_c = st.columns(3)
-    search_protocol = c_p.text_input(
-        "Protocol (e.g. NEC, RC5, SONY)", key="man_proto"
-    )
-    search_address = c_a.text_input("Address Hex (e.g. 0x4)", key="man_addr")
-    search_command = c_c.text_input("Command Hex (e.g. 0x8)", key="man_cmd")
+                if decoded and isinstance(decoded, dict):
+                    search_protocol = decoded.get("protocol")
+                    search_address = decoded.get("address")
+                    search_command = decoded.get("command")
+                    st.success(f"**Successfully Decoded File:** Protocol: `{search_protocol}`, Address: `{search_address}`, Command: `{search_command}`")
+                else:
+                    st.warning("⚠️ Decoder module not linked or could not parse this file format automatically. Please enter hex values manually:")
+                    c_p, c_a, c_c = st.columns(3)
+                    search_protocol = c_p.text_input("Protocol", value="", placeholder="e.g. NEC", key="up_proto")
+                    search_address = c_a.text_input("Address", value="", placeholder="e.g. 0x4", key="up_addr")
+                    search_command = c_c.text_input("Command", value="", placeholder="e.g. 0xf0", key="up_cmd")
 
-  # Perform Filtering across ALL master keys (df_keys)
-  if search_protocol or search_address or search_command:
-    st.divider()
-    st.subheader("🔎 Search Parameters")
-    st.write(
-        f"**Protocol:** `{search_protocol or 'Any'}` | **Address:**"
-        f" `{search_address or 'Any'}` | **Command:**"
-        f" `{search_command or 'Any'}`"
-    )
+            except Exception as e:
+                st.error(f"Error decoding signal file: {e}")
+            finally:
+                if os.path.exists(tmp_path):
+                    os.remove(tmp_path)
 
-    matches = df_keys.copy()
-
-    if search_protocol:
-      matches = matches[
-          matches["Protocol"].astype(str).str.upper()
-          == str(search_protocol).strip().upper()
-      ]
-
-    if search_address:
-      # Compare string and lower-case hex formats
-      target_addr = str(search_address).strip().lower()
-      matches = matches[
-          matches["Address"].astype(str).str.strip().str.lower() == target_addr
-      ]
-
-    if search_command:
-      target_cmd = str(search_command).strip().lower()
-      matches = matches[
-          matches["Command"].astype(str).str.strip().str.lower() == target_cmd
-      ]
-
-    st.subheader(f"📋 Exact Database Matches ({len(matches)} found)")
-
-    if len(matches) > 0:
-      output_cols = [
-          "Folder ID",
-          "Brand",
-          "Device",
-          "Model",
-          "Key Name",
-          "Protocol",
-          "Address",
-          "Command",
-          "Country",
-          "Region",
-          "Source File",
-      ]
-      st.dataframe(
-          matches[output_cols].reset_index(drop=True), use_container_width=True
-      )
     else:
-      st.warning("No records matched the specified protocol and hex criteria.")
+        c_p, c_a, c_c = st.columns(3)
+        search_protocol = c_p.text_input("Protocol (e.g. NEC, RC5, SONY)", value="", placeholder="e.g. NEC", key="man_proto")
+        search_address = c_a.text_input("Address Hex (e.g. 0x4)", value="", placeholder="e.g. 0x4", key="man_addr")
+        search_command = c_c.text_input("Command Hex (e.g. 0xf0)", value="", placeholder="e.g. 0xf0", key="man_cmd")
+
+    # Perform Filtering across ALL master keys (df_keys)
+    if search_protocol or search_address or search_command:
+        st.divider()
+        st.subheader("🔎 Search Parameters")
+        st.write(f"**Protocol:** `{search_protocol or 'Any'}` | **Address:** `{search_address or 'Any'}` | **Command:** `{search_command or 'Any'}`")
+
+        matches = df_keys.copy()
+
+        if search_protocol:
+            matches = matches[matches["Protocol"].astype(str).str.upper() == str(search_protocol).strip().upper()]
+
+        if search_address:
+            target_addr = str(search_address).strip().lower()
+            matches = matches[matches["Address"].astype(str).str.strip().str.lower() == target_addr]
+
+        if search_command:
+            target_cmd = str(search_command).strip().lower()
+            matches = matches[matches["Command"].astype(str).str.strip().str.lower() == target_cmd]
+
+        st.subheader(f"📋 Exact Database Matches ({len(matches)} found)")
+
+        if len(matches) > 0:
+            output_cols = ['Folder ID', 'Brand', 'Device', 'Model', 'Key Name', 'Protocol', 'Address', 'Command', 'Country', 'Region', 'Source File']
+            st.dataframe(matches[output_cols].reset_index(drop=True), use_container_width=True)
+        else:
+            st.warning("No records matched the specified protocol and hex criteria.")
