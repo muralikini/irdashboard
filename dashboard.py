@@ -181,8 +181,8 @@ if selected_device:
 # -----------------------------------------------------------------------------
 # 4. Main Navigation Tabs
 # -----------------------------------------------------------------------------
-tab_analytics, tab_matcher = st.tabs(
-    ["📊 Database Analytics", "🔍 Direct Signal Matcher"]
+tab_analytics, tab_matcher, tab_finder = st.tabs(
+    ["📊 Database Analytics", "🔍 Direct Signal Matcher", "📂 Smart Folder Finder"]
 )
 
 # =============================================================================
@@ -447,6 +447,7 @@ with tab_analytics:
 # TAB 2: DIRECT SIGNAL MATCHER
 # =============================================================================
 with tab_matcher:
+  
   st.header("🎯 Direct Raw Signal Matcher")
   st.write(
       "Upload a raw signal file (`.SIG`, `.U1`, or `.U2`) or manually enter"
@@ -574,3 +575,109 @@ with tab_matcher:
       )
     else:
       st.warning("No records matched the specified protocol and hex criteria.")
+
+# =============================================================================
+# TAB 3: SMART FOLDER FINDER
+# =============================================================================
+with tab_finder:
+  st.header("📂 Smart Folder Finder")
+  st.write(
+      "Find remote folders that contain a specific combination of keys for a target device. "
+      "Adjust the tolerance slider if you don't need a 100% perfect match."
+  )
+
+  # Layout for inputs
+  col1, col2, col3 = st.columns(3)
+
+  with col1:
+    all_devices = sorted(df_remotes["Device"].unique())
+    req_devices = st.multiselect("Target Device(s) [Mandatory]", options=all_devices)
+
+  with col2:
+    all_regions = sorted(df_remotes["Region"].unique())
+    req_regions = st.multiselect("Target Region(s) [Optional]", options=all_regions)
+
+  with col3:
+    all_keys = sorted(df_keys["Key Name"].dropna().unique())
+    req_keys = st.multiselect("Required Keys [Mandatory]", options=all_keys)
+
+  # Dynamic Tolerance Slider
+  if len(req_keys) > 0:
+    max_tol = len(req_keys)
+    # Minimum tolerance is 2, unless the user only selected 1 key
+    min_tol = 1 if max_tol == 1 else 2
+    
+    tolerance = st.slider(
+        "Minimum Keys Match Tolerance",
+        min_value=min_tol,
+        max_value=max_tol,
+        value=max_tol, # Defaults to 100% required
+        help="Set the minimum number of requested keys a folder must have to be considered a match."
+    )
+  else:
+    tolerance = 0
+    st.info("Select keys above to set the match tolerance.")
+
+  # Execute Search
+  if st.button("Search Folders", type="primary", use_container_width=True):
+    if not req_devices:
+      st.error("⚠️ Please select at least one Target Device.")
+    elif not req_keys:
+      st.error("⚠️ Please select at least one Required Key.")
+    else:
+      with st.spinner("Scanning database for matching folders..."):
+        # 1. Filter Remotes by Device and (Optional) Region
+        cand_remotes = df_remotes[df_remotes["Device"].isin(req_devices)]
+        if req_regions:
+          cand_remotes = cand_remotes[cand_remotes["Region"].isin(req_regions)]
+        
+        valid_folders = cand_remotes["Folder ID"].unique()
+
+        # 2. Filter Keys by valid folders and the requested keys
+        cand_keys = df_keys[
+            (df_keys["Folder ID"].isin(valid_folders)) & 
+            (df_keys["Key Name"].isin(req_keys))
+        ]
+
+        if cand_keys.empty:
+          st.warning("No folders found matching the specified device and key criteria.")
+        else:
+          # 3. Count how many requested keys exist in each folder
+          match_counts = cand_keys.groupby("Folder ID")["Key Name"].nunique().reset_index()
+          match_counts.rename(columns={"Key Name": "Matched Keys Count"}, inplace=True)
+          
+          # 4. Apply the user's tolerance threshold
+          passed_folders = match_counts[match_counts["Matched Keys Count"] >= tolerance]
+
+          if passed_folders.empty:
+            st.warning(f"No folders met the minimum tolerance of {tolerance} matching keys.")
+          else:
+            # 5. Merge back with folder metadata for display
+            results = pd.merge(passed_folders, cand_remotes, on="Folder ID", how="left")
+
+            # Helper function to list exactly which keys matched
+            def get_matched_keys(fid):
+              fk = cand_keys[cand_keys["Folder ID"] == fid]
+              return ", ".join(sorted(fk["Key Name"].unique()))
+
+            results["Matched Keys"] = results["Folder ID"].apply(get_matched_keys)
+
+            # Helper function to calculate which requested keys are missing
+            def get_missing_keys(matched_str):
+              matched_list = [k.strip() for k in matched_str.split(",")] if matched_str else []
+              missing = set(req_keys) - set(matched_list)
+              return ", ".join(sorted(missing)) if missing else "None (100% Match)"
+
+            results["Missing Keys"] = results["Matched Keys"].apply(get_missing_keys)
+
+            # Sort best matches (highest key count) to the top
+            results = results.sort_values(by=["Matched Keys Count", "Brand"], ascending=[False, True])
+
+            st.success(f"🎉 Found {len(results)} folders matching your criteria!")
+
+            # Display clean DataFrame
+            display_cols = [
+                "Folder ID", "Brand", "Device", "Model", "Region", 
+                "Matched Keys Count", "Matched Keys", "Missing Keys"
+            ]
+            st.dataframe(results[display_cols], use_container_width=True, hide_index=True)
