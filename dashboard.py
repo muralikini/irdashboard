@@ -239,7 +239,7 @@ st.caption("IR matching, EDID hardware decoding, and HDMI InfoFrame analytics.")
 # -----------------------------------------------------------------------------
 json_gz_path = "batch_passed.json.gz"
 json_path = "batch_passed.json"
-cec_json_path = "cec_edid_data.json"
+cec_json_path = "merge_edid_data.json"
 infoframe_json_path = "infoframe_data.json"
 
 @st.cache_data
