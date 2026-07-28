@@ -27,7 +27,6 @@ except ImportError as e:
   parse_and_decode_signal = None
   print(f"Decoder import warning: {e}")
 
-
 # -----------------------------------------------------------------------------
 # EDID Parser Helper Function (Pure Python)
 # -----------------------------------------------------------------------------
@@ -51,29 +50,22 @@ def parse_edid_hex(hex_str):
   except ValueError:
     return {"status": "Error", "message": "Failed to decode hex string."}
 
-  # 1. Check Standard Header
   header = data[0:8]
   valid_header = header == b"\x00\xff\xff\xff\xff\xff\xff\x00"
 
-  # 2. Extract Manufacturer PNP ID (offset 0x08 - 0x09)
   m_int = (data[8] << 8) | data[9]
   c1 = chr(((m_int >> 10) & 0x1F) + 64)
   c2 = chr(((m_int >> 5) & 0x1F) + 64)
   c3 = chr((m_int & 0x1F) + 64)
   mfg_id = f"{c1}{c2}{c3}"
 
-  # 3. Product Code & Serial Number
   prod_code = f"0x{(data[11] << 8) | data[10]:04X}"
   serial_num = (data[15] << 24) | (data[14] << 16) | (data[13] << 8) | data[12]
 
-  # 4. Manufacture Date
   week = data[16]
   year = data[17] + 1990
-
-  # 5. EDID Version
   ver = f"{data[18]}.{data[19]}"
 
-  # 6. Basic Display Parameters
   is_digital = bool(data[20] & 0x80)
   width_cm = data[21]
   height_cm = data[22]
@@ -83,24 +75,22 @@ def parse_edid_hex(hex_str):
       else "N/A"
   )
 
-  # 7. Descriptor Blocks (Monitor Name / Ranges)
   monitor_name = "N/A"
   ranges = "N/A"
   for offset in (54, 72, 90, 108):
     desc = data[offset : offset + 18]
     if len(desc) == 18 and desc[0:3] == b"\x00\x00\x00":
       tag = desc[3]
-      if tag == 0xFC:  # Monitor Name
+      if tag == 0xFC: 
         monitor_name = (
             desc[5:].decode("ascii", errors="ignore").strip("\x0a\x20\x00")
         )
-      elif tag == 0xFD:  # Range Limits
+      elif tag == 0xFD: 
         ranges = (
             f"V: {desc[5]}-{desc[6]} Hz | H: {desc[7]}-{desc[8]} kHz | Max"
             f" Pixel Clock: {desc[9]*10} MHz"
         )
 
-  # 8. Extension Block Count & Checksum Validation
   ext_blocks = data[126] if len(data) >= 127 else 0
   checksum = data[127]
   calc_checksum = (256 - (sum(data[:127]) % 256)) % 256
@@ -132,8 +122,6 @@ def parse_edid_hex(hex_str):
       ),
   }
 
-
-# Helper function to convert Hex OSD string to ASCII
 def hex_osd_to_ascii(hex_str):
   if not hex_str or not isinstance(hex_str, str):
     return ""
@@ -144,6 +132,61 @@ def hex_osd_to_ascii(hex_str):
   except Exception:
     return hex_str
 
+# -----------------------------------------------------------------------------
+# SPD InfoFrame Parser Helper Function
+# -----------------------------------------------------------------------------
+def parse_spd_infoframe(hex_str):
+    """Parses an HDMI Source Product Description (SPD) InfoFrame."""
+    if not hex_str or not isinstance(hex_str, str):
+        return {"status": "Error", "message": "No raw data provided."}
+
+    clean_hex = hex_str.replace(" ", "").strip()
+    try:
+        data = bytes.fromhex(clean_hex)
+    except ValueError:
+        return {"status": "Error", "message": "Invalid hex format."}
+
+    if len(data) < 29:
+        return {"status": "Error", "message": "Packet too short for an SPD InfoFrame."}
+
+    if data[0] != 0x83:
+        return {"status": "Error", "message": f"Not an SPD InfoFrame (Expected 0x83, got 0x{data[0]:02X})"}
+
+    version = data[1]
+    length = data[2]
+    checksum = data[3]
+    
+    # Validate Checksum
+    calc_checksum = sum(data[:4 + length]) & 0xFF
+    checksum_valid = calc_checksum == 0
+
+    # Extract 8-byte Vendor Name (Bytes 4 to 11)
+    vendor_bytes = data[4:12]
+    vendor_name = vendor_bytes.decode('ascii', errors='ignore').strip('\x00')
+
+    # Extract 16-byte Product Description (Bytes 12 to 27)
+    product_bytes = data[12:28]
+    product_desc = product_bytes.decode('ascii', errors='ignore').strip('\x00')
+
+    # Extract Source Device Info (Byte 28)
+    source_type_byte = data[28]
+    source_mapping = {
+        0x00: "Unknown", 0x01: "Digital STB", 0x02: "DVD Player",
+        0x03: "D-VHS", 0x04: "HDD Videorecorder", 0x05: "DTV",
+        0x06: "DVCR", 0x07: "PVR", 0x08: "Game Console",
+        0x09: "PC General", 0x0A: "Digital Camera", 0x0B: "Media Receiver"
+    }
+    source_type_str = source_mapping.get(source_type_byte, f"Reserved/Other (0x{source_type_byte:02X})")
+
+    return {
+        "status": "Success",
+        "version": version,
+        "length": length,
+        "checksum_valid": checksum_valid,
+        "vendor_name": vendor_name,
+        "product_description": product_desc,
+        "source_device_type": source_type_str
+    }
 
 # -----------------------------------------------------------------------------
 # 1. Page Configuration
@@ -154,11 +197,8 @@ st.set_page_config(
     layout="wide",
 )
 
-st.title("📡 IR & CEC EDID Signal Intelligence Hub")
-st.caption(
-    "Multi-protocol IR signal matching, dataset analytics, and CEC EDID"
-    " hardware decoding."
-)
+st.title("📡 Signal Intelligence Hub")
+st.caption("IR matching, EDID hardware decoding, and HDMI InfoFrame analytics.")
 
 # -----------------------------------------------------------------------------
 # 2. Data Loading Functions
@@ -166,7 +206,7 @@ st.caption(
 json_gz_path = "batch_passed.json.gz"
 json_path = "batch_passed.json"
 cec_json_path = "cec_edid_data.json"
-
+infoframe_json_path = "infoframe_data.json"
 
 @st.cache_data
 def load_and_parse_json(file_source):
@@ -247,18 +287,24 @@ def load_and_parse_json(file_source):
 
   return pd.DataFrame(remote_summary), pd.DataFrame(key_signals)
 
-
 @st.cache_data
 def load_cec_json(file_path):
   if os.path.exists(file_path):
     with open(file_path, "r", encoding="utf-8") as f:
       data = json.load(f)
     df = pd.DataFrame(data)
-    # Compute ASCII version of OSD Name up front
-    df["OSD ASCII"] = df["OSD Name"].apply(hex_osd_to_ascii)
+    if "OSD Name" in df.columns:
+        df["OSD ASCII"] = df["OSD Name"].apply(hex_osd_to_ascii)
     return df
   return pd.DataFrame()
 
+@st.cache_data
+def load_infoframe_json(file_path):
+  if os.path.exists(file_path):
+    with open(file_path, "r", encoding="utf-8") as f:
+      data = json.load(f)
+    return pd.DataFrame(data)
+  return pd.DataFrame()
 
 # -----------------------------------------------------------------------------
 # 3. Cached Heavy Aggregation Helpers
@@ -281,7 +327,6 @@ def compute_cross_brand(df_valid):
       by="Unique_Brands", ascending=False
   )
 
-
 @st.cache_data
 def compute_intra_remote(df_valid):
   intra = (
@@ -295,7 +340,6 @@ def compute_intra_remote(df_valid):
   return intra[intra["Duplicate_Key_Count"] > 1].sort_values(
       by="Duplicate_Key_Count", ascending=False
   )
-
 
 @st.cache_data
 def compute_dictionary(df_valid):
@@ -318,7 +362,6 @@ def compute_dictionary(df_valid):
   )
   return dict_df.sort_values(by="Total_Occurrences", ascending=False)
 
-
 # -----------------------------------------------------------------------------
 # 4. Sidebar Data Ingestion
 # -----------------------------------------------------------------------------
@@ -336,8 +379,8 @@ elif os.path.exists(json_path):
 else:
   df_remotes, df_keys = pd.DataFrame(), pd.DataFrame()
 
-# Load CEC EDID Data
 df_cec = load_cec_json(cec_json_path)
+df_infoframe = load_infoframe_json(infoframe_json_path)
 
 st.sidebar.subheader("Filter Analytics Dashboard")
 if not df_remotes.empty:
@@ -379,12 +422,13 @@ if not df_remotes.empty:
 # -----------------------------------------------------------------------------
 # 5. Main Navigation Tabs
 # -----------------------------------------------------------------------------
-tab_analytics, tab_matcher, tab_finder, tab_explorer, tab_cec = st.tabs([
+tab_analytics, tab_matcher, tab_finder, tab_explorer, tab_cec, tab_info = st.tabs([
     "📊 Database Analytics",
     "🔍 Direct Signal Matcher",
     "📂 Smart Folder Finder",
     "📱 Device & Brand Explorer",
     "📺 CEC & EDID Intelligence",
+    "🗃️ SPD InfoFrame Decoder"
 ])
 
 # =============================================================================
@@ -414,14 +458,8 @@ with tab_analytics:
       brand_counts.columns = ["Brand", "Count"]
       st.plotly_chart(
           px.bar(
-              brand_counts,
-              x="Brand",
-              y="Count",
-              text="Count",
-              color="Brand",
-              title="Remotes per Brand",
-          ),
-          use_container_width=True,
+              brand_counts, x="Brand", y="Count", text="Count", color="Brand", title="Remotes per Brand",
+          ), use_container_width=True,
       )
 
     with col2:
@@ -430,13 +468,8 @@ with tab_analytics:
       device_counts.columns = ["Device", "Count"]
       st.plotly_chart(
           px.pie(
-              device_counts,
-              names="Device",
-              values="Count",
-              hole=0.4,
-              title="Device Type Distribution",
-          ),
-          use_container_width=True,
+              device_counts, names="Device", values="Count", hole=0.4, title="Device Type Distribution",
+          ), use_container_width=True,
       )
 
     st.divider()
@@ -448,15 +481,8 @@ with tab_analytics:
       proto_counts.columns = ["Protocol", "Total Keys"]
       st.plotly_chart(
           px.bar(
-              proto_counts,
-              x="Total Keys",
-              y="Protocol",
-              orientation="h",
-              text="Total Keys",
-              color="Protocol",
-              title="Signals by IR Protocol",
-          ),
-          use_container_width=True,
+              proto_counts, x="Total Keys", y="Protocol", orientation="h", text="Total Keys", color="Protocol", title="Signals by IR Protocol",
+          ), use_container_width=True,
       )
 
     with col4:
@@ -468,12 +494,8 @@ with tab_analytics:
       )
       st.plotly_chart(
           px.sunburst(
-              region_counts,
-              path=["Region", "Country"],
-              values="Count",
-              title="Geographic Breakdown",
-          ),
-          use_container_width=True,
+              region_counts, path=["Region", "Country"], values="Count", title="Geographic Breakdown",
+          ), use_container_width=True,
       )
 
     st.divider()
@@ -488,36 +510,21 @@ with tab_analytics:
     with pb_col1:
       st.plotly_chart(
           px.bar(
-              proto_brand_df,
-              x="Protocol",
-              y="Signal Count",
-              color="Brand",
-              title="Protocol Stacked by Brand",
-              barmode="stack",
-              text="Signal Count",
-          ),
-          use_container_width=True,
+              proto_brand_df, x="Protocol", y="Signal Count", color="Brand", title="Protocol Stacked by Brand", barmode="stack", text="Signal Count",
+          ), use_container_width=True,
       )
     with pb_col2:
       st.plotly_chart(
           px.sunburst(
-              proto_brand_df,
-              path=["Brand", "Protocol"],
-              values="Signal Count",
-              title="Brand -> Protocol Breakdown",
-          ),
-          use_container_width=True,
+              proto_brand_df, path=["Brand", "Protocol"], values="Signal Count", title="Brand -> Protocol Breakdown",
+          ), use_container_width=True,
       )
 
     st.markdown("#### 📋 Protocol vs. Brand Matrix")
     st.dataframe(
         pd.crosstab(
-            filtered_keys["Protocol"],
-            filtered_keys["Brand"],
-            margins=True,
-            margins_name="Total Signals",
-        ),
-        use_container_width=True,
+            filtered_keys["Protocol"], filtered_keys["Brand"], margins=True, margins_name="Total Signals",
+        ), use_container_width=True,
     )
     st.divider()
 
@@ -531,10 +538,7 @@ with tab_analytics:
       st.markdown("##### Signals Shared Across Multiple Brands")
       shared_signals = compute_cross_brand(valid_keys)
       if len(shared_signals) > 0:
-        st.success(
-            f"Found {len(shared_signals)} unique Hex signal signatures shared"
-            " across different brands."
-        )
+        st.success(f"Found {len(shared_signals)} unique Hex signal signatures shared across different brands.")
         st.dataframe(shared_signals, use_container_width=True, hide_index=True)
       else:
         st.info("No cross-brand hex overlaps detected.")
@@ -543,13 +547,8 @@ with tab_analytics:
       st.markdown("##### Duplicate Hex Commands Within the Same Remote Folder")
       same_remote_dups = compute_intra_remote(valid_keys)
       if len(same_remote_dups) > 0:
-        st.warning(
-            f"Found {len(same_remote_dups)} instances where a single remote"
-            " uses identical Hex codes for multiple buttons."
-        )
-        st.dataframe(
-            same_remote_dups, use_container_width=True, hide_index=True
-        )
+        st.warning("Found instances where a single remote uses identical Hex codes for multiple buttons.")
+        st.dataframe(same_remote_dups, use_container_width=True, hide_index=True)
       else:
         st.info("No intra-remote key collisions detected.")
 
@@ -558,21 +557,15 @@ with tab_analytics:
     st.subheader("🗂️ Universal Hex Dictionary (Reverse Lookup)")
     st.markdown("Grouped strictly by Protocol, Address, and Command.")
     st.dataframe(
-        compute_dictionary(valid_keys),
-        use_container_width=True,
-        hide_index=True,
+        compute_dictionary(valid_keys), use_container_width=True, hide_index=True,
     )
     st.divider()
 
     st.subheader("🔄 Device-Brand Coverage Matrix")
     st.dataframe(
         pd.crosstab(
-            filtered_remotes["Brand"],
-            filtered_remotes["Device"],
-            margins=True,
-            margins_name="Total",
-        ),
-        use_container_width=True,
+            filtered_remotes["Brand"], filtered_remotes["Device"], margins=True, margins_name="Total",
+        ), use_container_width=True,
     )
     st.divider()
 
@@ -587,9 +580,7 @@ with tab_analytics:
       display_keys = filtered_keys
       if search_key:
         display_keys = display_keys[
-            display_keys["Key Name"].str.contains(
-                search_key, case=False, na=False
-            )
+            display_keys["Key Name"].str.contains(search_key, case=False, na=False)
         ]
       st.dataframe(display_keys, use_container_width=True, hide_index=True)
 
@@ -604,17 +595,13 @@ with tab_matcher:
   )
 
   input_method = st.radio(
-      "Select Input Mode:",
-      ["Upload Signal File (.SIG / .U1 / .U2)", "Manual Hex Search"],
-      horizontal=True,
+      "Select Input Mode:", ["Upload Signal File (.SIG / .U1 / .U2)", "Manual Hex Search"], horizontal=True,
   )
   search_protocol, search_address, search_command = None, None, None
 
   if input_method == "Upload Signal File (.SIG / .U1 / .U2)":
     uploaded_signal = st.file_uploader(
-        "Upload a raw `.SIG`, `.U1`, or `.U2` file",
-        type=["sig", "u1", "u2"],
-        key="matcher_file_uploader",
+        "Upload a raw `.SIG`, `.U1`, or `.U2` file", type=["sig", "u1", "u2"], key="matcher_file_uploader",
     )
     if uploaded_signal:
       ext = uploaded_signal.name.split(".")[-1].lower()
@@ -623,14 +610,10 @@ with tab_matcher:
         tmp_path = tmp.name
       try:
         decoded = (
-            parse_and_decode_signal(tmp_path)
-            if parse_and_decode_signal
-            else None
+            parse_and_decode_signal(tmp_path) if parse_and_decode_signal else None
         )
         if (
-            decoded
-            and isinstance(decoded, dict)
-            and decoded.get("status") in ["Success", "Repeat"]
+            decoded and isinstance(decoded, dict) and decoded.get("status") in ["Success", "Repeat"]
         ):
           search_protocol = decoded.get("protocol")
           search_address = decoded.get("address")
@@ -640,20 +623,11 @@ with tab_matcher:
               f" Address: `{search_address}`, Command: `{search_command}`"
           )
         else:
-          st.warning(
-              "⚠️ Decoder failed to identify this signal format. Please enter"
-              " hex values manually:"
-          )
+          st.warning("⚠️ Decoder failed to identify this signal format. Please enter hex values manually:")
           c_p, c_a, c_c = st.columns(3)
-          search_protocol = c_p.text_input(
-              "Protocol", value="", placeholder="e.g. NEC", key="up_proto"
-          )
-          search_address = c_a.text_input(
-              "Address", value="", placeholder="e.g. 0x4", key="up_addr"
-          )
-          search_command = c_c.text_input(
-              "Command", value="", placeholder="e.g. 0xf0", key="up_cmd"
-          )
+          search_protocol = c_p.text_input("Protocol", value="", placeholder="e.g. NEC", key="up_proto")
+          search_address = c_a.text_input("Address", value="", placeholder="e.g. 0x4", key="up_addr")
+          search_command = c_c.text_input("Command", value="", placeholder="e.g. 0xf0", key="up_cmd")
       except Exception as e:
         st.error(f"Error decoding signal file: {e}")
       finally:
@@ -661,21 +635,9 @@ with tab_matcher:
           os.remove(tmp_path)
   else:
     c_p, c_a, c_c = st.columns(3)
-    search_protocol = c_p.text_input(
-        "Protocol (e.g. NEC, RC5, SONY)",
-        value="",
-        placeholder="e.g. NEC",
-        key="man_proto",
-    )
-    search_address = c_a.text_input(
-        "Address Hex (e.g. 0x4)", value="", placeholder="e.g. 0x4", key="man_addr"
-    )
-    search_command = c_c.text_input(
-        "Command Hex (e.g. 0xf0)",
-        value="",
-        placeholder="e.g. 0xf0",
-        key="man_cmd",
-    )
+    search_protocol = c_p.text_input("Protocol (e.g. NEC, RC5, SONY)", value="", placeholder="e.g. NEC", key="man_proto")
+    search_address = c_a.text_input("Address Hex (e.g. 0x4)", value="", placeholder="e.g. 0x4", key="man_addr")
+    search_command = c_c.text_input("Command Hex (e.g. 0xf0)", value="", placeholder="e.g. 0xf0", key="man_cmd")
 
   if search_protocol or search_address or search_command:
     st.divider()
@@ -688,39 +650,18 @@ with tab_matcher:
 
     matches = df_keys.copy()
     if search_protocol:
-      matches = matches[
-          matches["Protocol"].astype(str).str.upper()
-          == str(search_protocol).strip().upper()
-      ]
+      matches = matches[matches["Protocol"].astype(str).str.upper() == str(search_protocol).strip().upper()]
     if search_address:
-      matches = matches[
-          matches["Address"].astype(str).str.strip().str.lower()
-          == str(search_address).strip().lower()
-      ]
+      matches = matches[matches["Address"].astype(str).str.strip().str.lower() == str(search_address).strip().lower()]
     if search_command:
-      matches = matches[
-          matches["Command"].astype(str).str.strip().str.lower()
-          == str(search_command).strip().lower()
-      ]
+      matches = matches[matches["Command"].astype(str).str.strip().str.lower() == str(search_command).strip().lower()]
 
     st.subheader(f"📋 Exact Database Matches ({len(matches)} found)")
     if len(matches) > 0:
       output_cols = [
-          "Folder ID",
-          "Brand",
-          "Device",
-          "Model",
-          "Key Name",
-          "Protocol",
-          "Address",
-          "Command",
-          "Country",
-          "Region",
-          "Source File",
+          "Folder ID", "Brand", "Device", "Model", "Key Name", "Protocol", "Address", "Command", "Country", "Region", "Source File",
       ]
-      st.dataframe(
-          matches[output_cols].reset_index(drop=True), use_container_width=True
-      )
+      st.dataframe(matches[output_cols].reset_index(drop=True), use_container_width=True)
     else:
       st.warning("No records matched the specified protocol and hex criteria.")
 
@@ -739,14 +680,10 @@ with tab_finder:
     col1, col2, col3 = st.columns(3)
     with col1:
       all_devices = sorted(df_remotes["Device"].unique())
-      req_devices = st.multiselect(
-          "Target Device(s) [Mandatory]", options=all_devices
-      )
+      req_devices = st.multiselect("Target Device(s) [Mandatory]", options=all_devices)
     with col2:
       all_regions = sorted(df_remotes["Region"].unique())
-      req_regions = st.multiselect(
-          "Target Region(s) [Optional]", options=all_regions
-      )
+      req_regions = st.multiselect("Target Region(s) [Optional]", options=all_regions)
     with col3:
       all_keys = sorted(df_keys["Key Name"].dropna().unique())
       req_keys = st.multiselect("Required Keys [Mandatory]", options=all_keys)
@@ -755,14 +692,8 @@ with tab_finder:
       max_tol = len(req_keys)
       min_tol = 1 if max_tol == 1 else 2
       tolerance = st.slider(
-          "Minimum Keys Match Tolerance",
-          min_value=min_tol,
-          max_value=max_tol,
-          value=max_tol,
-          help=(
-              "Set the minimum number of requested keys a folder must have to"
-              " be considered a match."
-          ),
+          "Minimum Keys Match Tolerance", min_value=min_tol, max_value=max_tol, value=max_tol,
+          help="Set the minimum number of requested keys a folder must have to be considered a match.",
       )
     else:
       tolerance = 0
@@ -777,95 +708,43 @@ with tab_finder:
         with st.spinner("Scanning database for matching folders..."):
           cand_remotes = df_remotes[df_remotes["Device"].isin(req_devices)]
           if req_regions:
-            cand_remotes = cand_remotes[
-                cand_remotes["Region"].isin(req_regions)
-            ]
+            cand_remotes = cand_remotes[cand_remotes["Region"].isin(req_regions)]
 
           valid_folders = cand_remotes["Folder ID"].unique()
           cand_keys = df_keys[
-              (df_keys["Folder ID"].isin(valid_folders))
-              & (df_keys["Key Name"].isin(req_keys))
+              (df_keys["Folder ID"].isin(valid_folders)) & (df_keys["Key Name"].isin(req_keys))
           ]
 
           if cand_keys.empty:
-            st.warning(
-                "No folders found matching the specified device and key"
-                " criteria."
-            )
+            st.warning("No folders found matching the specified device and key criteria.")
           else:
-            match_counts = (
-                cand_keys.groupby("Folder ID")["Key Name"]
-                .nunique()
-                .reset_index()
-            )
-            match_counts.rename(
-                columns={"Key Name": "Matched Keys Count"}, inplace=True
-            )
-            passed_folders = match_counts[
-                match_counts["Matched Keys Count"] >= tolerance
-            ]
+            match_counts = cand_keys.groupby("Folder ID")["Key Name"].nunique().reset_index()
+            match_counts.rename(columns={"Key Name": "Matched Keys Count"}, inplace=True)
+            passed_folders = match_counts[match_counts["Matched Keys Count"] >= tolerance]
 
             if passed_folders.empty:
-              st.warning(
-                  f"No folders met the minimum tolerance of {tolerance}"
-                  " matching keys."
-              )
+              st.warning(f"No folders met the minimum tolerance of {tolerance} matching keys.")
             else:
-              results = pd.merge(
-                  passed_folders, cand_remotes, on="Folder ID", how="left"
-              )
+              results = pd.merge(passed_folders, cand_remotes, on="Folder ID", how="left")
 
               def get_matched_keys(fid):
-                return ", ".join(
-                    sorted(
-                        cand_keys[cand_keys["Folder ID"] == fid][
-                            "Key Name"
-                        ].unique()
-                    )
-                )
+                return ", ".join(sorted(cand_keys[cand_keys["Folder ID"] == fid]["Key Name"].unique()))
 
-              results["Matched Keys"] = results["Folder ID"].apply(
-                  get_matched_keys
-              )
+              results["Matched Keys"] = results["Folder ID"].apply(get_matched_keys)
 
               def get_missing_keys(matched_str):
-                matched_list = (
-                    [k.strip() for k in matched_str.split(",")]
-                    if matched_str
-                    else []
-                )
+                matched_list = ([k.strip() for k in matched_str.split(",")] if matched_str else [])
                 missing = set(req_keys) - set(matched_list)
-                return (
-                    ", ".join(sorted(missing)) if missing else "None (100%"
-                    " Match)"
-                )
+                return (", ".join(sorted(missing)) if missing else "None (100% Match)")
 
-              results["Missing Keys"] = results["Matched Keys"].apply(
-                  get_missing_keys
-              )
-
-              results = results.sort_values(
-                  by=["Matched Keys Count", "Brand"], ascending=[False, True]
-              )
-              st.success(
-                  f"🎉 Found {len(results)} folders matching your criteria!"
-              )
+              results["Missing Keys"] = results["Matched Keys"].apply(get_missing_keys)
+              results = results.sort_values(by=["Matched Keys Count", "Brand"], ascending=[False, True])
+              st.success(f"🎉 Found {len(results)} folders matching your criteria!")
 
               display_cols = [
-                  "Folder ID",
-                  "Brand",
-                  "Device",
-                  "Model",
-                  "Region",
-                  "Matched Keys Count",
-                  "Matched Keys",
-                  "Missing Keys",
+                  "Folder ID", "Brand", "Device", "Model", "Region", "Matched Keys Count", "Matched Keys", "Missing Keys",
               ]
-              st.dataframe(
-                  results[display_cols],
-                  use_container_width=True,
-                  hide_index=True,
-              )
+              st.dataframe(results[display_cols], use_container_width=True, hide_index=True)
 
 # =============================================================================
 # TAB 4: DEVICE & BRAND EXPLORER
@@ -881,25 +760,14 @@ with tab_explorer:
     col1, col2, col3 = st.columns(3)
     with col1:
       all_devices_t4 = sorted(df_remotes["Device"].unique())
-      search_devices = st.multiselect(
-          "Target Device(s) [Mandatory]", options=all_devices_t4, key="t4_dev"
-      )
+      search_devices = st.multiselect("Target Device(s) [Mandatory]", options=all_devices_t4, key="t4_dev")
     with col2:
       all_brands_t4 = sorted(df_remotes["Brand"].unique())
-      search_brands = st.multiselect(
-          "Target Brand(s) [Mandatory]", options=all_brands_t4, key="t4_brand"
-      )
+      search_brands = st.multiselect("Target Brand(s) [Mandatory]", options=all_brands_t4, key="t4_brand")
     with col3:
-      search_model = st.text_input(
-          "Model Name (Min 3 chars) [Optional]",
-          value="",
-          key="t4_model",
-          placeholder="e.g. AKB",
-      )
+      search_model = st.text_input("Model Name (Min 3 chars) [Optional]", value="", key="t4_model", placeholder="e.g. AKB")
 
-    if st.button(
-        "Search Database", type="primary", use_container_width=True, key="t4_btn"
-    ):
+    if st.button("Search Database", type="primary", use_container_width=True, key="t4_btn"):
       if not search_devices:
         st.error("⚠️ Please select at least one Target Device.")
       elif not search_brands:
@@ -907,29 +775,18 @@ with tab_explorer:
       else:
         with st.spinner("Searching for matching folders..."):
           cand = df_remotes[
-              (df_remotes["Device"].isin(search_devices))
-              & (df_remotes["Brand"].isin(search_brands))
+              (df_remotes["Device"].isin(search_devices)) & (df_remotes["Brand"].isin(search_brands))
           ].copy()
 
           model_query = search_model.strip()
           if len(model_query) > 0:
             if len(model_query) < 3:
-              st.warning(
-                  "⚠️ Model input ignored. Please enter at least 3 characters"
-                  " to apply the model filter."
-              )
+              st.warning("⚠️ Model input ignored. Please enter at least 3 characters to apply the model filter.")
             else:
-              cand = cand[
-                  cand["Model"]
-                  .astype(str)
-                  .str.contains(model_query, case=False, na=False)
-              ]
+              cand = cand[cand["Model"].astype(str).str.contains(model_query, case=False, na=False)]
 
           if cand.empty:
-            st.warning(
-                "No folders found matching the specified Device, Brand, and"
-                " Model criteria."
-            )
+            st.warning("No folders found matching the specified Device, Brand, and Model criteria.")
           else:
             valid_fids = cand["Folder ID"].unique()
             matched_keys = df_keys[df_keys["Folder ID"].isin(valid_fids)]
@@ -939,31 +796,17 @@ with tab_explorer:
                 .apply(lambda x: ", ".join(sorted(set(x))))
                 .reset_index()
             )
-            keys_per_folder.rename(
-                columns={"Key Name": "Supported Keys"}, inplace=True
-            )
+            keys_per_folder.rename(columns={"Key Name": "Supported Keys"}, inplace=True)
 
             results = pd.merge(cand, keys_per_folder, on="Folder ID", how="left")
             results = results.sort_values(by=["Brand", "Device", "Model"])
 
-            st.success(
-                f"🎉 Found {len(results)} folders matching your criteria!"
-            )
+            st.success(f"🎉 Found {len(results)} folders matching your criteria!")
 
             display_cols = [
-                "Folder ID",
-                "Brand",
-                "Device",
-                "Model",
-                "Region",
-                "Total Keys",
-                "Supported Keys",
+                "Folder ID", "Brand", "Device", "Model", "Region", "Total Keys", "Supported Keys",
             ]
-            st.dataframe(
-                results[display_cols],
-                use_container_width=True,
-                hide_index=True,
-            )
+            st.dataframe(results[display_cols], use_container_width=True, hide_index=True)
 
 # =============================================================================
 # TAB 5: CEC & EDID INTELLIGENCE
@@ -976,152 +819,86 @@ with tab_cec:
   )
 
   if df_cec.empty:
-    st.warning(
-        "⚠️ `cec_edid_data.json` not found or empty! Please ensure the file is"
-        " placed in the root directory."
-    )
+    st.warning("⚠️ `cec_edid_data.json` not found or empty! Please ensure the file is placed in the root directory.")
   else:
-    # 1. Metric KPIs
     cec_m1, cec_m2, cec_m3, cec_m4 = st.columns(4)
     cec_m1.metric("Total Devices In Dataset", len(df_cec))
-    cec_m2.metric(
-        "CEC Supported Devices",
-        len(df_cec[df_cec["IS CEC Present"].astype(str).str.upper() == "Y"]),
-    )
-    cec_m3.metric(
-        "CEC Enabled Devices",
-        len(df_cec[df_cec["Is CEC Enabled"].astype(str).str.upper() == "Y"]),
-    )
+    cec_m2.metric("CEC Supported Devices", len(df_cec[df_cec["IS CEC Present"].astype(str).str.upper() == "Y"]))
+    cec_m3.metric("CEC Enabled Devices", len(df_cec[df_cec["Is CEC Enabled"].astype(str).str.upper() == "Y"]))
     cec_m4.metric("Unique Brands", df_cec["Brand"].nunique())
 
     st.divider()
 
-    # 2. Controls & Filtering
     st.subheader("🔍 Filter CEC Data & Toggle OSD Decoding")
 
     col_f1, col_f2, col_f3, col_f4 = st.columns(4)
     with col_f1:
-      cec_brands = st.multiselect(
-          "Filter Brand",
-          options=sorted(df_cec["Brand"].dropna().unique()),
-          key="cec_brand_f",
-      )
+      cec_brands = st.multiselect("Filter Brand", options=sorted(df_cec["Brand"].dropna().unique()), key="cec_brand_f")
     with col_f2:
-      cec_regions = st.multiselect(
-          "Filter Region",
-          options=sorted(df_cec["Region"].dropna().unique()),
-          key="cec_reg_f",
-      )
+      cec_regions = st.multiselect("Filter Region", options=sorted(df_cec["Region"].dropna().unique()), key="cec_reg_f")
     with col_f3:
-      cec_present_filter = st.selectbox(
-          "CEC Present?", ["All", "Yes Only (Y)", "No Only (N)"]
-      )
+      cec_present_filter = st.selectbox("CEC Present?", ["All", "Yes Only (Y)", "No Only (N)"])
     with col_f4:
       osd_display_mode = st.radio(
-          "OSD Name View Format:",
-          ["ASCII String", "Hex Bytes", "Both (Hex -> ASCII)"],
-          horizontal=True,
+          "OSD Name View Format:", ["ASCII String", "Hex Bytes", "Both (Hex -> ASCII)"], horizontal=True,
       )
 
-    # Apply Table Filters
     cec_display_df = df_cec.copy()
 
     if cec_brands:
-      cec_display_df = cec_display_df[
-          cec_display_df["Brand"].isin(cec_brands)
-      ]
+      cec_display_df = cec_display_df[cec_display_df["Brand"].isin(cec_brands)]
     if cec_regions:
-      cec_display_df = cec_display_df[
-          cec_display_df["Region"].isin(cec_regions)
-      ]
+      cec_display_df = cec_display_df[cec_display_df["Region"].isin(cec_regions)]
 
     if cec_present_filter == "Yes Only (Y)":
-      cec_display_df = cec_display_df[
-          cec_display_df["IS CEC Present"].astype(str).str.upper() == "Y"
-      ]
+      cec_display_df = cec_display_df[cec_display_df["IS CEC Present"].astype(str).str.upper() == "Y"]
     elif cec_present_filter == "No Only (N)":
-      cec_display_df = cec_display_df[
-          cec_display_df["IS CEC Present"].astype(str).str.upper() == "N"
-      ]
+      cec_display_df = cec_display_df[cec_display_df["IS CEC Present"].astype(str).str.upper() == "N"]
 
-    # Handle OSD Display Mode Transformation
     if osd_display_mode == "ASCII String":
       cec_display_df["OSD Field Display"] = cec_display_df["OSD ASCII"]
     elif osd_display_mode == "Hex Bytes":
       cec_display_df["OSD Field Display"] = cec_display_df["OSD Name"]
     else:
-
       def combine_osd(row):
         h = str(row["OSD Name"]).strip()
         a = str(row["OSD ASCII"]).strip()
         return f"{h} ➔ ({a})" if (h and a) else h or a
+      cec_display_df["OSD Field Display"] = cec_display_df.apply(combine_osd, axis=1)
 
-      cec_display_df["OSD Field Display"] = cec_display_df.apply(
-          combine_osd, axis=1
-      )
-
-    # 3. Main Data Table
+    show_edid = st.checkbox("👁️ Show Raw EDID Hex Data in Table", value=False)
+    
     table_cols = [
-        "Brand",
-        "Model",
-        "Device Type",
-        "Subdevice",
-        "IS CEC Present",
-        "Is CEC Enabled",
-        "Vendor ID",
-        "OSD Field Display",
-        "Region",
-        "Country",
+        "Brand", "Model", "Device Type", "Subdevice", "IS CEC Present",
+        "Is CEC Enabled", "Vendor ID", "OSD Field Display", "Region", "Country",
     ]
-    st.dataframe(
-        cec_display_df[table_cols].reset_index(drop=True),
-        use_container_width=True,
-    )
+    if show_edid:
+        table_cols.append("EDID")
+
+    st.dataframe(cec_display_df[table_cols].reset_index(drop=True), use_container_width=True)
 
     st.divider()
 
-    # 4. Interactive EDID Hardware Decoder
     st.subheader("🔬 VESA EDID Hardware Decoder")
-    st.write(
-        "Select a device model from the database or paste a raw EDID hex block"
-        " below to parse hardware capabilities, monitor descriptors, and"
-        " checksums."
-    )
+    st.write("Select a device model from the database or paste a raw EDID hex block below to parse hardware capabilities.")
 
-    decode_source = st.radio(
-        "Select EDID Source:",
-        ["Select Model from Dataset", "Paste Custom Hex String"],
-        horizontal=True,
-    )
+    decode_source = st.radio("Select EDID Source:", ["Select Model from Dataset", "Paste Custom Hex String"], horizontal=True)
 
     edid_to_parse = ""
 
     if decode_source == "Select Model from Dataset":
-      # Filter models that actually have EDID data available
       has_edid = df_cec[df_cec["EDID"].astype(str).str.strip() != ""]
 
       if not has_edid.empty:
-        # Create a selectbox label combining Brand, Model, and Country
         has_edid["Select Label"] = (
-            has_edid["Brand"].astype(str)
-            + " - "
-            + has_edid["Model"].astype(str)
-            + " ("
-            + has_edid["Country"].astype(str)
-            + ")"
+            has_edid["Brand"].astype(str) + " - " + has_edid["Model"].astype(str) + " (" + has_edid["Country"].astype(str) + ")"
         )
 
-        selected_model_label = st.selectbox(
-            "Choose a TV / Display Model:",
-            options=has_edid["Select Label"].unique(),
-        )
-        selected_row = has_edid[
-            has_edid["Select Label"] == selected_model_label
-        ].iloc[0]
+        selected_model_label = st.selectbox("Choose a TV / Display Model:", options=has_edid["Select Label"].unique())
+        selected_row = has_edid[has_edid["Select Label"] == selected_model_label].iloc[0]
 
         edid_to_parse = selected_row["EDID"]
 
-        # Display Selected Device Quick Info
         st.info(
             f"**Selected Model:** {selected_row['Brand']} {selected_row['Model']} | "
             f"**CEC Status:** {selected_row['IS CEC Present']} (Enabled: {selected_row['Is CEC Enabled']}) | "
@@ -1129,13 +906,8 @@ with tab_cec:
         )
       else:
         st.warning("No EDID data available in the current dataset.")
-
     else:
-      edid_to_parse = st.text_area(
-          "Paste Raw EDID Hex Block (128 or 256 bytes):",
-          height=120,
-          placeholder="00 FF FF FF FF FF FF 00 1E 6D ...",
-      )
+      edid_to_parse = st.text_area("Paste Raw EDID Hex Block (128 or 256 bytes):", height=120, placeholder="00 FF FF FF FF FF FF 00 1E 6D ...")
 
     if st.button("Decode EDID Data", type="primary", use_container_width=True):
       if not edid_to_parse or len(edid_to_parse.strip()) == 0:
@@ -1148,46 +920,80 @@ with tab_cec:
         else:
           st.success("🎉 EDID Data Successfully Decoded!")
 
-          # Display Parsed Metadata in structured KPI cards
           ed_col1, ed_col2, ed_col3, ed_col4 = st.columns(4)
           ed_col1.metric("Manufacturer PNP ID", parsed_res.get("mfg_id"))
-          ed_col2.metric(
-              "Parsed Monitor Name", parsed_res.get("monitor_name")
-          )
+          ed_col2.metric("Parsed Monitor Name", parsed_res.get("monitor_name"))
           ed_col3.metric("Signal Type", parsed_res.get("signal_type"))
           ed_col4.metric("Checksum Result", parsed_res.get("checksum"))
 
-          st.markdown("#### 📋 Detailed Hardware Breakdown")
-
           p_data = {
               "Property": [
-                  "PNP Manufacturer Code",
-                  "Product Code",
-                  "Serial Number",
-                  "Manufactured Date",
-                  "EDID Structure Version",
-                  "Physical Screen Dimensions",
-                  "Timing / Refresh Rate Limits",
-                  "CEA-861 HDMI Extension Blocks",
-                  "Header Validation",
+                  "PNP Manufacturer Code", "Product Code", "Serial Number", "Manufactured Date",
+                  "EDID Structure Version", "Physical Screen Dimensions", "Timing / Refresh Rate Limits",
+                  "CEA-861 HDMI Extension Blocks", "Header Validation",
               ],
               "Decoded Value": [
-                  parsed_res.get("mfg_id"),
-                  parsed_res.get("product_code"),
-                  str(parsed_res.get("serial_number")),
-                  parsed_res.get("manufactured"),
-                  parsed_res.get("edid_version"),
-                  parsed_res.get("screen_size"),
-                  parsed_res.get("range_limits"),
-                  f"{parsed_res.get('extension_blocks')} block(s)",
-                  (
-                      "Valid Standard (0x00FFFFFF...)"
-                      if parsed_res.get("valid_header")
-                      else "Non-standard Header"
-                  ),
+                  parsed_res.get("mfg_id"), parsed_res.get("product_code"), str(parsed_res.get("serial_number")),
+                  parsed_res.get("manufactured"), parsed_res.get("edid_version"), parsed_res.get("screen_size"),
+                  parsed_res.get("range_limits"), f"{parsed_res.get('extension_blocks')} block(s)",
+                  "Valid Standard" if parsed_res.get("valid_header") else "Non-standard Header",
               ],
           }
           st.dataframe(pd.DataFrame(p_data), use_container_width=True)
 
           with st.expander("🔍 View Raw Hex Stream"):
             st.code(edid_to_parse, language="text")
+
+# =============================================================================
+# TAB 6: SPD INFOFRAME DECODER
+# =============================================================================
+with tab_info:
+  st.header("🗃️ SPD InfoFrame Intelligence Hub")
+  st.write("Browse and decode HDMI Source Product Description (SPD) InfoFrame data streams to identify connected media hardware.")
+
+  if df_infoframe.empty:
+      st.warning("⚠️ `infoframe_data.json` not found or empty! Please place the file in the root directory.")
+  else:
+      st.dataframe(df_infoframe, use_container_width=True)
+      st.divider()
+
+      st.subheader("🔬 SPD InfoFrame Hex Decoder")
+      st.write("Select a hardware entry from the database to instantly parse its HDMI InfoFrame packet.")
+
+      valid_info = df_infoframe[df_infoframe["rawdata"].astype(str).str.strip() != ""]
+
+      if valid_info.empty:
+          st.warning("No raw hex data available in the InfoFrame dataset.")
+      else:
+          valid_info["Info Label"] = valid_info["Manufacturer"].astype(str) + " - " + valid_info["sifdescription"].astype(str)
+          
+          # Dialog/Popup equivalent using Streamlit components
+          selected_info_label = st.selectbox("Select a Device to Decode:", options=valid_info["Info Label"].unique())
+          
+          if st.button("Decode InfoFrame Packet", type="primary"):
+              selected_info_row = valid_info[valid_info["Info Label"] == selected_info_label].iloc[0]
+              raw_hex = selected_info_row["rawdata"]
+              
+              parsed_spd = parse_spd_infoframe(raw_hex)
+              
+              if parsed_spd.get("status") == "Error":
+                  st.error(f"⚠️ Decoding Error: {parsed_spd.get('message')}")
+              else:
+                  st.success("🎉 InfoFrame Packet Successfully Decoded!")
+                  
+                  # Present as a clean detailed card
+                  col_a, col_b, col_c = st.columns(3)
+                  col_a.metric("Vendor Name", parsed_spd.get("vendor_name"))
+                  col_b.metric("Product Description", parsed_spd.get("product_description"))
+                  col_c.metric("Device Profile", parsed_spd.get("source_device_type"))
+                  
+                  st.markdown("#### 📡 Protocol Headers & Verification")
+                  st.write(f"- **InfoFrame Type:** `0x83` (Source Product Description)")
+                  st.write(f"- **Version:** `0x{parsed_spd.get('version'):02X}`")
+                  st.write(f"- **Length:** `{parsed_spd.get('length')} bytes`")
+                  
+                  chk_msg = "Valid ✅" if parsed_spd.get("checksum_valid") else "Invalid ❌"
+                  st.write(f"- **Checksum:** {chk_msg}")
+                  
+                  with st.expander("🔍 View Raw Hex Stream"):
+                      st.code(raw_hex, language="text")

@@ -1,0 +1,3866 @@
+[
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "S-A",
+    "sifdescription": "Explorer 4KG3",
+    "Manufacturer": "S-A"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-D5100",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-1613",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 01 44 45 4E 4F 4E 00 00 00 41 56 52 2D 45 33 30 30 00 00 00 00 00 00 00 00 00",
+    "sifname": "DENON",
+    "sifdescription": "AVR-E300",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 BE 44 45 4E 4F 4E 00 00 00 41 56 52 2D 58 33 30 30 30 00 00 00 00 00 00 00 00",
+    "sifname": "DENON",
+    "sifdescription": "AVR-X3000",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 0C 44 45 4E 4F 4E 00 00 00 41 56 52 2D 31 39 31 32 00 00 00 00 00 00 00 00 00",
+    "sifname": "DENON",
+    "sifdescription": "AVR-1912",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-X4000",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-1612",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-3313",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-X2000",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-2308",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-888",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-3808",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-1911",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-2112",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-1611",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-591",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-791",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-4311",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 10 44 45 4E 4F 4E 00 00 00 41 56 52 2D 33 33 31 32 00 00 00 00 00 00 00 00 00",
+    "sifname": "DENON",
+    "sifdescription": "AVR-3312",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-2311",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-1913",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-E400",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-2113",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-1910",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-790",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-590",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-890",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 13 44 45 4E 4F 4E 00 00 00 41 56 52 2D 32 33 31 30 00 00 00 00 00 00 00 00 00",
+    "sifname": "DENON",
+    "sifdescription": "AVR-2310",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-4308",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 07 44 45 4E 4F 4E 00 00 00 41 56 52 2D 32 38 30 38 00 00 00 00 00 00 00 00 00",
+    "sifname": "DENON",
+    "sifdescription": "AVR-2808",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-2312",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-1712",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-1610",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-1713",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR 1312",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-391",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 13 44 45 4E 4F 4E 00 00 00 41 56 52 2D 32 31 31 32 00 00 00 00 00 00 00 00 00",
+    "sifname": "DENON",
+    "sifdescription": "AVR-2112",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-1513",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-E200",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 98 44 45 4E 4F 4E 00 00 00 41 56 52 2D 53 37 30 30 57 00 00 00 00 00 00 00 00",
+    "sifname": "DENON",
+    "sifdescription": "AVR-S700W",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 06 68 2F 6B 20 20 20 20 20 41 2F 56 20 52 65 63 65 69 76 65 72 20 20 20 20 20",
+    "sifname": "h/k",
+    "sifdescription": "A/V Receiver",
+    "Manufacturer": "h/k"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "Integra",
+    "sifdescription": "DTR-20.4",
+    "Manufacturer": "Integra"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "Integra",
+    "sifdescription": "DTR-5.8",
+    "Manufacturer": "Integra"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 F3 6D 61 72 61 6E 74 7A 00 53 52 36 30 30 38 00 00 00 00 00 00 00 00 00 00 00",
+    "sifname": "marantz",
+    "sifdescription": "SR6008",
+    "Manufacturer": "marantz"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 F4 6D 61 72 61 6E 74 7A 00 53 52 36 30 30 37 00 00 00 00 00 00 00 00 00 00 00",
+    "sifname": "marantz",
+    "sifdescription": "SR6007",
+    "Manufacturer": "marantz"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 FC 6D 61 72 61 6E 74 7A 00 4E 52 31 35 30 34 00 00 00 00 00 00 00 00 00 00 00",
+    "sifname": "marantz",
+    "sifdescription": "NR1504",
+    "Manufacturer": "marantz"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "marantz",
+    "sifdescription": "NR1403",
+    "Manufacturer": "marantz"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 FC 6D 61 72 61 6E 74 7A 00 4E 52 31 36 30 33 00 00 00 00 00 00 00 00 00 00 00",
+    "sifname": "marantz",
+    "sifdescription": "NR1603",
+    "Manufacturer": "marantz"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 FB 6D 61 72 61 6E 74 7A 00 4E 52 31 36 30 34 00 00 00 00 00 00 00 00 00 00 00",
+    "sifname": "marantz",
+    "sifdescription": "NR1604",
+    "Manufacturer": "marantz"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "marantz",
+    "sifdescription": "SR5007",
+    "Manufacturer": "marantz"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "HT-RC160",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 77 4F 4E 4B 59 4F 00 00 00 54 58 2D 4E 52 38 33 38 20 20 00 00 00 00 00 00 00",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-NR838",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 BD 4F 4E 4B 59 4F 00 00 00 54 58 2D 4E 52 35 33 35 00 00 00 00 00 00 00 00 00",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-NR535",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 7E 4F 4E 4B 59 4F 00 00 00 54 58 2D 4E 52 35 32 35 20 20 00 00 00 00 00 00 00",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-NR525",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 BF 4F 4E 4B 59 4F 00 00 00 54 58 2D 4E 52 35 31 35 00 00 00 00 00 00 00 00 00",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-NR515",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 BB 4F 4E 4B 59 4F 00 00 00 54 58 2D 4E 52 38 30 37 00 00 00 00 00 00 00 00 00",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-NR807",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-NR616",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 C1 4F 4E 4B 59 4F 00 00 00 54 58 2D 4E 52 34 31 34 00 00 00 00 00 00 00 00 00",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-NR414",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-NR609",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-SR606",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-NR717",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-NR5010",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-NR626",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 BA 4F 4E 4B 59 4F 00 00 00 54 58 2D 4E 52 38 30 38 00 00 00 00 00 00 00 00 00",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-NR808",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-NR1007",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-SR806",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-SR308",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-SR605",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-SR705",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-SR805",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-SR508",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "HT-R580",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "HT-R391",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "HT-R591",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "HT-R558",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "HT-RC370",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-NR509",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-NR709",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-SR309",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "HT-RC560",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-SR608",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-NR818",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "HT-RC430",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "HT-RC460",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "HT-R690",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "HT-R990",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "HT-R390",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-NR727",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 76 4F 4E 4B 59 4F 00 00 00 54 58 2D 4E 52 39 32 39 20 20 00 00 00 00 00 00 00",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-NR929",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 BE 4F 4E 4B 59 4F 00 00 00 54 58 2D 53 52 33 31 33 00 00 00 00 00 00 00 00 00",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-SR313",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 7B 4F 4E 4B 59 4F 00 00 00 54 58 2D 4E 52 36 33 36 20 20 00 00 00 00 00 00 00",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-NR636",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-NR809",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "TX-SR607",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 14 4F 4E 4B 59 4F 00 00 00 48 54 2D 52 37 35 38 00 00 00 00 00 00 00 00 00 00",
+    "sifname": "ONKYO",
+    "sifdescription": "HT-R758",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PIONEER",
+    "sifdescription": "VSX-920",
+    "Manufacturer": "PIONEER"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 52 59 61 6D 61 68 61 00 00 52 58 2D 53 36 30 30 00 00 00 00 00 00 00 00 00 00",
+    "sifname": "Yamaha",
+    "sifdescription": "RX-S600",
+    "Manufacturer": "Yamaha"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 5F 59 61 6D 61 68 61 00 00 52 58 2D 41 38 33 30 00 00 00 00 00 00 00 00 00 00",
+    "sifname": "Yamaha",
+    "sifdescription": "RX-A830",
+    "Manufacturer": "Yamaha"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 D7 59 41 4D 41 48 41 00 00 52 58 2D 41 31 30 32 30 00 00 00 00 00 00 00 00 00",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-A1020",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 00 59 41 4D 41 48 41 00 00 52 58 2D 41 38 32 30 00 00 00 00 00 00 00 00 00 00",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-A820",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 C5 59 41 4D 41 48 41 00 00 48 54 52 2D 37 30 36 35 00 00 00 00 00 00 00 00 00",
+    "sifname": "YAMAHA",
+    "sifdescription": "HTR-7065",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "Yamaha",
+    "sifdescription": "RX-V375",
+    "Manufacturer": "Yamaha"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-V373",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-V567",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "Yamaha",
+    "sifdescription": "RX-A730",
+    "Manufacturer": "Yamaha"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 5E 59 61 6D 61 68 61 00 00 52 58 2D 41 38 34 30 00 00 00 00 00 00 00 00 00 00",
+    "sifname": "Yamaha",
+    "sifdescription": "RX-A840",
+    "Manufacturer": "Yamaha"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-V667",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-V471",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-V565",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "HTR-6260",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-A800",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-V571",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-V867",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-V3800",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-V2700",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-V1600",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 35 59 61 6D 61 68 61 00 00 52 58 2D 41 31 30 34 30 00 00 00 00 00 00 00 00 00",
+    "sifname": "Yamaha",
+    "sifdescription": "RX-A1040",
+    "Manufacturer": "Yamaha"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-V1073",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-V673",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-V1067",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-V3900",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-V1900",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "Yamaha",
+    "sifdescription": "RX-V775",
+    "Manufacturer": "Yamaha"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 28 59 61 6D 61 68 61 00 00 48 54 52 2D 32 30 36 37 00 00 00 00 00 00 00 00 00",
+    "sifname": "Yamaha",
+    "sifdescription": "HTR-2067",
+    "Manufacturer": "Yamaha"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 43 59 61 6D 61 68 61 00 00 52 58 2D 56 36 37 35 00 00 00 00 00 00 00 00 00 00",
+    "sifname": "Yamaha",
+    "sifdescription": "RX-V675",
+    "Manufacturer": "Yamaha"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "Yamaha",
+    "sifdescription": "RX-V475",
+    "Manufacturer": "Yamaha"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "Yamaha",
+    "sifdescription": "RX-V575",
+    "Manufacturer": "Yamaha"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-V771",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 E6 59 41 4D 41 48 41 00 00 52 58 2D 56 35 37 33 00 00 00 00 00 00 00 00 00 00",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-V573",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-V671",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-A1010",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-V871",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-A810",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "Yamaha",
+    "sifdescription": "RX-A1030",
+    "Manufacturer": "Yamaha"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-A1000",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 D6 59 41 4D 41 48 41 00 00 52 58 2D 41 32 30 32 30 00 00 00 00 00 00 00 00 00",
+    "sifname": "YAMAHA",
+    "sifdescription": "RX-A2020",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 C9 59 41 4D 41 48 41 00 00 48 54 52 2D 33 30 36 35 00 00 00 00 00 00 00 00 00",
+    "sifname": "YAMAHA",
+    "sifdescription": "HTR-3065",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 42 59 61 6D 61 68 61 00 00 52 58 2D 56 35 37 37 00 00 00 00 00 00 00 00 00 00",
+    "sifname": "Yamaha",
+    "sifdescription": "RX-V577",
+    "Manufacturer": "Yamaha"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "83 01 19 41 59 61 6D 61 68 61 00 00 52 58 2D 56 36 37 37 00 00 00 00 00 00 00 00 00 00",
+    "sifname": "Yamaha",
+    "sifdescription": "RX-V677",
+    "Manufacturer": "Yamaha"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "DBT-1713UD",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 6E 4C 47 45 00 00 00 00 00 42 44 20 50 6C 61 79 65 72 00 00 00 00 00 00 00 0A",
+    "sifname": "LGE",
+    "sifdescription": "BD Player",
+    "Manufacturer": "LGE"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 DE 4D 41 52 41 4E 54 5A 00 44 56 36 36 30 30 00 00 00 00 00 00 00 00 00 00 02",
+    "sifname": "MARANTZ",
+    "sifdescription": "DV6600",
+    "Manufacturer": "MARANTZ"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "BD-SP309",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "BDP2700",
+    "Manufacturer": "PHILIPS"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "BDP3000",
+    "Manufacturer": "PHILIPS"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 AE 50 48 49 4C 49 50 53 00 42 44 50 33 31 30 30 00 00 00 00 00 00 00 00 00 02",
+    "sifname": "PHILIPS",
+    "sifdescription": "BDP3100",
+    "Manufacturer": "PHILIPS"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "BDP3200",
+    "Manufacturer": "PHILIPS"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "BDP3200X",
+    "Manufacturer": "PHILIPS"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "BDP5100",
+    "Manufacturer": "PHILIPS"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "BDP5180",
+    "Manufacturer": "PHILIPS"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "BDP5200",
+    "Manufacturer": "PHILIPS"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "BDP5500",
+    "Manufacturer": "PHILIPS"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "BDP7300",
+    "Manufacturer": "PHILIPS"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "BDP7500",
+    "Manufacturer": "PHILIPS"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "BDP7600",
+    "Manufacturer": "PHILIPS"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "BDP7700",
+    "Manufacturer": "PHILIPS"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 5C 50 48 49 4C 49 50 53 00 42 44 50 37 35 30 30 4D 6B 49 49 00 00 00 00 00 02",
+    "sifname": "PHILIPS",
+    "sifdescription": "BDP7500MkII",
+    "Manufacturer": "PHILIPS"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 36 50 49 4F 4E 45 45 52 00 42 44 50 2D 4C 58 39 31 00 00 00 00 00 00 00 00 0A",
+    "sifname": "PIONEER",
+    "sifdescription": "BDP-LX91",
+    "Manufacturer": "PIONEER"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 50 50 49 4F 4E 45 45 52 00 44 56 52 2D 36 36 30 48 00 00 00 00 00 00 00 00 04",
+    "sifname": "PIONEER",
+    "sifdescription": "DVR-660H",
+    "Manufacturer": "PIONEER"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 55 50 49 4F 4E 45 45 52 00 42 44 50 2D 30 35 46 44 00 00 00 00 00 00 00 00 0A",
+    "sifname": "PIONEER",
+    "sifdescription": "BDP-05FD",
+    "Manufacturer": "PIONEER"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "PIONEER",
+    "sifdescription": "BDP-320",
+    "Manufacturer": "PIONEER"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-C5300",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-C5500",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-C5900",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-C6500",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-C6800",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-C6900",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-C7500",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-C8500",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-D5300",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-D5500",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-D5700",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-D6500",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-D6900",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-D6900S",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-D7500",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-D8500",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-D8500A",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-D8500M",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-D8500N",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-D8509S",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 26 53 41 4D 53 55 4E 47 00 42 44 2D 44 38 39 30 30 4D 00 00 00 00 00 00 00 0A",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-D8900M",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-D8900A",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 26 53 41 4D 53 55 4E 47 00 42 44 2D 44 38 39 30 30 4D 00 00 00 00 00 00 00 0A",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-D8900M",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-D8909S",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-E5300",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-E5400",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-E5500",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-E5700",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-E5900",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-E6300",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-E6300S",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-E8300",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-E8300N",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-E8500",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-E8500A",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-E8500M",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-E8500N",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-E8900",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-E8900A",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-E8900M",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-EM57",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-EM59",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-ES6000",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-F5100",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-F5500",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-F5900",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-F6500",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-F6900",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-F7500",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-F8500",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-F8500M",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-F8900",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-F8900M",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-FM51",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-FM57C",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-H5100",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-H5900",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-H6500",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 26 53 41 4D 53 55 4E 47 00 42 44 2D 48 38 35 30 30 4D 00 00 00 00 00 00 00 0A",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-H8500M",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BDP1200",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "Samsung",
+    "sifdescription": "BD-P1400",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 72 53 41 4D 53 55 4E 47 00 42 44 2D 50 31 35 30 30 00 00 00 00 00 00 00 00 0A",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-P1500",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-P1580",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-P1600",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-P1620",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-P3600",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 6E 53 41 4D 53 55 4E 47 00 42 44 2D 50 34 36 30 30 00 00 00 00 00 00 00 00 0A",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-P4600",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "DVD-HR775A",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "DVD-R155",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "DVD-SH895",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "DVD-SH897M",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "DVD-VR375A",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 26 53 41 4D 53 55 4E 47 00 42 44 2D 48 38 35 30 30 4D 00 00 00 00 00 00 00 0A",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-H8500M",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 A8 53 41 4D 53 55 4E 47 00 44 56 44 2D 53 48 38 39 37 4D 00 00 00 00 00 00 02",
+    "sifname": "SAMSUNG",
+    "sifdescription": "DVD-SH897M",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 01 4D 54 4B 30 30 31 00 00 44 45 4D 4F 2D 30 30 31 00 00 00 00 00 00 00 00 02",
+    "sifname": "MTK001",
+    "sifdescription": "DEMO-001",
+    "Manufacturer": "MTK001"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 75 53 41 4D 53 55 4E 47 00 42 44 2D 46 36 37 30 30 00 00 00 00 00 00 00 00 0A",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-F6700",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 15 53 41 4D 53 55 4E 47 00 42 44 2D 46 38 39 30 39 53 00 00 00 00 00 00 00 0A",
+    "sifname": "SAMSUNG",
+    "sifdescription": "BD-F8909S",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 E5 53 48 41 52 50 00 00 00 42 44 2D 41 4D 53 32 30 00 00 00 00 00 00 00 00 0A",
+    "sifname": "SHARP",
+    "sifdescription": "BD-AMS20",
+    "Manufacturer": "SHARP"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 27 53 48 41 52 50 00 00 00 42 44 2D 48 50 39 30 00 00 00 00 00 00 00 00 00 0A",
+    "sifname": "SHARP",
+    "sifdescription": "BD-HP90",
+    "Manufacturer": "SHARP"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 3C 53 48 41 52 50 00 00 00 42 44 2D 57 35 30 30 00 00 00 00 00 00 00 00 00 0A",
+    "sifname": "SHARP",
+    "sifdescription": "BD-W500",
+    "Manufacturer": "SHARP"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 DE 53 48 41 52 50 00 00 00 42 44 2D 48 44 57 37 30 00 00 00 00 00 00 00 00 0A",
+    "sifname": "SHARP",
+    "sifdescription": "BD-HDW70",
+    "Manufacturer": "SHARP"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 C4 53 48 41 52 50 00 00 00 42 44 2D 53 50 31 30 30 30 00 00 00 00 00 00 00 0A",
+    "sifname": "SHARP",
+    "sifdescription": "BD-SP1000",
+    "Manufacturer": "SHARP"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 2D 53 48 41 52 50 00 00 00 42 44 2D 48 50 32 31 00 00 00 00 00 00 00 00 00 0A",
+    "sifname": "SHARP",
+    "sifdescription": "BD-HP21",
+    "Manufacturer": "SHARP"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 24 53 48 41 52 50 00 00 00 44 56 2D 41 43 57 38 32 20 41 52 00 00 00 00 00 02",
+    "sifname": "SHARP",
+    "sifdescription": "DV-ACW82 AR",
+    "Manufacturer": "SHARP"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SHARP",
+    "sifdescription": "BD-S520",
+    "Manufacturer": "SHARP"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SHARP",
+    "sifdescription": "BD-W550",
+    "Manufacturer": "SHARP"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 61 53 43 45 49 00 00 00 00 50 53 33 00 00 00 00 00 00 00 00 00 00 00 00 00 08",
+    "sifname": "SCEI",
+    "sifdescription": "PS3",
+    "Manufacturer": "SCEI"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 43 54 4F 53 48 49 42 41 20 44 42 52 2D 4D 31 39 30 00 00 00 00 00 00 00 00 0A",
+    "sifname": "TOSHIBA",
+    "sifdescription": "DBR-M190",
+    "Manufacturer": "TOSHIBA"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 79 54 4F 53 48 49 42 41 20 52 44 2D 45 33 30 33 20 20 20 20 20 20 20 20 20 02",
+    "sifname": "TOSHIBA",
+    "sifdescription": "RD-E303",
+    "Manufacturer": "TOSHIBA"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 75 54 4F 53 48 49 42 41 20 52 44 2D 47 35 30 33 20 20 20 20 20 20 20 20 20 02",
+    "sifname": "TOSHIBA",
+    "sifdescription": "RD-G503",
+    "Manufacturer": "TOSHIBA"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 D3 54 4F 53 48 49 42 41 00 52 44 2D 58 31 30 00 00 00 00 00 00 00 00 00 00 0A",
+    "sifname": "TOSHIBA",
+    "sifdescription": "RD-X10",
+    "Manufacturer": "TOSHIBA"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 04 54 4F 53 48 49 42 41 00 52 44 2D 58 38 00 00 00 00 00 00 00 00 00 00 00 02",
+    "sifname": "TOSHIBA",
+    "sifdescription": "RD-X8",
+    "Manufacturer": "TOSHIBA"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "TOSHIBA",
+    "sifdescription": "BDX1100",
+    "Manufacturer": "TOSHIBA"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "TOSHIBA",
+    "sifdescription": "BDX1200",
+    "Manufacturer": "TOSHIBA"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "TOSHIBA",
+    "sifdescription": "BDX1250",
+    "Manufacturer": "TOSHIBA"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "TOSHIBA",
+    "sifdescription": "BDX2100",
+    "Manufacturer": "TOSHIBA"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "TOSHIBA",
+    "sifdescription": "BDX2250",
+    "Manufacturer": "TOSHIBA"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "TOSHIBA",
+    "sifdescription": "BDX3200",
+    "Manufacturer": "TOSHIBA"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "TOSHIBA",
+    "sifdescription": "BDX5300",
+    "Manufacturer": "TOSHIBA"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "TOSHIBA",
+    "sifdescription": "DBR-M190",
+    "Manufacturer": "TOSHIBA"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "TOSHIBA",
+    "sifdescription": "DBR-Z150",
+    "Manufacturer": "TOSHIBA"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "TOSHIBA",
+    "sifdescription": "DBR-Z160",
+    "Manufacturer": "TOSHIBA"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 59 54 4F 53 48 49 42 41 00 52 44 2D 42 5A 37 30 30 00 00 00 00 00 00 00 00 0A",
+    "sifname": "TOSHIBA",
+    "sifdescription": "RD-BZ700",
+    "Manufacturer": "TOSHIBA"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "TOSHIBA",
+    "sifdescription": "RD-S303",
+    "Manufacturer": "TOSHIBA"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "TOSHIBA",
+    "sifdescription": "RD-S601",
+    "Manufacturer": "TOSHIBA"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "Vizio",
+    "sifdescription": "VBR122",
+    "Manufacturer": "Vizio"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "VIZIO",
+    "sifdescription": "VBR200W",
+    "Manufacturer": "VIZIO"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "VIZIO",
+    "sifdescription": "VBR210",
+    "Manufacturer": "VIZIO"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "BD-S667",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "N",
+    "rawdata": "83 01 19 C7 4D 53 46 54 00 00 00 00 58 62 6F 78 20 33 36 30 00 00 00 00 00 00 00 00 08",
+    "sifname": "MSFT",
+    "sifdescription": "Xbox 360",
+    "Manufacturer": "MSFT"
+  },
+  {
+    "Device Type": "N",
+    "rawdata": "83 01 19 3E 4D 53 46 54 00 00 00 00 58 62 6F 78 20 4F 6E 65 00 00 00 00 00 00 00 00 08",
+    "sifname": "MSFT",
+    "sifdescription": "Xbox One",
+    "Manufacturer": "MSFT"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 61 53 43 45 49 00 00 00 00 50 53 33 00 00 00 00 00 00 00 00 00 00 00 00 00 08",
+    "sifname": "SCEI",
+    "sifdescription": "PS3",
+    "Manufacturer": "SCEI"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "",
+    "sifname": "SCEI",
+    "sifdescription": "PS3P",
+    "Manufacturer": "SCEI"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 60 53 43 45 49 00 00 00 00 50 53 34 00 00 00 00 00 00 00 00 00 00 00 00 00 08",
+    "sifname": "SCEI",
+    "sifdescription": "PS4",
+    "Manufacturer": "SCEI"
+  },
+  {
+    "Device Type": "DVD/DVReceiver",
+    "rawdata": "83 01 19 61 53 43 45 49 00 00 00 00 50 53 33 00 00 00 00 00 00 00 00 00 00 00 00 00 08",
+    "sifname": "SCEI",
+    "sifdescription": "PS3",
+    "Manufacturer": "SCEI"
+  },
+  {
+    "Device Type": "M",
+    "rawdata": "",
+    "sifname": "DENON",
+    "sifdescription": "AVR-4310",
+    "Manufacturer": "DENON"
+  },
+  {
+    "Device Type": "M",
+    "rawdata": "",
+    "sifname": "YAMAHA",
+    "sifdescription": "YSP-4000",
+    "Manufacturer": "YAMAHA"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 01 19 B9 41 6D 73 74 72 61 64 00 53 6B 79 2B 20 48 44 00 41 6D 73 74 72 61 64 00 04",
+    "sifname": "Amstrad",
+    "sifdescription": "Sky+ HD",
+    "Manufacturer": "Amstrad"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 01 19 B9 41 6D 73 74 72 61 64 00 53 6B 79 2B 20 48 44 00 41 6D 73 74 72 61 64 00 04",
+    "sifname": "Amstrad",
+    "sifdescription": "Sky+ HD",
+    "Manufacturer": "Amstrad"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 01 19 79 53 6B 79 00 46 61 69 6C 48 44 53 4B 59 00 00 00 53 6B 79 00 46 61 69 6C 01",
+    "sifname": "Sky",
+    "sifdescription": "HDSKY",
+    "Manufacturer": "Sky"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "Amstrad",
+    "sifdescription": "HDSKY",
+    "Manufacturer": "Amstrad"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "Sky",
+    "sifdescription": "HDSKY",
+    "Manufacturer": "Sky"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 45 78 70 6C 6F 72 65 72 20 38 36 35 30 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 8650",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 45 78 70 6C 6F 72 65 72 20 38 36 35 32 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 8652",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 45 78 70 6C 6F 72 65 72 20 38 36 35 32 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 8652",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 45 78 70 6C 6F 72 65 72 20 38 36 34 30 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 8640",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 45 78 70 6C 6F 72 65 72 20 38 36 34 32 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 8642",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 45 78 70 6C 6F 72 65 72 20 38 36 34 30 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 8640",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 4652",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 45 78 70 6C 6F 72 65 72 20 38 36 30 30 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 8600",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 45 78 70 6C 6F 72 65 72 20 38 36 34 30 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 8640",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 45 78 70 6C 6F 72 65 72 20 34 36 34 32 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 4642",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 45 78 70 6C 6F 72 65 72 20 38 36 34 32 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 8642",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 45 78 70 6C 6F 72 65 72 20 34 36 34 32 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 4642",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 45 78 70 6C 6F 72 65 72 20 34 36 34 32 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 4642",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 45 78 70 6C 6F 72 65 72 20 34 36 34 32 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 4642",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 45 78 70 6C 6F 72 65 72 20 38 36 34 30 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 8640",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 45 78 70 6C 6F 72 65 72 20 38 36 35 30 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 8650",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 45 78 70 6C 6F 72 65 72 20 38 36 35 32 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 8652",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 45 78 70 6C 6F 72 65 72 20 38 36 35 32 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 8652",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 56 65 72 69 7A 6F 6E 20 43 6C 61 73 73 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Verizon Class",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 45 78 70 6C 6F 72 65 72 20 34 36 34 32 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 4642",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 45 78 70 6C 6F 72 65 72 20 39 38 30 30 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 9800",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 45 78 70 6C 6F 72 65 72 20 34 36 34 32 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 4642",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 45 78 70 6C 6F 72 65 72 20 34 36 34 32 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 4642",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 45 78 70 6C 6F 72 65 72 20 34 37 30 30 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 4700",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 43 69 73 63 6F 0 0 0 45 78 70 6C 6F 72 65 72 20 34 36 34 32 0 0 0 1",
+    "sifname": "Cisco",
+    "sifdescription": "Explorer 4642",
+    "Manufacturer": "Cisco"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 44 49 47 45 4F 0 0 0 4D 6F 78 69 20 44 4D 41 0 0 0 0 0 0 0 0 1",
+    "sifname": "DIGEO",
+    "sifdescription": "Moxi DMA",
+    "Manufacturer": "DIGEO"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 44 69 67 65 6F 0 0 0 4D 4F 58 49 20 48 44 2D 44 56 52 33 30 31 32 0 1",
+    "sifname": "Digeo",
+    "sifdescription": "MOXI HD-DVR3012",
+    "Manufacturer": "Digeo"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 44 49 52 45 43 54 56 0 43 34 31 2D 37 30 30 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "DIRECTV",
+    "sifdescription": "C41-700",
+    "Manufacturer": "DIRECTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 44 69 72 65 63 54 56 0 48 52 32 30 0 0 0 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "DirecTV",
+    "sifdescription": "HR20",
+    "Manufacturer": "DirecTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 44 49 52 45 43 54 56 0 43 34 31 2D 37 30 30 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "DIRECTV",
+    "sifdescription": "C41-700",
+    "Manufacturer": "DIRECTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 01 19 22 44 69 72 65 63 54 56 00 48 32 35 00 00 00 00 00 00 00 00 00 00 00 00 00 01",
+    "sifname": "DirecTV",
+    "sifdescription": "H25",
+    "Manufacturer": "DirecTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 44 49 52 45 43 54 56 0 43 33 31 2D 37 30 30 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "DIRECTV",
+    "sifdescription": "C31-700",
+    "Manufacturer": "DIRECTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 44 69 72 65 63 54 56 0 48 4D 43 0 0 0 0 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "DirecTV",
+    "sifdescription": "HMC",
+    "Manufacturer": "DirecTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 44 49 52 45 43 54 56 0 43 34 31 2D 37 30 30 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "DIRECTV",
+    "sifdescription": "C41-700",
+    "Manufacturer": "DIRECTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 44 69 72 65 63 54 56 0 48 4D 43 0 0 0 0 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "DirecTV",
+    "sifdescription": "HMC",
+    "Manufacturer": "DirecTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 44 69 72 65 63 54 56 0 48 52 32 30 0 0 0 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "DirecTV",
+    "sifdescription": "HR20",
+    "Manufacturer": "DirecTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "DirecTV",
+    "sifdescription": "H25",
+    "Manufacturer": "DirecTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 44 69 72 65 63 54 56 0 48 52 32 30 0 0 0 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "DirecTV",
+    "sifdescription": "HR20",
+    "Manufacturer": "DirecTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 44 69 72 65 63 54 56 0 48 58 32 34 0 0 0 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "DirecTV",
+    "sifdescription": "Hx24",
+    "Manufacturer": "DirecTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 44 69 72 65 63 54 56 0 48 58 32 34 0 0 0 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "DirecTV",
+    "sifdescription": "Hx24",
+    "Manufacturer": "DirecTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 44 49 52 45 43 54 56 0 43 34 31 2D 37 30 30 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "DIRECTV",
+    "sifdescription": "C41-700",
+    "Manufacturer": "DIRECTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 44 69 72 65 63 54 56 0 48 58 32 34 0 0 0 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "DirecTV",
+    "sifdescription": "Hx24",
+    "Manufacturer": "DirecTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 44 49 52 45 43 54 56 0 54 69 56 6F 20 48 44 20 44 56 52 0 0 0 0 0 1",
+    "sifname": "DIRECTV",
+    "sifdescription": "TiVo HD DVR",
+    "Manufacturer": "DIRECTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "DIRECTV",
+    "sifdescription": "TiVo HD DVR1",
+    "Manufacturer": "DIRECTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 44 69 72 65 63 54 56 0 48 52 32 30 0 0 0 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "DirecTV",
+    "sifdescription": "HR20",
+    "Manufacturer": "DirecTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 44 69 72 65 63 54 56 0 48 52 32 30 0 0 0 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "DirecTV",
+    "sifdescription": "HR20",
+    "Manufacturer": "DirecTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 44 69 72 65 63 54 56 0 48 4D 43 0 0 0 0 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "DirecTV",
+    "sifdescription": "HMC",
+    "Manufacturer": "DirecTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 01 19 F9 44 69 72 65 63 54 56 00 48 4D 43 00 00 00 00 00 00 00 00 00 00 00 00 00 01",
+    "sifname": "DirecTV",
+    "sifdescription": "HMC",
+    "Manufacturer": "DirecTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 44 49 52 45 43 54 56 0 54 69 56 6F 20 48 44 20 44 56 52 0 0 0 0 0 1",
+    "sifname": "DIRECTV",
+    "sifdescription": "TiVo HD DVR",
+    "Manufacturer": "DIRECTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 01 19 F9 44 69 72 65 63 54 56 00 48 4D 43 00 00 00 00 00 00 00 00 00 00 00 00 00 01",
+    "sifname": "DirecTV",
+    "sifdescription": "HMC",
+    "Manufacturer": "DirecTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 01 19 AB 44 69 72 65 63 54 56 00 48 78 32 34 00 00 00 00 00 00 00 00 00 00 00 00 01",
+    "sifname": "DirecTV",
+    "sifdescription": "Hx24",
+    "Manufacturer": "DirecTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "Dhrac",
+    "sifdescription": "HMC",
+    "Manufacturer": "Dhrac"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 01 19 F9 44 69 72 65 63 54 56 00 48 4D 43 00 00 00 00 00 00 00 00 00 00 00 00 00 01",
+    "sifname": "DirecTV",
+    "sifdescription": "HMC",
+    "Manufacturer": "DirecTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 44 49 52 45 43 54 56 0 43 33 31 2D 37 30 30 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "DIRECTV",
+    "sifdescription": "C31-700",
+    "Manufacturer": "DIRECTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 44 69 72 65 63 54 56 0 48 58 32 34 0 0 0 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "DirecTV",
+    "sifdescription": "Hx24",
+    "Manufacturer": "DirecTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "Dream",
+    "sifdescription": "DM800SE",
+    "Manufacturer": "Dream"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 45 43 48 4F 53 54 41 52 56 49 50 32 31 31 4B 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "ECHOSTAR",
+    "sifdescription": "VIP211K",
+    "Manufacturer": "ECHOSTAR"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 45 43 48 4F 0 0 0 0 56 49 50 36 31 32 0 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "ECHO",
+    "sifdescription": "VIP612",
+    "Manufacturer": "ECHO"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 45 43 48 4F 53 54 41 52 56 49 50 32 32 32 4B 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "ECHOSTAR",
+    "sifdescription": "VIP222K",
+    "Manufacturer": "ECHOSTAR"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 45 43 48 4F 53 54 41 52 56 49 50 37 32 32 0 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "ECHOSTAR",
+    "sifdescription": "VIP722",
+    "Manufacturer": "ECHOSTAR"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 45 43 48 4F 53 54 41 52 56 49 50 37 32 32 4B 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "ECHOSTAR",
+    "sifdescription": "VIP722K",
+    "Manufacturer": "ECHOSTAR"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 01 19 DB 45 63 68 6F 53 74 61 72 48 44 43 2D 36 30 31 44 45 52 00 00 00 00 00 00 01",
+    "sifname": "EchoStar",
+    "sifdescription": "HDC-601DER",
+    "Manufacturer": "EchoStar"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "EchoStar",
+    "sifdescription": "HDC601DER",
+    "Manufacturer": "EchoStar"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 45 43 48 4F 53 54 41 52 56 49 50 36 32 32 0 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "ECHOSTAR",
+    "sifdescription": "VIP622",
+    "Manufacturer": "ECHOSTAR"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "EchoStar",
+    "sifdescription": "9400",
+    "Manufacturer": "EchoStar"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 45 43 48 4F 53 54 41 52 56 49 50 32 31 31 0 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "ECHOSTAR",
+    "sifdescription": "VIP211",
+    "Manufacturer": "ECHOSTAR"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 45 63 68 6F 53 74 61 72 48 6F 70 70 65 72 20 32 30 30 30 0 0 0 0 0 1",
+    "sifname": "EchoStar",
+    "sifdescription": "Hopper 2000",
+    "Manufacturer": "EchoStar"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 45 63 68 6F 53 74 61 72 48 6F 70 70 65 72 0 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "EchoStar",
+    "sifdescription": "Hopper",
+    "Manufacturer": "EchoStar"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 45 63 68 6F 53 74 61 72 48 6F 70 70 65 72 20 77 2E 20 53 6C 69 6E 67 0 1",
+    "sifname": "EchoStar",
+    "sifdescription": "Hopper w. Sling",
+    "Manufacturer": "EchoStar"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 45 43 48 4F 53 54 41 52 56 49 50 39 32 32 0 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "ECHOSTAR",
+    "sifdescription": "VIP922",
+    "Manufacturer": "ECHOSTAR"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 45 63 68 6F 53 74 61 72 56 49 50 32 31 31 5A 47 32 0 0 0 0 0 0 0 1",
+    "sifname": "EchoStar",
+    "sifdescription": "VIP211ZG2",
+    "Manufacturer": "EchoStar"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 1 19 0 45 63 68 6F 53 74 61 72 4A 6F 65 79 20 31 2E 30 0 0 0 0 0 0 0 0 1",
+    "sifname": "EchoStar",
+    "sifdescription": "Joey 1.0",
+    "Manufacturer": "EchoStar"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "83 01 19 B0 48 6F 6D 65 63 61 73 74 48 53 38 30 30 30 4E 44 00 00 00 00 48 6F 6D 65 01",
+    "sifname": "Homecast",
+    "sifdescription": "HS8000ND",
+    "Manufacturer": "Homecast"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "HUMAX",
+    "sifdescription": "S HD3",
+    "Manufacturer": "HUMAX"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 01 19 62 48 55 4D 41 58 00 00 00 69 48 44 52 2D 35 32 30 30 43 00 00 00 00 00 00 00",
+    "sifname": "HUMAX",
+    "sifdescription": "iHDR-5200C",
+    "Manufacturer": "HUMAX"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "HUMAX",
+    "sifdescription": "CXHD-5100C",
+    "Manufacturer": "HUMAX"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "HUMAX",
+    "sifdescription": "S HD4",
+    "Manufacturer": "HUMAX"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "HUMAX",
+    "sifdescription": "ICORD CABLE",
+    "Manufacturer": "HUMAX"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "LG DTV",
+    "sifdescription": "DIRECTV A3 STB",
+    "Manufacturer": "LG DTV"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "LG DTV",
+    "sifdescription": "DSS-HD-IRD/H20",
+    "Manufacturer": "LG DTV"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 6F 74 6F 72 6F 6C 61 44 43 48 2D 33 32 30 30 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCH-3200",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 51 49 50 2D 37 32 31 36 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "QIP-7216",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "MOTOROLA",
+    "sifdescription": "QIP-72xx",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCT-5100",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 54 2D 33 34 78 78 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCT-34xx",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 54 2D 36 34 78 78 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCT-64xx",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 54 2D 36 34 78 78 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCT-64xx",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 48 2D 36 34 78 78 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCH-64xx",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 01 19 B0 41 52 52 49 53 44 43 54 44 43 48 2D 36 34 78 78 00 00 00 00 00 00 00 00 01",
+    "sifname": "ARRISDCT",
+    "sifdescription": "DCH-64xx",
+    "Manufacturer": "ARRISDCT"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCX-3210",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 51 49 50 2D 37 31 30 30 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "QIP-7100",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 58 2D 33 34 30 30 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCX-3400",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 51 49 50 2D 37 32 33 32 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "QIP-7232",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 54 2D 33 34 78 78 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCT-34xx",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 54 2D 36 34 78 78 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCT-64xx",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 01 19 41 41 52 52 49 53 00 6F 6D 44 43 58 2D 33 34 32 35 00 20 53 77 00 00 00 00 01",
+    "sifname": "ARRIS",
+    "sifdescription": "DCX-3425",
+    "Manufacturer": "ARRIS"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 54 2D 36 34 78 78 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCT-64xx",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCX-3300",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 51 49 50 2D 37 31 30 30 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "QIP-7100",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 58 2D 33 34 33 32 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCX-3432",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 48 2D 36 34 78 78 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCH-64xx",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 48 2D 33 34 78 78 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCH-34xx",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 01 19 B3 41 52 52 49 53 44 43 54 44 43 48 2D 33 34 78 78 00 00 00 00 00 00 00 00 01",
+    "sifname": "ARRISDCT",
+    "sifdescription": "DCH-34xx",
+    "Manufacturer": "ARRISDCT"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 58 2D 33 32 30 30 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCX-3200",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 58 2D 33 32 32 30 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCX-3220",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 58 2D 33 35 31 30 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCX-3510",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 58 2D 33 35 32 30 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCX-3520",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 54 2D 33 34 78 78 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCT-34xx",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 01 19 A7 41 52 52 49 53 44 43 54 44 43 54 2D 33 34 78 78 00 00 00 00 00 00 00 00 01",
+    "sifname": "ARRISDCT",
+    "sifdescription": "DCT-34xx",
+    "Manufacturer": "ARRISDCT"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 48 2D 36 32 30 30 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCH-6200",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 51 49 50 2D 36 32 78 78 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "QIP-62xx",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 54 2D 36 34 78 78 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCT-64xx",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 54 2D 36 34 78 78 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCT-64xx",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 48 2D 33 34 78 78 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCH-34xx",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 01 19 4A 41 52 52 49 53 00 6F 6D 44 43 58 2D 33 32 30 30 00 20 53 77 00 00 00 00 01",
+    "sifname": "ARRIS",
+    "sifdescription": "DCX-3200",
+    "Manufacturer": "ARRIS"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 6F 74 6F 72 6F 6C 61 44 43 58 2D 33 35 30 30 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCX-3500",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 6F 74 6F 72 6F 6C 61 44 43 58 2D 33 34 31 36 0 0 0 0 0 0 0 0 1",
+    "sifname": "Motorola",
+    "sifdescription": "DCX-3416",
+    "Manufacturer": "Motorola"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 58 2D 37 30 30 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCX-700",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 58 2D 33 34 32 35 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCX-3425",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 58 2D 33 34 35 30 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCX-3450",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 51 49 50 2D 36 34 78 78 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "QIP-64xx",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 44 43 54 2D 36 34 78 78 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "DCT-64xx",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 4D 4F 54 4F 52 4F 4C 41 51 49 50 2D 37 31 30 30 0 0 0 0 0 0 0 0 1",
+    "sifname": "MOTOROLA",
+    "sifdescription": "QIP-7100",
+    "Manufacturer": "MOTOROLA"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "Pace",
+    "sifdescription": "TDS865NS",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 01 19 7B 50 61 63 65 00 63 6F 6D 52 4E 47 31 35 30 00 63 65 20 53 77 00 00 00 00 01",
+    "sifname": "Pace",
+    "sifdescription": "RNG150",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 50 61 63 65 0 0 0 0 52 4E 47 32 30 30 0 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "Pace",
+    "sifdescription": "RNG200",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "Pace",
+    "sifdescription": "DS830NP",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "PACE",
+    "sifdescription": "TDS850NB",
+    "Manufacturer": "PACE"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 50 61 63 65 0 0 0 0 54 44 43 37 37 37 44 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "Pace",
+    "sifdescription": "TDC777D",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 01 19 D4 50 61 63 65 00 00 00 00 50 58 30 30 31 41 4E 4D 00 00 00 00 00 00 00 00 01",
+    "sifname": "Pace",
+    "sifdescription": "PX001ANM",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 50 61 63 65 0 0 0 0 54 44 43 37 38 37 78 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "Pace",
+    "sifdescription": "TDC787x",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "Pace",
+    "sifdescription": "AspenAce",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "Pace",
+    "sifdescription": "ApacheCC",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 01 19 B4 50 61 63 65 00 00 00 00 54 44 43 38 36 36 4E 53 44 58 00 00 50 61 63 65 01",
+    "sifname": "Pace",
+    "sifdescription": "TDC866NSDX",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 50 61 63 65 0 0 0 0 52 4E 47 31 31 30 0 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "Pace",
+    "sifdescription": "RNG110",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "PACE",
+    "sifdescription": "DS830NS",
+    "Manufacturer": "PACE"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 50 61 63 65 0 0 0 0 50 58 30 30 31 41 4E 43 0 0 0 0 0 0 0 0 1",
+    "sifname": "Pace",
+    "sifdescription": "PX001ANC",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "PACE",
+    "sifdescription": "TDS850NS",
+    "Manufacturer": "PACE"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 50 61 63 65 0 0 0 0 44 43 37 30 30 78 0 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "Pace",
+    "sifdescription": "DC700x",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "Pace",
+    "sifdescription": "DC702D",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 50 61 63 65 0 0 0 0 54 44 43 37 37 37 44 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "Pace",
+    "sifdescription": "TDC777D",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 50 61 63 65 0 0 0 0 50 58 30 30 31 41 4E 4D 0 0 0 0 0 0 0 0 1",
+    "sifname": "Pace",
+    "sifdescription": "PX001ANM",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 01 19 D4 50 61 63 65 00 00 00 00 50 58 30 30 31 41 4E 4D 00 00 00 00 00 00 00 00 01",
+    "sifname": "Pace",
+    "sifdescription": "PX001ANM",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 50 61 63 65 0 0 0 0 54 44 43 37 37 37 44 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "Pace",
+    "sifdescription": "TDC777D",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 01 19 7B 50 61 63 65 00 63 6F 6D 52 4E 47 31 35 30 00 63 65 20 53 77 00 00 00 00 01",
+    "sifname": "Pace",
+    "sifdescription": "RNG150",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "PACE",
+    "sifdescription": "HDC74X1/78",
+    "Manufacturer": "PACE"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 50 61 63 65 0 0 0 0 54 44 43 37 37 37 44 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "Pace",
+    "sifdescription": "TDC777D",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 50 61 63 65 0 0 0 0 52 4E 47 31 35 30 0 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "Pace",
+    "sifdescription": "RNG150",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "PACE",
+    "sifdescription": "DS820NS",
+    "Manufacturer": "PACE"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 50 61 63 65 0 0 0 0 44 43 35 35 30 44 0 0 0 0 0 0 0 0 0 0 1",
+    "sifname": "Pace",
+    "sifdescription": "DC550D",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 50 61 63 65 0 0 0 0 44 43 20 35 35 31 2D 48 44 0 0 0 0 0 0 0 1",
+    "sifname": "Pace",
+    "sifdescription": "DC 551-HD",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "PACE",
+    "sifdescription": "HDS7241/16",
+    "Manufacturer": "PACE"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "Pace",
+    "sifdescription": "TDC788D",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "Pacedcom",
+    "sifdescription": "X1Berence Board",
+    "Manufacturer": "Pacedcom"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "DSR7211/16",
+    "Manufacturer": "PHILIPS"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "SAGEM",
+    "sifdescription": "ICADD82_160",
+    "Manufacturer": "SAGEM"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "Samsung",
+    "sifdescription": "Sky+ HD",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "SMT-C7160",
+    "Manufacturer": "SAMSUNG"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "Samsung",
+    "sifdescription": "DSB990V",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 01 19 65 53 2D 41 00 00 00 00 00 45 78 70 6C 6F 72 65 72 20 38 33 30 30 00 00 00 01",
+    "sifname": "S-A",
+    "sifdescription": "Explorer 8300",
+    "Manufacturer": "S-A"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 53 2D 41 0 0 0 0 0 45 78 70 6C 6F 72 65 72 20 38 33 30 30 0 0 0 1",
+    "sifname": "S-A",
+    "sifdescription": "Explorer 8300",
+    "Manufacturer": "S-A"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "Thomson",
+    "sifdescription": "DSS-HD-IRD/H20",
+    "Manufacturer": "Thomson"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 54 69 56 6F 0 0 0 0 53 65 72 69 65 73 33 20 48 44 0 0 0 0 0 0 1",
+    "sifname": "TiVo",
+    "sifdescription": "Series3 HD",
+    "Manufacturer": "TiVo"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "Broadcom",
+    "sifdescription": "TiVo",
+    "Manufacturer": "TiVo"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "Broadcom",
+    "sifdescription": "TiVo Mini",
+    "Manufacturer": "TiVo"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "DASAN",
+    "sifdescription": "IPSTB",
+    "Manufacturer": "Dasan"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "Dhrac",
+    "sifdescription": "HMC",
+    "Manufacturer": "DirecTV"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "Digeo",
+    "sifdescription": "Moxi MR-1500T3",
+    "Manufacturer": "Digeo"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "Dream",
+    "sifdescription": "DM800HD",
+    "Manufacturer": "Dream Multimedia"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "Dream",
+    "sifdescription": "DM800SE",
+    "Manufacturer": "Dream Multimedia"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "Dream",
+    "sifdescription": "DM800SE",
+    "Manufacturer": "Dream Multimedia"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "ECHO",
+    "sifdescription": "VIP612",
+    "Manufacturer": "Echostar"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "HUMAX",
+    "sifdescription": "YouView",
+    "Manufacturer": "Humax"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "HUMAX",
+    "sifdescription": "YouView",
+    "Manufacturer": "Humax"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "KAON",
+    "sifdescription": "NA1100",
+    "Manufacturer": "Kaon"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "LG DTV",
+    "sifdescription": "DIRECTV A3 STB",
+    "Manufacturer": "LG"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "LG DTV",
+    "sifdescription": "DSS-HD-IRD/H20",
+    "Manufacturer": "LG"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "LGE",
+    "sifdescription": "LSI530-8DLK",
+    "Manufacturer": "LG"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "Pacedcom",
+    "sifdescription": "X1Berence Board",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "DCR7121",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "S-A",
+    "sifdescription": "Explorer 4KG3",
+    "Manufacturer": "Scientific Atlanta"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "S-A",
+    "sifdescription": "Explorer 8300",
+    "Manufacturer": "Scientific Atlanta"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "SMT-E5012",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "SMTH3020",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "Broadcom",
+    "sifdescription": "TiVo STB",
+    "Manufacturer": "TiVo"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "Dream",
+    "sifdescription": "DM500HD",
+    "Manufacturer": "Dream Multimedia"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "Dream",
+    "sifdescription": "DM7020HD",
+    "Manufacturer": "Dream Multimedia"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "Dream",
+    "sifdescription": "DM8000",
+    "Manufacturer": "Dream Multimedia"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "ECHOSTAR",
+    "sifdescription": "HDS-400E",
+    "Manufacturer": "EchoStar"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "EchoStar",
+    "sifdescription": "HDS-600",
+    "Manufacturer": "EchoStar"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "HUMAX",
+    "sifdescription": "DTR-T1000",
+    "Manufacturer": "Humax"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "HUMAX",
+    "sifdescription": "DTRT2100",
+    "Manufacturer": "Humax"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "HUMAX",
+    "sifdescription": "HB1000S",
+    "Manufacturer": "Humax"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "HUMAX",
+    "sifdescription": "HD FOX+",
+    "Manufacturer": "Humax"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "HUMAX",
+    "sifdescription": "HD-NANO",
+    "Manufacturer": "Humax"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "HUMAX",
+    "sifdescription": "HDR1000S",
+    "Manufacturer": "Humax"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "HUMAX",
+    "sifdescription": "HDR2000T",
+    "Manufacturer": "Humax"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "HUMAX",
+    "sifdescription": "ICORD-MINI",
+    "Manufacturer": "Humax"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "MOTOROLA",
+    "sifdescription": "QIP-723",
+    "Manufacturer": "Motorola"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "Motorola",
+    "sifdescription": "VIP1853D",
+    "Manufacturer": "Motorola"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "Pace",
+    "sifdescription": "TDC776D",
+    "Manufacturer": "Pace"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "DTR5520",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HDT8520",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "GX-SM530CF",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "SMT-C5320",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "SHARP",
+    "sifdescription": "TU-R252H",
+    "Manufacturer": "Sharp"
+  },
+  {
+    "Device Type": "Set-Top-Box",
+    "rawdata": "",
+    "sifname": "ST",
+    "sifdescription": "M211HD3",
+    "Manufacturer": "ST"
+  },
+  {
+    "Device Type": "N",
+    "rawdata": "",
+    "sifname": "BOXEE",
+    "sifdescription": "BOXEE TV DSM-382",
+    "Manufacturer": "BOXEE"
+  },
+  {
+    "Device Type": "N",
+    "rawdata": "",
+    "sifname": "ChnlMast",
+    "sifdescription": "CM 7500",
+    "Manufacturer": "ChnlMast"
+  },
+  {
+    "Device Type": "N",
+    "rawdata": "",
+    "sifname": "Roku",
+    "sifdescription": "Roku2",
+    "Manufacturer": "Roku"
+  },
+  {
+    "Device Type": "N",
+    "rawdata": "",
+    "sifname": "Roku",
+    "sifdescription": "Rokucast",
+    "Manufacturer": "Roku"
+  },
+  {
+    "Device Type": "N",
+    "rawdata": "",
+    "sifname": "Vudu",
+    "sifdescription": "VUDUBOX",
+    "Manufacturer": "Vudu"
+  },
+  {
+    "Device Type": "N",
+    "rawdata": "",
+    "sifname": "WDC",
+    "sifdescription": "WDTV",
+    "Manufacturer": "WDC"
+  },
+  {
+    "Device Type": "N",
+    "rawdata": "",
+    "sifname": "WDTV",
+    "sifdescription": "WDTV",
+    "Manufacturer": "WDTV"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "HT-R538",
+    "Manufacturer": "Onkyo"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS3260",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS3541",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS3551",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS3560",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS3563",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS3580",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS4282",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS4561",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS4562",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS5100B",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS5560",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS5561",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS5562",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS5580",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS5582",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS5591",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS5593",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS7201",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS7500",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS7540",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS8100",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS8140",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS9221",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS9520",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "PHILIPS",
+    "sifdescription": "HTS9800W",
+    "Manufacturer": "Philips"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-BD3250",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-BD7200",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-C5500",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-C6500",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-D4200",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-D4500",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-D4600",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-D5000",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-D5100",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-D5300",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-D5500",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-D6500",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-E3500",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-E4200",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-E4500",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-E5400",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-E5500",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-E6500",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-EM35",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-ES6200",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-ES8200",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-F4200",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-F4500",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-F5500",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-F5500W",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-F6500",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "SAMSUNG",
+    "sifdescription": "HT-F6500W",
+    "Manufacturer": "Samsung"
+  },
+  {
+    "Device Type": "Receiver",
+    "rawdata": "",
+    "sifname": "ONKYO",
+    "sifdescription": "HT-R380",
+    "Manufacturer": "ONKYO"
+  },
+  {
+    "Device Type": "Cable",
+    "rawdata": "83 1 19 0 41 52 52 49 53 0 0 0 4D 6F 78 69 20 50 6C 61 79 65 72 0 0 0 0 0 1",
+    "sifname": "ARRIS",
+    "sifdescription": "Moxi Player",
+    "Manufacturer": "ARRIS"
+  }
+]
