@@ -26,7 +26,7 @@ def check_password():
     def password_entered():
         """Checks whether a password entered by the user is correct."""
         # Use st.secrets to securely check the password
-        if st.session_state["password"] == st.secrets["app_password"]:
+        if st.session_state.get("password", "") == st.secrets.get("app_password", ""):
             st.session_state["password_correct"] = True
             del st.session_state["password"]  # Don't store password in session state
         else:
