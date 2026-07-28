@@ -7,6 +7,47 @@ import plotly.express as px
 import streamlit as st
 
 # -----------------------------------------------------------------------------
+# 1. Page Configuration
+# -----------------------------------------------------------------------------
+st.set_page_config(
+    page_title="IR & CEC EDID Signal Intelligence",
+    page_icon="📊",
+    layout="wide",
+)
+
+# -----------------------------------------------------------------------------
+# 2. Authentication Wrapper
+# -----------------------------------------------------------------------------
+def check_password():
+    """Returns `True` if the user had a correct password."""
+
+    def password_entered():
+        """Checks whether a password entered by the user is correct."""
+        # Use st.secrets to securely check the password
+        if st.session_state["password"] == st.secrets["app_password"]:
+            st.session_state["password_correct"] = True
+            del st.session_state["password"]  # Don't store password in session state
+        else:
+            st.session_state["password_correct"] = False
+
+    if st.session_state.get("password_correct", False):
+        return True
+
+    # Show input for password
+    st.title("🔒 Authentication Required")
+    st.write("Please enter the password to access the Intelligence Hub.")
+    st.text_input(
+        "Password", type="password", on_change=password_entered, key="password"
+    )
+    if "password_correct" in st.session_state:
+        st.error("😕 Password incorrect")
+    return False
+
+# Stop execution if password is not correct
+if not check_password():
+    st.stop()
+
+# -----------------------------------------------------------------------------
 # Dependency Linking for IR Signal Parsing
 # -----------------------------------------------------------------------------
 try:
@@ -156,19 +197,15 @@ def parse_spd_infoframe(hex_str):
     length = data[2]
     checksum = data[3]
     
-    # Validate Checksum
     calc_checksum = sum(data[:4 + length]) & 0xFF
     checksum_valid = calc_checksum == 0
 
-    # Extract 8-byte Vendor Name (Bytes 4 to 11)
     vendor_bytes = data[4:12]
     vendor_name = vendor_bytes.decode('ascii', errors='ignore').strip('\x00')
 
-    # Extract 16-byte Product Description (Bytes 12 to 27)
     product_bytes = data[12:28]
     product_desc = product_bytes.decode('ascii', errors='ignore').strip('\x00')
 
-    # Extract Source Device Info (Byte 28)
     source_type_byte = data[28]
     source_mapping = {
         0x00: "Unknown", 0x01: "Digital STB", 0x02: "DVD Player",
@@ -188,20 +225,11 @@ def parse_spd_infoframe(hex_str):
         "source_device_type": source_type_str
     }
 
-# -----------------------------------------------------------------------------
-# 1. Page Configuration
-# -----------------------------------------------------------------------------
-st.set_page_config(
-    page_title="IR & CEC EDID Signal Intelligence",
-    page_icon="📊",
-    layout="wide",
-)
-
 st.title("📡 Signal Intelligence Hub")
 st.caption("IR matching, EDID hardware decoding, and HDMI InfoFrame analytics.")
 
 # -----------------------------------------------------------------------------
-# 2. Data Loading Functions
+# 3. Data Loading Functions
 # -----------------------------------------------------------------------------
 json_gz_path = "batch_passed.json.gz"
 json_path = "batch_passed.json"
@@ -307,7 +335,7 @@ def load_infoframe_json(file_path):
   return pd.DataFrame()
 
 # -----------------------------------------------------------------------------
-# 3. Cached Heavy Aggregation Helpers
+# 4. Cached Heavy Aggregation Helpers
 # -----------------------------------------------------------------------------
 @st.cache_data
 def compute_cross_brand(df_valid):
@@ -363,7 +391,7 @@ def compute_dictionary(df_valid):
   return dict_df.sort_values(by="Total_Occurrences", ascending=False)
 
 # -----------------------------------------------------------------------------
-# 4. Sidebar Data Ingestion
+# 5. Sidebar Data Ingestion
 # -----------------------------------------------------------------------------
 st.sidebar.header("⚙️ Data Options & Filters")
 uploaded_file = st.sidebar.file_uploader(
@@ -420,7 +448,7 @@ if not df_remotes.empty:
     ]
 
 # -----------------------------------------------------------------------------
-# 5. Main Navigation Tabs
+# 6. Main Navigation Tabs
 # -----------------------------------------------------------------------------
 tab_analytics, tab_matcher, tab_finder, tab_explorer, tab_cec, tab_info = st.tabs([
     "📊 Database Analytics",
@@ -967,7 +995,6 @@ with tab_info:
       else:
           valid_info["Info Label"] = valid_info["Manufacturer"].astype(str) + " - " + valid_info["sifdescription"].astype(str)
           
-          # Dialog/Popup equivalent using Streamlit components
           selected_info_label = st.selectbox("Select a Device to Decode:", options=valid_info["Info Label"].unique())
           
           if st.button("Decode InfoFrame Packet", type="primary"):
@@ -981,7 +1008,6 @@ with tab_info:
               else:
                   st.success("🎉 InfoFrame Packet Successfully Decoded!")
                   
-                  # Present as a clean detailed card
                   col_a, col_b, col_c = st.columns(3)
                   col_a.metric("Vendor Name", parsed_spd.get("vendor_name"))
                   col_b.metric("Product Description", parsed_spd.get("product_description"))
