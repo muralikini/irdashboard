@@ -56,6 +56,10 @@ try:
   from signal_parser import RdPlsPython
   from decoders.decoder_registry import try_all_decoders
 
+  # ---> NEW ENCODER IMPORTS HERE <---
+  from encoders.encoder_registry import generate_pulses
+  from encoders.packager import create_raw_bytes
+
   def parse_and_decode_signal(filepath):
     """Extracts mark/space data from a raw file and attempts to decode it."""
     parser = RdPlsPython()
@@ -1062,14 +1066,21 @@ with tab_gen:
 
     st.divider()
 
-    # 4. Dummy Encoder Function (To be replaced with your actual encoding logic later)
+    # 4. Actual Encoder Function
     def generate_raw_signal_bytes(protocol, address, command, payload, format_ext):
-        """
-        PLACEHOLDER: Converts Hex -> Mark/Space Array -> Raw Binary Bytes.
-        Currently returns dummy text bytes so the UI works.
-        """
-        dummy_content = f"Simulated {protocol} Signal\nAddress: {address}\nCommand: {command}\nPayload: {payload}\nFormat: {format_ext}"
-        return dummy_content.encode('utf-8')
+        """Routes the generation request to the registry and packages the bytes."""
+        try:
+            # 1. Get the Mark/Space pulse array from the registry
+            pulses = generate_pulses(protocol, address, command, payload)
+
+            # 2. Package into raw binary bytes at 1 MHz
+            raw_binary = create_raw_bytes(pulses, sample_freq_hz=1000000)
+
+            # Return the compiled binary data for download
+            return raw_binary
+            
+        except Exception as e:
+            return f"Encoding Error: {str(e)}".encode('utf-8')
 
     # 5. Generation & Download Logic
     if st.button("⚙️ Compile & Generate Files", type="primary", use_container_width=True):
