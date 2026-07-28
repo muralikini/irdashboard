@@ -239,7 +239,7 @@ st.caption("IR matching, EDID hardware decoding, and HDMI InfoFrame analytics.")
 # -----------------------------------------------------------------------------
 json_gz_path = "batch_passed.json.gz"
 json_path = "batch_passed.json"
-cec_json_path = "merge_edid_data.json"
+cec_json_path = "master_edid_data.json.gz"
 infoframe_json_path = "infoframe_data.json"
 
 @st.cache_data
@@ -324,8 +324,14 @@ def load_and_parse_json(file_source):
 @st.cache_data
 def load_cec_json(file_path):
   if os.path.exists(file_path):
-    with open(file_path, "r", encoding="utf-8") as f:
-      data = json.load(f)
+    # Check if the file is compressed
+    if file_path.endswith('.gz'):
+        with gzip.open(file_path, "rt", encoding="utf-8") as f:
+            data = json.load(f)
+    else:
+        with open(file_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            
     df = pd.DataFrame(data)
     if "OSD Name" in df.columns:
         df["OSD ASCII"] = df["OSD Name"].apply(hex_osd_to_ascii)
