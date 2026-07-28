@@ -5,6 +5,8 @@ import tempfile
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+import io          # <-- NEW
+import zipfile     # <-- NEW
 
 # -----------------------------------------------------------------------------
 # 1. Page Configuration
@@ -450,13 +452,14 @@ if not df_remotes.empty:
 # -----------------------------------------------------------------------------
 # 6. Main Navigation Tabs
 # -----------------------------------------------------------------------------
-tab_analytics, tab_matcher, tab_finder, tab_explorer, tab_cec, tab_info = st.tabs([
+tab_analytics, tab_matcher, tab_finder, tab_explorer, tab_cec, tab_info, tab_gen = st.tabs([
     "📊 Database Analytics",
     "🔍 Direct Signal Matcher",
     "📂 Smart Folder Finder",
     "📱 Device & Brand Explorer",
     "📺 CEC & EDID Intelligence",
-    "🗃️ SPD InfoFrame Decoder"
+    "🗃️ SPD InfoFrame Decoder",
+    "🛠️ IR Signal Generator"
 ])
 
 # =============================================================================
@@ -1023,3 +1026,103 @@ with tab_info:
                   
                   with st.expander("🔍 View Raw Hex Stream"):
                       st.code(raw_hex, language="text")
+                    
+# =============================================================================
+# TAB 7: IR SIGNAL GENERATOR
+# =============================================================================
+with tab_gen:
+    st.header("🛠️ IR Signal Generator")
+    st.write("Generate raw signal files based on Protocol, Address, Command, and Payload. Add multiple rows to download a combined ZIP archive.")
+
+    # 1. File Format Selector
+    file_format = st.radio("Select Target Format:", [".SIG", ".U1", ".U2"], horizontal=True)
+
+    # 2. Setup Default Dataframe for the Data Editor
+    if "gen_keys_df" not in st.session_state:
+        st.session_state.gen_keys_df = pd.DataFrame(
+            [{"Key Name": "Power", "Protocol": "NEC", "Address (Hex)": "0x04", "Command (Hex)": "0x08", "Payload (Hex)": ""}]
+        )
+
+    st.markdown("### ⌨️ Signal Definitions")
+    st.caption("Edit the table below. You can paste data directly from Excel or click the '+' at the bottom to add new rows.")
+    
+    # 3. Dynamic Data Editor
+    edited_df = st.data_editor(
+        st.session_state.gen_keys_df,
+        num_rows="dynamic",
+        use_container_width=True,
+        column_config={
+            "Key Name": st.column_config.TextColumn("Key Name", required=True),
+            "Protocol": st.column_config.SelectboxColumn("Protocol", options=["NEC", "RC5", "RC6", "SONY", "SAMSUNG", "LG", "PANASONIC", "JVC", "SHARP", "RCA", "APPLE", "DENON", "ONKYO"], required=True),
+            "Address (Hex)": st.column_config.TextColumn("Address (Hex)"),
+            "Command (Hex)": st.column_config.TextColumn("Command (Hex)"),
+            "Payload (Hex)": st.column_config.TextColumn("Payload (Hex)")
+        }
+    )
+
+    st.divider()
+
+    # 4. Dummy Encoder Function (To be replaced with your actual encoding logic later)
+    def generate_raw_signal_bytes(protocol, address, command, payload, format_ext):
+        """
+        PLACEHOLDER: Converts Hex -> Mark/Space Array -> Raw Binary Bytes.
+        Currently returns dummy text bytes so the UI works.
+        """
+        dummy_content = f"Simulated {protocol} Signal\nAddress: {address}\nCommand: {command}\nPayload: {payload}\nFormat: {format_ext}"
+        return dummy_content.encode('utf-8')
+
+    # 5. Generation & Download Logic
+    if st.button("⚙️ Compile & Generate Files", type="primary", use_container_width=True):
+        
+        # Clean up empty rows
+        valid_rows = edited_df.dropna(subset=["Key Name", "Protocol"]).copy()
+        valid_rows = valid_rows[valid_rows["Key Name"].str.strip() != ""]
+
+        if valid_rows.empty:
+            st.error("⚠️ Please define at least one valid key with a name and protocol.")
+        else:
+            num_keys = len(valid_rows)
+            
+            # --- SCENARIO A: SINGLE KEY (Download single file) ---
+            if num_keys == 1:
+                row = valid_rows.iloc[0]
+                filename = f"{row['Key Name'].strip()}{file_format.lower()}"
+                
+                # Generate Bytes
+                file_bytes = generate_raw_signal_bytes(
+                    row['Protocol'], row['Address (Hex)'], row['Command (Hex)'], row['Payload (Hex)'], file_format
+                )
+
+                st.success(f"Successfully compiled {filename}!")
+                st.download_button(
+                    label=f"⬇️ Download {filename}",
+                    data=file_bytes,
+                    file_name=filename,
+                    mime="application/octet-stream"
+                )
+
+            # --- SCENARIO B: MULTIPLE KEYS (Download ZIP file) ---
+            else:
+                zip_buffer = io.BytesIO()
+                
+                # Open an in-memory zip file
+                with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zip_file:
+                    for index, row in valid_rows.iterrows():
+                        key_name = str(row['Key Name']).strip().replace("/", "_").replace("\\", "_")
+                        filename = f"{key_name}{file_format.lower()}"
+                        
+                        # Generate Bytes
+                        file_bytes = generate_raw_signal_bytes(
+                            row['Protocol'], row['Address (Hex)'], row['Command (Hex)'], row['Payload (Hex)'], file_format
+                        )
+                        
+                        # Write bytes to the specific filename inside the zip
+                        zip_file.writestr(filename, file_bytes)
+
+                st.success(f"Successfully compiled {num_keys} keys into a ZIP archive!")
+                st.download_button(
+                    label="⬇️ Download All Keys (ZIP)",
+                    data=zip_buffer.getvalue(),
+                    file_name=f"Generated_Signals{file_format.lower()}.zip",
+                    mime="application/zip"
+                )
