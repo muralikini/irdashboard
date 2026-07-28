@@ -1079,8 +1079,8 @@ with tab_gen:
             # 1. Get the Mark/Space pulse array from the registry
             pulses = generate_pulses(protocol, address, command, payload)
 
-            # 2. Package into raw binary bytes at 1 MHz
-            raw_binary = create_raw_bytes(pulses, sample_freq_hz=1000000)
+            # 2. Package into raw binary bytes at 1 MHz, passing the target file extension format
+            raw_binary = create_raw_bytes(pulses, sample_freq_hz=1000000, file_format=format_ext)
 
             # Return the compiled binary data for download
             return raw_binary
