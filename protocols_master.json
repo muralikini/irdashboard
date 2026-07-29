@@ -22,8 +22,19 @@
     "encoding_type": "manchester",
     "unit_us": 889,
     "transmission_structure": {
-      "frame_count": 2, 
+      "frame_count": 2,
       "separator_gap_us": 45000,
+      "has_repeat_frame": false
+    }
+  },
+  "RC6": {
+    "frequency_hz": 38000,
+    "duty_cycle": 0.25,
+    "encoding_type": "rc6",
+    "unit_us": 444,
+    "transmission_structure": {
+      "frame_count": 1,
+      "separator_gap_us": 0,
       "has_repeat_frame": false
     }
   }
