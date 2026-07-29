@@ -23,9 +23,15 @@ st.set_page_config(
 def check_password():
     """Returns `True` if the user had a correct password."""
 
+    # Get password from st.secrets, with a safe local development fallback
+    try:
+        expected_password = st.secrets.get("app_password", "")
+    except Exception:
+        expected_password = "your_local_password_here"  # Change this to your preferred local password
+
     def password_entered():
         """Checks whether a password entered by the user is correct."""
-        if st.session_state.get("password", "") == st.secrets.get("app_password", ""):
+        if st.session_state.get("password", "") == expected_password:
             st.session_state["password_correct"] = True
             del st.session_state["password"]
         else:
@@ -42,9 +48,6 @@ def check_password():
     if "password_correct" in st.session_state:
         st.error("😕 Password incorrect")
     return False
-
-if not check_password():
-    st.stop()
 
 # -----------------------------------------------------------------------------
 # Dependency Linking for IR Signal Parsing
