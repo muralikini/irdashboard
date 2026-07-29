@@ -1,5 +1,3 @@
-# encoders/packager.py
-
 def create_raw_bytes(pulses, sample_freq_hz=1000000, file_format="sig"):
     """
     Converts a microsecond Mark/Space timing array into a packed binary bytearray 
@@ -21,20 +19,14 @@ def create_raw_bytes(pulses, sample_freq_hz=1000000, file_format="sig"):
     for i in range(0, len(bit_string), 8):
         byte_array.append(int(bit_string[i:i+8], 2))
 
-    # 4. Format-specific header wrappers
+    # 4. Format-specific header wrappers (safely stripping periods and case)
     fmt = str(file_format).strip().lower().replace(".", "")
     
     if fmt == "u2":
-        # .U2 specific header/prefix wrapping if required by target hardware
-        # If standard U2 raw streams do not require a distinct header, return byte_array directly.
         header = b"" 
         return header + byte_array
-        
     elif fmt == "u1":
-        # .U1 specific header wrapper if applicable
         header = b""
         return header + byte_array
-        
     else:
-        # Standard .SIG raw format packaging
         return byte_array
