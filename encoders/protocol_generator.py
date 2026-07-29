@@ -41,29 +41,46 @@ def generate_protocol_pulses(protocol_name, address_hex, command_hex, payload_he
 
     single_frame_pulses = []
 
+    # --- SAMSUNG GENERATION PATH ---
+    if encoding_type == "samsung":
+        if payload_hex and str(payload_hex).strip():
+            payload = parse_hex(payload_hex, 0) & 0xFFFFFFFF[cite: 19]
+        else:
+            a_val = parse_hex(address_hex, 0x0707) & 0xFFFF[cite: 19]
+            c_val = parse_hex(command_hex, 0x0202) & 0xFFFF[cite: 19]
+            payload = (a_val << 16) | c_val[cite: 19]
+            
+        bits = [(payload >> i) & 1 for i in range(32)][cite: 19]
+        hdr = proto.get("header", {})
+        l0 = proto.get("logical_0", {})
+        l1 = proto.get("logical_1", {})
+        
+        single_frame_pulses = [hdr.get("mark_us", 4500), hdr.get("space_us", 4500)][cite: 19]
+        for bit in bits:
+            if bit == 1:
+                single_frame_pulses.extend([l1.get("mark_us", 560), l1.get("space_us", 1690)])[cite: 19]
+            else:
+                single_frame_pulses.extend([l0.get("mark_us", 560), l0.get("space_us", 560)])[cite: 19]
+                
+        stop = proto.get("stop_bit", {})
+        if stop.get("mark_us", 0) > 0:
+            single_frame_pulses.append(stop.get("mark_us", 560))[cite: 19]
+
     # --- BANG & OLUFSEN (BO) GENERATION PATH ---
-    if encoding_type == "bo":
+    elif encoding_type == "bo":
         if payload_hex and str(payload_hex).strip():
             payload = parse_hex(payload_hex, 0) & 0xFFFF
         else:
             a_val = addr & 0xFF
             c_val = cmd & 0xFF
             payload = (a_val << 8) | c_val
-            
         bits = [(payload >> i) & 1 for i in range(15, -1, -1)]
-        l0 = proto.get("logical_0", {})
-        l1 = proto.get("logical_1", {})
-        
+        l0, l1 = proto.get("logical_0", {}), proto.get("logical_1", {})
         single_frame_pulses = []
         for bit in bits:
-            if bit == 1:
-                single_frame_pulses.extend([l1.get("mark_us", 200), l1.get("space_us", 6250)])
-            else:
-                single_frame_pulses.extend([l0.get("mark_us", 200), l0.get("space_us", 3125)])
-                
+            single_frame_pulses.extend([l1.get("mark_us", 200), l1.get("space_us", 6250)] if bit == 1 else [l0.get("mark_us", 200), l0.get("space_us", 3125)])
         stop = proto.get("stop_bit", {})
-        if stop.get("mark_us", 0) > 0:
-            single_frame_pulses.append(stop.get("mark_us", 200))
+        if stop.get("mark_us", 0) > 0: single_frame_pulses.append(stop.get("mark_us", 200))
 
     # --- ZENITH GENERATION PATH ---
     elif encoding_type == "zenith":
