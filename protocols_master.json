@@ -16,6 +16,23 @@
       "repeat_frame": { "mark_us": 9000, "space_us": 2250, "stop_us": 565 }
     }
   },
+  "APPLE": {
+    "frequency_hz": 38000,
+    "duty_cycle": 0.25,
+    "encoding_type": "apple",
+    "byte_layout": ["addr_low", "addr_high", "cmd", "cmd_inv"],
+    "bit_order": "lsb",
+    "header": { "mark_us": 9000, "space_us": 4500 },
+    "logical_0": { "mark_us": 565, "space_us": 565 },
+    "logical_1": { "mark_us": 565, "space_us": 1690 },
+    "stop_bit": { "mark_us": 565, "space_us": 565 },
+    "transmission_structure": {
+      "frame_count": 2,
+      "separator_gap_us": 40000,
+      "has_repeat_frame": true,
+      "repeat_frame": { "mark_us": 9000, "space_us": 2250, "stop_us": 565 }
+    }
+  },
   "RC5": {
     "frequency_hz": 38000,
     "duty_cycle": 0.25,
@@ -35,6 +52,44 @@
     "transmission_structure": {
       "frame_count": 1,
       "separator_gap_us": 0,
+      "has_repeat_frame": false
+    }
+  },
+  "RCA": {
+    "frequency_hz": 38000,
+    "duty_cycle": 0.25,
+    "encoding_type": "rca",
+    "header": { "mark_us": 4000, "space_us": 4000 },
+    "logical_0": { "mark_us": 500, "space_us": 1000 },
+    "logical_1": { "mark_us": 500, "space_us": 2000 },
+    "stop_bit": { "mark_us": 500, "space_us": 0 },
+    "transmission_structure": {
+      "frame_count": 2,
+      "separator_gap_us": 30000,
+      "has_repeat_frame": false
+    }
+  },
+  "NRC17": {
+    "frequency_hz": 38000,
+    "duty_cycle": 0.25,
+    "encoding_type": "nrc17",
+    "unit_us": 500,
+    "transmission_structure": {
+      "frame_count": 2,
+      "separator_gap_us": 35000,
+      "has_repeat_frame": false
+    }
+  },
+  "SONY": {
+    "frequency_hz": 40000,
+    "duty_cycle": 0.25,
+    "encoding_type": "sony",
+    "header": { "mark_us": 2400, "space_us": 600 },
+    "logical_0": { "mark_us": 600, "space_us": 600 },
+    "logical_1": { "mark_us": 1200, "space_us": 600 },
+    "transmission_structure": {
+      "frame_count": 3,
+      "separator_gap_us": 25000,
       "has_repeat_frame": false
     }
   }
