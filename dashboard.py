@@ -1062,6 +1062,12 @@ with tab_gen:
     file_format = st.radio("Select Target Format:", [".SIG", ".U1", ".U2"], horizontal=True)
 
     # 2. Setup Default Dataframe for the Data Editor
+    # Import your loader function from the generator module
+    from encoders.protocol_generator import load_protocols
+    # Load all protocols dynamically from the master JSON database
+    protocols_data = load_protocols()
+    available_protocols = sorted(list(protocols_data.keys()))
+
     if "gen_keys_df" not in st.session_state:
         st.session_state.gen_keys_df = pd.DataFrame(
             [{"Key Name": "Power", "Protocol": "NEC", "Address (Hex)": "0x04", "Command (Hex)": "0x08", "Payload (Hex)": ""}]
@@ -1077,7 +1083,8 @@ with tab_gen:
         use_container_width=True,
         column_config={
             "Key Name": st.column_config.TextColumn("Key Name", required=True),
-            "Protocol": st.column_config.SelectboxColumn("Protocol", options=["NEC", "RC5", "RC6", "SONY", "SAMSUNG", "LG", "PANASONIC", "JVC", "SHARP", "RCA", "APPLE", "DENON", "ONKYO"], required=True),
+            "Protocol": st.column_config.SelectboxColumn("Protocol",help="Select infrared protocol type",options=available_protocols,
+                                                          required=True),
             "Address (Hex)": st.column_config.TextColumn("Address (Hex)"),
             "Command (Hex)": st.column_config.TextColumn("Command (Hex)"),
             "Payload (Hex)": st.column_config.TextColumn("Payload (Hex)")
