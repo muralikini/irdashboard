@@ -5,8 +5,8 @@ import tempfile
 import pandas as pd
 import plotly.express as px
 import streamlit as st
-import io          # <-- NEW
-import zipfile     # <-- NEW
+import io
+import zipfile
 
 # -----------------------------------------------------------------------------
 # 1. Page Configuration
@@ -25,17 +25,15 @@ def check_password():
 
     def password_entered():
         """Checks whether a password entered by the user is correct."""
-        # Use st.secrets to securely check the password
         if st.session_state.get("password", "") == st.secrets.get("app_password", ""):
             st.session_state["password_correct"] = True
-            del st.session_state["password"]  # Don't store password in session state
+            del st.session_state["password"]
         else:
             st.session_state["password_correct"] = False
 
     if st.session_state.get("password_correct", False):
         return True
 
-    # Show input for password
     st.title("🔒 Authentication Required")
     st.write("Please enter the password to access the Intelligence Hub.")
     st.text_input(
@@ -45,7 +43,6 @@ def check_password():
         st.error("😕 Password incorrect")
     return False
 
-# Stop execution if password is not correct
 if not check_password():
     st.stop()
 
@@ -55,8 +52,6 @@ if not check_password():
 try:
   from signal_parser import RdPlsPython
   from decoders.decoder_registry import try_all_decoders
-
-  # ---> NEW ENCODER IMPORTS HERE <---
   from encoders.encoder_registry import generate_pulses
   from encoders.packager import create_raw_bytes
 
@@ -324,7 +319,6 @@ def load_and_parse_json(file_source):
 @st.cache_data
 def load_cec_json(file_path):
   if os.path.exists(file_path):
-    # Check if the file is compressed
     if file_path.endswith('.gz'):
         with gzip.open(file_path, "rt", encoding="utf-8") as f:
             data = json.load(f)
@@ -1075,14 +1069,9 @@ with tab_gen:
     # 4. Actual Encoder Function
     def generate_raw_signal_bytes(protocol, address, command, payload, format_ext):
         """Routes the generation request to the registry and packages the bytes."""
-        # 1. Get the Mark/Space pulse array from the registry
         pulses = generate_pulses(protocol, address, command, payload)
-
-        # 2. Package into raw binary bytes at 1 MHz
         raw_binary = create_raw_bytes(pulses, sample_freq_hz=1000000, file_format=format_ext)
-
         return raw_binary
-    
 
     # 5. Generation & Download Logic
     if st.button("⚙️ Compile & Generate Files", type="primary", use_container_width=True):
@@ -1105,6 +1094,13 @@ with tab_gen:
                     file_bytes = generate_raw_signal_bytes(
                         row['Protocol'], row['Address (Hex)'], row['Command (Hex)'], row['Payload (Hex)'], file_format
                     )
+                    
+                    # Convert bytearray to standard bytes for Streamlit compatibility
+                    if isinstance(file_bytes, bytearray):
+                        file_bytes = bytes(file_bytes)
+                    elif isinstance(file_bytes, str):
+                        file_bytes = file_bytes.encode('utf-8')
+
                     st.success(f"Successfully compiled {filename}!")
                     st.download_button(
                         label=f"⬇️ Download {filename}",
@@ -1119,24 +1115,29 @@ with tab_gen:
             else:
                 zip_buffer = io.BytesIO()
                 
-                # Open an in-memory zip file
-                with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zip_file:
-                    for index, row in valid_rows.iterrows():
-                        key_name = str(row['Key Name']).strip().replace("/", "_").replace("\\", "_")
-                        filename = f"{key_name}{file_format.lower()}"
-                        
-                        # Generate Bytes
-                        file_bytes = generate_raw_signal_bytes(
-                            row['Protocol'], row['Address (Hex)'], row['Command (Hex)'], row['Payload (Hex)'], file_format
-                        )
-                        
-                        # Write bytes to the specific filename inside the zip
-                        zip_file.writestr(filename, file_bytes)
+                try:
+                    with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zip_file:
+                        for index, row in valid_rows.iterrows():
+                            key_name = str(row['Key Name']).strip().replace("/", "_").replace("\\", "_")
+                            filename = f"{key_name}{file_format.lower()}"
+                            
+                            file_bytes = generate_raw_signal_bytes(
+                                row['Protocol'], row['Address (Hex)'], row['Command (Hex)'], row['Payload (Hex)'], file_format
+                            )
+                            
+                            if isinstance(file_bytes, bytearray):
+                                file_bytes = bytes(file_bytes)
+                            elif isinstance(file_bytes, str):
+                                file_bytes = file_bytes.encode('utf-8')
+                            
+                            zip_file.writestr(filename, file_bytes)
 
-                st.success(f"Successfully compiled {num_keys} keys into a ZIP archive!")
-                st.download_button(
-                    label="⬇️ Download All Keys (ZIP)",
-                    data=zip_buffer.getvalue(),
-                    file_name=f"Generated_Signals{file_format.lower()}.zip",
-                    mime="application/zip"
-                )
+                    st.success(f"Successfully compiled {num_keys} keys into a ZIP archive!")
+                    st.download_button(
+                        label="⬇️ Download All Keys (ZIP)",
+                        data=zip_buffer.getvalue(),
+                        file_name=f"Generated_Signals{file_format.lower()}.zip",
+                        mime="application/zip"
+                    )
+                except Exception as e:
+                    st.error(f"⚠️ ZIP Compilation Error: {str(e)}")
