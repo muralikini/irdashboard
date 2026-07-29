@@ -92,5 +92,163 @@
       "separator_gap_us": 25000,
       "has_repeat_frame": false
     }
+  },
+  "DENON": {
+    "frequency_hz": 38000,
+    "duty_cycle": 0.25,
+    "encoding_type": "denon",
+    "logical_0": { "mark_us": 275, "space_us": 775 },
+    "logical_1": { "mark_us": 275, "space_us": 1900 },
+    "stop_bit": { "mark_us": 275, "space_us": 0 },
+    "transmission_structure": {
+      "frame_count": 2,
+      "separator_gap_us": 65000,
+      "has_repeat_frame": false
+    }
+  },
+  "JVC": {
+    "frequency_hz": 38000,
+    "duty_cycle": 0.25,
+    "encoding_type": "jvc",
+    "header": { "mark_us": 8416, "space_us": 4208 },
+    "logical_0": { "mark_us": 526, "space_us": 526 },
+    "logical_1": { "mark_us": 526, "space_us": 1578 },
+    "stop_bit": { "mark_us": 526, "space_us": 0 },
+    "transmission_structure": {
+      "frame_count": 2,
+      "separator_gap_us": 40000,
+      "has_repeat_frame": false
+    }
+  },
+  "KASEIKYO": {
+    "frequency_hz": 38000,
+    "duty_cycle": 0.25,
+    "encoding_type": "kaseikyo",
+    "header": { "mark_us": 3456, "space_us": 1728 },
+    "logical_0": { "mark_us": 432, "space_us": 432 },
+    "logical_1": { "mark_us": 432, "space_us": 1296 },
+    "stop_bit": { "mark_us": 432, "space_us": 0 },
+    "transmission_structure": {
+      "frame_count": 2,
+      "separator_gap_us": 35000,
+      "has_repeat_frame": false
+    }
+  },
+  "LG": {
+    "frequency_hz": 38000,
+    "duty_cycle": 0.25,
+    "encoding_type": "lg",
+    "header": { "mark_us": 9000, "space_us": 4500 },
+    "logical_0": { "mark_us": 560, "space_us": 560 },
+    "logical_1": { "mark_us": 560, "space_us": 1680 },
+    "stop_bit": { "mark_us": 560, "space_us": 0 },
+    "transmission_structure": {
+      "frame_count": 2,
+      "separator_gap_us": 40000,
+      "has_repeat_frame": false
+    }
+  },
+  "ONKYO": {
+    "frequency_hz": 38000,
+    "duty_cycle": 0.25,
+    "encoding_type": "onkyo",
+    "header": { "mark_us": 9000, "space_us": 4500 },
+    "logical_0": { "mark_us": 560, "space_us": 560 },
+    "logical_1": { "mark_us": 560, "space_us": 1690 },
+    "stop_bit": { "mark_us": 560, "space_us": 0 },
+    "transmission_structure": {
+      "frame_count": 2,
+      "separator_gap_us": 40000,
+      "has_repeat_frame": false
+    }
+  },
+  "PANASONIC": {
+    "frequency_hz": 38000,
+    "duty_cycle": 0.25,
+    "encoding_type": "panasonic",
+    "header": { "mark_us": 3456, "space_us": 1728 },
+    "logical_0": { "mark_us": 432, "space_us": 432 },
+    "logical_1": { "mark_us": 432, "space_us": 1296 },
+    "stop_bit": { "mark_us": 432, "space_us": 0 },
+    "transmission_structure": {
+      "frame_count": 2,
+      "separator_gap_us": 35000,
+      "has_repeat_frame": false
+    }
+  },
+  "RCMM": {
+    "frequency_hz": 38000,
+    "duty_cycle": 0.25,
+    "encoding_type": "rcmm",
+    "header": { "mark_us": 416, "space_us": 277 },
+    "transmission_structure": {
+      "frame_count": 2,
+      "separator_gap_us": 35000,
+      "has_repeat_frame": false
+    }
+  },
+  "SANYO": {
+    "frequency_hz": 38000,
+    "duty_cycle": 0.25,
+    "encoding_type": "sanyo",
+    "header": { "mark_us": 9000, "space_us": 4500 },
+    "logical_0": { "mark_us": 560, "space_us": 560 },
+    "logical_1": { "mark_us": 560, "space_us": 1690 },
+    "stop_bit": { "mark_us": 560, "space_us": 0 },
+    "transmission_structure": {
+      "frame_count": 2,
+      "separator_gap_us": 40000,
+      "has_repeat_frame": false
+    }
+  },
+  "SHARP": {
+    "frequency_hz": 38000,
+    "duty_cycle": 0.25,
+    "encoding_type": "sharp",
+    "logical_0": { "mark_us": 320, "space_us": 680 },
+    "logical_1": { "mark_us": 320, "space_us": 1680 },
+    "stop_bit": { "mark_us": 320, "space_us": 0 },
+    "transmission_structure": {
+      "frame_count": 2,
+      "separator_gap_us": 40000,
+      "has_repeat_frame": false
+    }
+  },
+  "XMP": {
+    "frequency_hz": 38000,
+    "duty_cycle": 0.25,
+    "encoding_type": "xmp",
+    "stop_bit": { "mark_us": 210, "space_us": 0 },
+    "transmission_structure": {
+      "frame_count": 2,
+      "separator_gap_us": 40000,
+      "has_repeat_frame": false
+    }
+  },
+  "ZENITH": {
+    "frequency_hz": 38000,
+    "duty_cycle": 0.25,
+    "encoding_type": "zenith",
+    "logical_0": { "mark_us": 520, "space_us": 520 },
+    "logical_1": { "mark_us": 520, "space_us": 1040 },
+    "stop_bit": { "mark_us": 520, "space_us": 0 },
+    "transmission_structure": {
+      "frame_count": 2,
+      "separator_gap_us": 40000,
+      "has_repeat_frame": false
+    }
+  },
+  "BO": {
+    "frequency_hz": 455000,
+    "duty_cycle": 0.25,
+    "encoding_type": "bo",
+    "logical_0": { "mark_us": 200, "space_us": 3125 },
+    "logical_1": { "mark_us": 200, "space_us": 6250 },
+    "stop_bit": { "mark_us": 200, "space_us": 0 },
+    "transmission_structure": {
+      "frame_count": 2,
+      "separator_gap_us": 40000,
+      "has_repeat_frame": false
+    }
   }
 }
