@@ -250,5 +250,19 @@
       "separator_gap_us": 40000,
       "has_repeat_frame": false
     }
+  },
+  "SAMSUNG": {
+    "frequency_hz": 38000,
+    "duty_cycle": 0.25,
+    "encoding_type": "samsung",
+    "header": { "mark_us": 4500, "space_us": 4500 },
+    "logical_0": { "mark_us": 560, "space_us": 560 },
+    "logical_1": { "mark_us": 560, "space_us": 1690 },
+    "stop_bit": { "mark_us": 560, "space_us": 0 },
+    "transmission_structure": {
+      "frame_count": 2,
+      "separator_gap_us": 40000,
+      "has_repeat_frame": false
+    }
   }
 }
