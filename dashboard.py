@@ -1075,18 +1075,14 @@ with tab_gen:
     # 4. Actual Encoder Function
     def generate_raw_signal_bytes(protocol, address, command, payload, format_ext):
         """Routes the generation request to the registry and packages the bytes."""
-        try:
-            # 1. Get the Mark/Space pulse array from the registry
-            pulses = generate_pulses(protocol, address, command, payload)
+        # 1. Get the Mark/Space pulse array from the registry
+        pulses = generate_pulses(protocol, address, command, payload)
 
-            # 2. Package into raw binary bytes at 1 MHz, passing the target file extension format
-            raw_binary = create_raw_bytes(pulses, sample_freq_hz=1000000, file_format=format_ext)
+        # 2. Package into raw binary bytes at 1 MHz
+        raw_binary = create_raw_bytes(pulses, sample_freq_hz=1000000, file_format=format_ext)
 
-            # Return the compiled binary data for download
-            return raw_binary
-            
-        except Exception as e:
-            return f"Encoding Error: {str(e)}".encode('utf-8')
+        return raw_binary
+    
 
     # 5. Generation & Download Logic
     if st.button("⚙️ Compile & Generate Files", type="primary", use_container_width=True):
@@ -1105,18 +1101,19 @@ with tab_gen:
                 row = valid_rows.iloc[0]
                 filename = f"{row['Key Name'].strip()}{file_format.lower()}"
                 
-                # Generate Bytes
-                file_bytes = generate_raw_signal_bytes(
-                    row['Protocol'], row['Address (Hex)'], row['Command (Hex)'], row['Payload (Hex)'], file_format
-                )
-
-                st.success(f"Successfully compiled {filename}!")
-                st.download_button(
-                    label=f"⬇️ Download {filename}",
-                    data=file_bytes,
-                    file_name=filename,
-                    mime="application/octet-stream"
-                )
+                try:
+                    file_bytes = generate_raw_signal_bytes(
+                        row['Protocol'], row['Address (Hex)'], row['Command (Hex)'], row['Payload (Hex)'], file_format
+                    )
+                    st.success(f"Successfully compiled {filename}!")
+                    st.download_button(
+                        label=f"⬇️ Download {filename}",
+                        data=file_bytes,
+                        file_name=filename,
+                        mime="application/octet-stream"
+                    )
+                except Exception as e:
+                    st.error(f"⚠️ Compilation Error for '{row['Key Name']}': {str(e)}")
 
             # --- SCENARIO B: MULTIPLE KEYS (Download ZIP file) ---
             else:
