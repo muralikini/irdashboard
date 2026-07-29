@@ -1,21 +1,21 @@
 # signal_parser.py
 import os
-import base64
 
 class RdPlsPython:
-    """Core Signal Processor: Converts raw .SIG bytes to Mark/Space arrays."""
+    """Core Signal Processor: Converts raw .SIG bytes to multi-frame Mark/Space sequences."""
     def __init__(self, sample_frequency=1.0):
         self.sample_frequency = sample_frequency
         self.raw_data = bytearray()
         self.carrier_data = []
-        self.mark_space_data = []
+        self.mark_space_data = []      # Flat list (backward compatibility)
+        self.frames = []                # List of individual frame timing arrays
+        self.separators = []            # Inter-frame gap durations (microseconds)
 
     def process_file(self, filepath):
-        """Reads a .SIG file and processes it into mark/space values."""
+        """Reads a .SIG file and processes it into multi-frame mark/space values."""
         with open(filepath, 'rb') as f:
             content = f.read()
             
-        # Handle potential legacy text headers
         if b"REMOTE" in content[:20]:
             num_bytes = len(content)
             if num_bytes > (1024 * 16):
@@ -30,6 +30,7 @@ class RdPlsPython:
         if len(self.raw_data) > 0:
             self._get_carrier_data(self.raw_data)
             self._get_mark_space_data()
+            self._segment_into_frames()
 
     def _get_carrier_data(self, buffer):
         markval = 0
@@ -96,3 +97,26 @@ class RdPlsPython:
         if mark > 0:
             calc_mark = round((mark + prev_space_val) * self.sample_frequency)
             self.mark_space_data.append(calc_mark)
+
+    def _segment_into_frames(self):
+        """Splits flat mark_space_data into individual frame bursts separated by long quiet gaps."""
+        if not self.mark_space_data:
+            return
+
+        current_frame = []
+        i = 0
+        while i < len(self.mark_space_data):
+            current_frame.append(self.mark_space_data[i]) # Mark
+            if i + 1 < len(self.mark_space_data):
+                space = self.mark_space_data[i+1]
+                current_frame.append(space)
+                
+                # If space is exceptionally long (> 15,000µs / 15ms), treat it as a frame separator boundary
+                if space > 15000:
+                    self.frames.append(current_frame)
+                    self.separators.append(space)
+                    current_frame = []
+            i += 2
+
+        if current_frame:
+            self.frames.append(current_frame)

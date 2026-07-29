@@ -59,14 +59,23 @@ try:
   from encoders.packager import create_raw_bytes
 
   def parse_and_decode_signal(filepath):
-    """Extracts mark/space data from a raw file and attempts to decode it."""
+    """Extracts multi-frame mark/space data from a raw file and attempts to decode it."""
     parser = RdPlsPython()
     parser.process_file(filepath)
 
     if not parser.mark_space_data:
       return {"status": "Error", "message": "No mark/space data extracted."}
 
-    return try_all_decoders(parser.mark_space_data)
+    # Attempt decoding on the primary frame (first frame segment, or fallback to full data)
+    target_pulses = parser.frames[0] if parser.frames else parser.mark_space_data
+    decode_result = try_all_decoders(target_pulses)
+
+    # Attach multi-frame metadata to the decode result dictionary
+    if isinstance(decode_result, dict):
+      decode_result["frame_count"] = len(parser.frames)
+      decode_result["separators"] = parser.separators
+
+    return decode_result
 
 except ImportError as e:
   parse_and_decode_signal = None
@@ -656,10 +665,18 @@ with tab_matcher:
           search_protocol = decoded.get("protocol")
           search_address = decoded.get("address")
           search_command = decoded.get("command")
+          frame_count = decoded.get("frame_count", 1)
+          separators = decoded.get("separators", [])
+
           st.success(
-              f"**Successfully Decoded File:** Protocol: `{search_protocol}`,"
-              f" Address: `{search_address}`, Command: `{search_command}`"
+              f"**Successfully Decoded File:** Protocol: `{search_protocol}` | "
+              f"Address: `{search_address}` | Command: `{search_command}`"
           )
+          
+          # Display multi-frame structural metrics
+          f_col1, f_col2 = st.columns(2)
+          f_col1.metric("Detected Frames", frame_count)
+          f_col2.metric("Separator Gap (µs)", f"{separators[0]} µs" if separators else "None (Single Frame)")
         else:
           st.warning("⚠️ Decoder failed to identify this signal format. Please enter hex values manually:")
           c_p, c_a, c_c = st.columns(3)
