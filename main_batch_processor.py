@@ -201,9 +201,10 @@ class LegacyPRJProcessor:
         return output
 
 class BatchRemoteProcessor:
-    def __init__(self, root_folder_path, skip_folders=None):
+    def __init__(self, root_folder_path, skip_folders=None, max_folders=200):
         self.root_folder_path = root_folder_path
         self.skip_folders = skip_folders or set()
+        self.max_folders = max_folders  # Process in manageable chunks
 
     def process_all(self):
         if not os.path.exists(self.root_folder_path):
@@ -216,8 +217,14 @@ class BatchRemoteProcessor:
         }
 
         skipped_count = 0
+        processed_in_this_run = 0
 
         for item in os.listdir(self.root_folder_path):
+            # Stop if we hit our chunk limit for this execution
+            if processed_in_this_run >= self.max_folders:
+                print(f"\nReached chunk limit of {self.max_folders} folders for this run. Stopping safely.")
+                break
+
             item_path = os.path.join(self.root_folder_path, item)
             
             if os.path.isdir(item_path):
@@ -236,9 +243,10 @@ class BatchRemoteProcessor:
                 
                 batch_output["remotes"][item] = processor.process()
                 batch_output["total_remotes_processed"] += 1
+                processed_in_this_run += 1
 
         if skipped_count > 0:
-            print(f"\nSkipped {skipped_count} folders that were already processed in previous runs.")
+            print(f"Skipped {skipped_count} already processed folders.")
 
         return batch_output
 
