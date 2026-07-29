@@ -27,7 +27,14 @@ def generate_protocol_pulses(protocol_name, address_hex, command_hex, payload_he
         if not v_str or v_str == "none" or v_str == "nan": return default
         return int(v_str, 16)
 
-    addr = parse_hex(address_hex, 0)
+    proto_upper = protocol_name.upper()
+    
+    # Apple defaults to 0x87EE address if not explicitly specified
+    if proto_upper == "APPLE":
+        addr = parse_hex(address_hex, 0x87EE)
+    else:
+        addr = parse_hex(address_hex, 0)
+        
     cmd = parse_hex(command_hex, 0)
     encoding_type = proto.get("encoding_type", "ppm")
     struct = proto.get("transmission_structure", {})
@@ -36,89 +43,138 @@ def generate_protocol_pulses(protocol_name, address_hex, command_hex, payload_he
 
     single_frame_pulses = []
 
-    # --- RC6 MODE 0 GENERATION ---
-    if encoding_type == "rc6":
-        T = proto.get("unit_us", 444)
+    # --- SONY GENERATION PATH ---
+    if encoding_type == "sony":
+        c_val = cmd & 0x7F
+        a_val = addr
+        bits = []
+        bits.extend([(c_val >> i) & 1 for i in range(7)])
         
-        # Determine 16-bit payload
-        p_val = parse_hex(payload_hex, -1)
-        if p_val >= 0:
-            payload = p_val & 0xFFFF
+        if payload_hex and str(payload_hex).strip():
+            a_val = a_val & 0x1F
+            ext = parse_hex(payload_hex, 0) & 0xFF
+            bits.extend([(a_val >> i) & 1 for i in range(5)])
+            bits.extend([(ext >> i) & 1 for i in range(8)])
+        elif a_val > 0x1F:
+            a_val = a_val & 0xFF
+            bits.extend([(a_val >> i) & 1 for i in range(8)])
         else:
-            payload = ((addr & 0xFF) << 8) | (cmd & 0xFF)
+            a_val = a_val & 0x1F
+            bits.extend([(a_val >> i) & 1 for i in range(5)])
             
-        start_bit = 1
-        mode_bits = [0, 0, 0]
-        toggle_bit = 0
-        payload_bits = [(payload >> i) & 1 for i in range(15, -1, -1)]
+        hdr = proto.get("header", {})
+        single_frame_pulses = [hdr.get("mark_us", 2400), hdr.get("space_us", 600)]
+        l0, l1 = proto.get("logical_0", {}), proto.get("logical_1", {})
         
-        logical_bits = [start_bit] + mode_bits + [toggle_bit] + payload_bits
+        for i, bit in enumerate(bits):
+            single_frame_pulses.append(l1.get("mark_us", 1200) if bit == 1 else l0.get("mark_us", 600))
+            if i < len(bits) - 1:
+                single_frame_pulses.append(l0.get("space_us", 600))
+
+    # --- NRC17 GENERATION PATH ---
+    elif encoding_type == "nrc17":
+        T = proto.get("unit_us", 500)
+        c_val = cmd & 0xFF
+        a_val = addr & 0xF
+        sub_val = parse_hex(payload_hex, 0x0) & 0xF
+
+        logical_bits = [1] + [(c_val >> i) & 1 for i in range(8)] + [(a_val >> i) & 1 for i in range(4)] + [(sub_val >> i) & 1 for i in range(4)]
+        half_bits = []
+        for bit in logical_bits:
+            half_bits.extend([1, 0] if bit == 1 else [0, 1])
+
+        single_frame_pulses = [1 * T, 5 * T]
+        current_level, duration = 1, 0
+        for hb in half_bits:
+            if hb == current_level: duration += T
+            else:
+                single_frame_pulses.append(duration)
+                current_level, duration = hb, T
+        single_frame_pulses.append(duration)
+
+    # --- RCA GENERATION PATH ---
+    elif encoding_type == "rca":
+        addr_4 = addr & 0xF
+        cmd_8 = cmd & 0xFF
+        inv_addr, inv_cmd = (~addr_4) & 0xF, (~cmd_8) & 0xFF
         
-        # RC6 Header: 6T Mark, 2T Space[cite: 4]
+        bits = []
+        bits.extend([(addr_4 >> i) & 1 for i in range(3, -1, -1)])
+        bits.extend([(cmd_8 >> i) & 1 for i in range(8)])
+        bits.extend([(inv_addr >> i) & 1 for i in range(3, -1, -1)])
+        bits.extend([(inv_cmd >> i) & 1 for i in range(8)])
+        
+        hdr = proto.get("header", {})
+        single_frame_pulses = [hdr.get("mark_us", 4000), hdr.get("space_us", 4000)]
+        l0, l1 = proto.get("logical_0", {}), proto.get("logical_1", {})
+        
+        for bit in bits:
+            single_frame_pulses.extend([l1.get("mark_us", 500), l1.get("space_us", 2000)] if bit == 1 else [l0.get("mark_us", 500), l0.get("space_us", 1000)])
+        if proto.get("stop_bit", {}).get("mark_us", 0) > 0:
+            single_frame_pulses.append(500)
+
+    # --- RC6 MODE 0 GENERATION ---
+    elif encoding_type == "rc6":
+        T = proto.get("unit_us", 444)
+        p_val = parse_hex(payload_hex, -1)
+        payload = p_val & 0xFFFF if p_val >= 0 else ((addr & 0xFF) << 8) | (cmd & 0xFF)
+        
+        logical_bits = [1, 0, 0, 0, 0] + [(payload >> i) & 1 for i in range(15, -1, -1)]
         t_units = [1, 1, 1, 1, 1, 1, 0, 0]
         
         for i, bit in enumerate(logical_bits):
-            # Index 4 is the Toggle bit (double width)[cite: 4]
             if i == 4:
-                if bit == 1:
-                    t_units.extend([1, 1, 0, 0])
-                else:
-                    t_units.extend([0, 0, 1, 1])
+                t_units.extend([1, 1, 0, 0] if bit == 1 else [0, 0, 1, 1])
             else:
-                if bit == 1:
-                    t_units.extend([1, 0])
-                else:
-                    t_units.extend([0, 1])
-                    
-        current_level = 1
-        duration = 0
+                t_units.extend([1, 0] if bit == 1 else [0, 1])
+                
+        current_level, duration = 1, 0
         for tu in t_units:
-            if tu == current_level:
-                duration += T
+            if tu == current_level: duration += T
             else:
                 single_frame_pulses.append(duration)
-                current_level = tu
-                duration = T
+                current_level, duration = tu, T
         single_frame_pulses.append(duration)
 
     # --- RC5 MANCHESTER GENERATION ---
     elif encoding_type == "manchester":
         T = proto.get("unit_us", 889)
-        s1 = 1
         s2 = 1 if cmd < 64 else 0
         if cmd >= 64: cmd = cmd & 0x3F
-        toggle = 0
-        addr = addr & 0x1F
         
-        bits = [s1, s2, toggle]
-        bits.extend([(addr >> i) & 1 for i in range(4, -1, -1)])
-        bits.extend([(cmd >> i) & 1 for i in range(5, -1, -1)])
-        
+        bits = [1, s2, 0] + [(addr >> i) & 1 for i in range(4, -1, -1)] + [(cmd >> i) & 1 for i in range(5, -1, -1)]
         half_bits = []
         for bit in bits:
-            if bit == 1: half_bits.extend([0, 1])
-            else: half_bits.extend([1, 0])
+            half_bits.extend([0, 1] if bit == 1 else [1, 0])
         half_bits = half_bits[1:]
         
-        current_level = 1
-        duration = 0
+        current_level, duration = 1, 0
         for hb in half_bits:
             if hb == current_level: duration += T
             else:
                 single_frame_pulses.append(duration)
-                current_level = hb
-                duration = T
+                current_level, duration = hb, T
         single_frame_pulses.append(duration)
 
-    # --- STANDARD PPM GENERATION (e.g., NEC) ---
+    # --- STANDARD PPM / APPLE GENERATION ---
     else:
-        layout = proto.get("byte_layout", ["addr", "cmd"])
+        layout = proto.get("byte_layout", ["addr", "addr_inv", "cmd", "cmd_inv"])
         bytes_arr = []
         for item in layout:
-            if item == "addr": bytes_arr.append(addr & 0xFF)
-            elif item == "addr_inv": bytes_arr.append((~addr) & 0xFF)
-            elif item == "cmd": bytes_arr.append(cmd & 0xFF)
-            elif item == "cmd_inv": bytes_arr.append((~cmd) & 0xFF)
+            if item == "addr":
+                bytes_arr.append(addr & 0xFF)
+            elif item == "addr_inv":
+                bytes_arr.append((~addr) & 0xFF)
+            elif item == "addr_low":
+                bytes_arr.append(addr & 0xFF)
+            elif item == "addr_high":
+                bytes_arr.append((addr >> 8) & 0xFF)
+            elif item == "addr_high_inv":
+                bytes_arr.append((~(addr >> 8)) & 0xFF)
+            elif item == "cmd":
+                bytes_arr.append(cmd & 0xFF)
+            elif item == "cmd_inv":
+                bytes_arr.append((~cmd) & 0xFF)
 
         bits = []
         bit_order = proto.get("bit_order", "lsb")
@@ -139,8 +195,6 @@ def generate_protocol_pulses(protocol_name, address_hex, command_hex, payload_he
         stop = proto.get("stop_bit", {})
         if stop.get("mark_us", 0) > 0:
             single_frame_pulses.append(stop.get("mark_us", 565))
-            if stop.get("space_us", 0) > 0:
-                single_frame_pulses.append(stop.get("space_us", 565))
 
     # --- ASSEMBLE MULTI-FRAME SEQUENCE ---
     complete_pulses = []
