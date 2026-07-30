@@ -123,9 +123,9 @@ def generate_pulses(protocol, address, command, payload):
     # 3. Build the complete multi-frame pulse train using exact master definition parameters
     multi_frame_pulses = []
     
-    if len(single_frame_pulses) % 2 == 0:        
+    if len(single_frame_pulses) % 2 == 0 & proto_upper!="SONY":        
         single_frame_pulses[-1]+=separator_gap
-    else:
+    elif proto_upper!="SONY":
         single_frame_pulses.append(separator_gap)
 
     for i in range(frame_count):
