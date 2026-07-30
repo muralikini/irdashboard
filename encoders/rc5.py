@@ -1,20 +1,9 @@
 # encoders/rc5.py
 
 def encode(address_hex, command_hex):
-    """
-    Encodes RC5 signals safely handling missing address/command or raw payloads.
-    """
-    # Safe parser helper for hex inputs
-    def parse_hex_val(val, default=0):
-        if val is None:
-            return default
-        val_str = str(val).strip().lower()
-        if not val_str or val_str == "none" or val_str == "nan":
-            return default
-        return int(val_str, 16)
-    
-    addr = parse_hex_val(address_hex, 0)
-    cmd = parse_hex_val(command_hex, 0)
+    """Encodes RC5 Hex Address and Command into a Mark/Space timing array using Manchester encoding."""
+    addr = int(str(address_hex), 16)
+    cmd = int(str(command_hex), 16)
     
     # 1. Extended RC5 Handling
     # If command is 64 or greater, S2 becomes 0 and we mask the command
